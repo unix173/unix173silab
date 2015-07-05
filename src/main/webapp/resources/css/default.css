@@ -1,0 +1,54 @@
+/* overriding bootstrap default css */
+
+.container {
+    padding: 0px;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #ffffff;
+}
+.table-striped > tbody > tr:nth-of-type(even) {
+    background-color: #d7d7d7;
+}
+
+/* custom css */
+
+body {
+    /*background-color: #cec8b4;*/
+    background-color: #5a8fb5;
+    color: #000064;
+}
+
+a {
+    color: #939393 !important;
+    font-weight: bold;
+}
+
+a span {
+    color: inherit;
+}
+
+h1, h2, h3, h4, h5, h6, p, span {
+    color: #191919;
+    font-weight: bolder;
+}
+
+.contentmain {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 10px;
+}
+
+#footer {
+    padding: 10px 0 20px 0;
+}
+
+.formany {
+    padding: 10px 0 10px 0;
+}
+
+.btn-primary {
+    background-color: #575152;
+    color: #e4e4e4;
+    border-color: #640000;
+}
