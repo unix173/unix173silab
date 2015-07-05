@@ -4,6 +4,9 @@
     <title>Exception Handling page</title>
 </head>
 <body>
-Exception handling page
+<p>Exception handling page</p>
+
+<p><a href="${pageContext.request.contextPath}/home">Povratak na početnu stranicu.</a></p>
+
 </body>
 </html>

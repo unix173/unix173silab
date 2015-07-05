@@ -24,7 +24,7 @@
                     <label>Korisničko ime:</label>
                 </div>
                 <div class="col-sm-6 text-left">
-                    <form:input path="username" id="inputUsername" placeholder="Korisničko ime:"/>
+                    <form:input path="username" id="inputUsername" placeholder="Korisničko ime"/>
                 </div>
             </div>
             <div class="row formany">

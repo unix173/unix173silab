@@ -16,6 +16,9 @@
     <div class="contentmain">
         <p>VOZILA</p>
         <br/>
+        <c:if test="${itemType.items.size() == 0}">
+        <p>Trenutno nema automobila ovog tipa</p>
+        </c:if>
         <table class="table table-striped">
             <tr>
                 <th>Registarski broj</th>
@@ -23,7 +26,7 @@
             </tr>
             <c:forEach items="${itemType.items}" var="item">
                 <tr>
-                        <td>${item.id}</td>
+                    <td>${item.id}</td>
                 </tr>
             </c:forEach>
         </table>

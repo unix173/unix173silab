@@ -19,18 +19,17 @@ public class MainController {
     @RequestMapping(value = {"/home", "/"})
     public String showHomeView(ModelMap model) {
         logger.trace("method invoked: showHomeView");
-        model.addAttribute("message", "Welcome to Generic Rental System!");
         return "home";
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public String showAboutView(){
+    public String showAboutView() {
         logger.trace("method invoked: showAboutView");
         return "about";
     }
 
     @RequestMapping(value = "/errorHandler")
-    public String redirectToErrorHandlingPage(HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes){
+    public String redirectToErrorHandlingPage(HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
         redirectAttributes.addFlashAttribute("statusCode", statusCode);
         return "redirect:/error";
@@ -38,18 +37,18 @@ public class MainController {
 
 
     @RequestMapping(value = "/error")
-    public String showErrorPage(){
+    public String showErrorPage() {
         return "errorHandlingPage";
     }
 
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
-    public String showContactView(){
+    public String showContactView() {
         logger.trace("method invoked: showContactView");
         return "contact";
     }
 
     @RequestMapping(value = "/exception")
-    public String showExceptionHandlingPage(){
+    public String showExceptionHandlingPage() {
         return "exceptionHandlingPage";
     }
 

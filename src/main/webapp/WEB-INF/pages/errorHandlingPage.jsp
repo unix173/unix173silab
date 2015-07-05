@@ -4,8 +4,11 @@
     <title></title>
 </head>
 <body>
-Something went wrong
+<p>Doslo je do greške.</p>
 
-Status code = ${statusCode}
+<p>Status kod = ${statusCode}</p>
+
+<p></o><a href="${pageContext.request.contextPath}/home">Povratak na početnu stranicu.</a></p>
+
 </body>
 </html>

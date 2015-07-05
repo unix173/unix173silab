@@ -40,7 +40,8 @@
                     <td>
                         <form:form name="delete" method="post" action="deleteUserAction" commandName="user">
                             <form:input type="hidden" path="id" value="${user.id}"/>
-                            <input type="submit" name="button" value="OBRIŠI" class="btn btn-primary btn-sm"/>
+                            <input type="submit" name="button" value="OBRIŠI" class="btn btn-primary btn-sm"
+                                   <c:if test="${user.IsAdmin()}">disabled</c:if> />
                         </form:form>
                     </td>
                     <td>
