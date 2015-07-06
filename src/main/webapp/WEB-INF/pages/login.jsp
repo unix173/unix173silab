@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <title>Login Page</title>
+    <title>Prijavljivanje</title>
     <link href="<c:url value="/resources/css/bootstrap.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/default.css" />" rel="stylesheet">
 </head>
