@@ -12,7 +12,7 @@ public class Item {
 
     @ManyToOne
     @NotNull
-    private ItemType itemType;
+    private TipVozila tipVozila;
 
     public String getId() {
         return id;
@@ -22,12 +22,12 @@ public class Item {
         this.id = id;
     }
 
-    public ItemType getItemType() {
-        return itemType;
+    public TipVozila getTipVozila() {
+        return tipVozila;
     }
 
-    public void setItemType(ItemType itemType) {
-        this.itemType = itemType;
+    public void setTipVozila(TipVozila tipVozila) {
+        this.tipVozila = tipVozila;
     }
 
     @Override

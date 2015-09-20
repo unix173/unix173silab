@@ -2,9 +2,9 @@ package com.zuehlke.sistemzaizdavanjevozila.service.impl;
 
 import com.zuehlke.sistemzaizdavanjevozila.core.ItemTypeInfoDTO;
 import com.zuehlke.sistemzaizdavanjevozila.dao.ItemDao;
-import com.zuehlke.sistemzaizdavanjevozila.dao.ItemTypeDao;
-import com.zuehlke.sistemzaizdavanjevozila.model.ItemType;
-import com.zuehlke.sistemzaizdavanjevozila.service.ItemTypeService;
+import com.zuehlke.sistemzaizdavanjevozila.dao.TipVozilaDao;
+import com.zuehlke.sistemzaizdavanjevozila.model.TipVozila;
+import com.zuehlke.sistemzaizdavanjevozila.service.TipVozilaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,38 +14,38 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class ItemTypeServiceImpl implements ItemTypeService {
+public class TipVozilaServiceImpl implements TipVozilaService {
 
     @Autowired
-    private ItemTypeDao itemTypeDao;
+    private TipVozilaDao tipVozilaDao;
 
     @Autowired
     private ItemDao itemDao;
 
     @Override
-    public void addItemType(ItemType itemType) {
-        itemTypeDao.addItemType(itemType);
+    public void addItemType(TipVozila tipVozila) {
+        tipVozilaDao.addItemType(tipVozila);
     }
 
     @Override
-    public void setItemType(ItemType itemType) {
-        itemTypeDao.setItemType(itemType);
+    public void setItemType(TipVozila tipVozila) {
+        tipVozilaDao.setItemType(tipVozila);
     }
 
     @Override
-    public void deleteItemType(ItemType itemType) {
-        itemTypeDao.deleteItemType(itemType);
+    public void deleteItemType(TipVozila tipVozila) {
+        tipVozilaDao.deleteItemType(tipVozila);
     }
 
     @Override
-    public List<ItemType> getItemTypes() {
-        return itemTypeDao.getItemTypes();
+    public List<TipVozila> getItemTypes() {
+        return tipVozilaDao.getItemTypes();
     }
 
     @Override
     public List<ItemTypeInfoDTO> getAvailableItemTypes(Set<Long> reservedItemTypeIdList, Date startDate, Date endDate) {
 
-        List<ItemTypeInfoDTO> availableItemTypes = itemTypeDao.getAvailableItemTypes(startDate,endDate);
+        List<ItemTypeInfoDTO> availableItemTypes = tipVozilaDao.getAvailableItemTypes(startDate,endDate);
         List<ItemTypeInfoDTO> filteredAvailableItemTypes = new ArrayList<ItemTypeInfoDTO>();
         for(ItemTypeInfoDTO itemTypeInfoDTO : availableItemTypes) {
             if (!reservedItemTypeIdList.contains(itemTypeInfoDTO.getItemTypeId())) {
@@ -56,12 +56,12 @@ public class ItemTypeServiceImpl implements ItemTypeService {
     }
 
     @Override
-    public ItemType getItemTypeById(Long id) {
-        return itemTypeDao.getItemTypeById(id);
+    public TipVozila getItemTypeById(Long id) {
+        return tipVozilaDao.getItemTypeById(id);
     }
 
     @Override
-    public List<ItemType> getItemTypeByName(String name) {
-        return itemTypeDao.getItemTypeByName(name);
+    public List<TipVozila> getItemTypeByName(String name) {
+        return tipVozilaDao.getItemTypeByName(name);
     }
 }

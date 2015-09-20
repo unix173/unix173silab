@@ -31,8 +31,8 @@
             </tr>
             <c:forEach items="${itemTypes}" var="itemType">
                 <tr>
-                    <td>${itemType.name}</td>
-                    <td>${itemType.price}</td>
+                    <td>${itemType.ime}</td>
+                    <td>${itemType.cena}</td>
                     <td>
                         <form:form name="viewItems" method="get" action="prikaziVozila" commandName="itemType">
                             <form:input type="hidden" path="id" value="${itemType.id}"/>

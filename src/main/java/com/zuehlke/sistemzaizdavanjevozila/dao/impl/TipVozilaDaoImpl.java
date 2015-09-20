@@ -1,8 +1,8 @@
 package com.zuehlke.sistemzaizdavanjevozila.dao.impl;
 
 import com.zuehlke.sistemzaizdavanjevozila.core.ItemTypeInfoDTO;
-import com.zuehlke.sistemzaizdavanjevozila.dao.ItemTypeDao;
-import com.zuehlke.sistemzaizdavanjevozila.model.ItemType;
+import com.zuehlke.sistemzaizdavanjevozila.dao.TipVozilaDao;
+import com.zuehlke.sistemzaizdavanjevozila.model.TipVozila;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,43 +16,43 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class ItemTypeDaoImpl implements ItemTypeDao {
+public class TipVozilaDaoImpl implements TipVozilaDao {
 
     private SessionFactory sessionFactory;
 
     @Autowired
-    public ItemTypeDaoImpl(SessionFactory sessionFactory) {
+    public TipVozilaDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
     @Override
-    public List<ItemType> getItemTypes() {
-        return sessionFactory.getCurrentSession().createCriteria(ItemType.class).setResultTransformer((Criteria.DISTINCT_ROOT_ENTITY)).list();
+    public List<TipVozila> getItemTypes() {
+        return sessionFactory.getCurrentSession().createCriteria(TipVozila.class).setResultTransformer((Criteria.DISTINCT_ROOT_ENTITY)).list();
     }
 
     @Override
-    public ItemType getItemTypeById(Long id) {
-        return (ItemType) sessionFactory.getCurrentSession().get(ItemType.class, id);
+    public TipVozila getItemTypeById(Long id) {
+        return (TipVozila) sessionFactory.getCurrentSession().get(TipVozila.class, id);
     }
 
     @Override
-    public void addItemType(ItemType itemType) {
-        sessionFactory.getCurrentSession().save(itemType);
+    public void addItemType(TipVozila tipVozila) {
+        sessionFactory.getCurrentSession().save(tipVozila);
     }
 
     @Override
-    public void setItemType(ItemType itemType) {
-        sessionFactory.getCurrentSession().update(itemType);
+    public void setItemType(TipVozila tipVozila) {
+        sessionFactory.getCurrentSession().update(tipVozila);
     }
 
     @Override
-    public List<ItemType> getItemTypeByName(String name) {
+    public List<TipVozila> getItemTypeByName(String name) {
         return sessionFactory.getCurrentSession().getNamedQuery("getItemTypeByName").setString("name", "%" + name + "%").list();
     }
 
     @Override
-    public void deleteItemType(ItemType itemType) {
-        sessionFactory.getCurrentSession().delete(itemType);
+    public void deleteItemType(TipVozila tipVozila) {
+        sessionFactory.getCurrentSession().delete(tipVozila);
     }
 
     @Override
@@ -63,8 +63,8 @@ public class ItemTypeDaoImpl implements ItemTypeDao {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String query =
                 "select " +
-                        "new com.zuehlke.sistemzaizdavanjevozila.core.ItemTypeInfoDTO(it.id, count(*),it.name ) " +
-                        "from ItemType it join it.items i " +
+                        "new com.zuehlke.sistemzaizdavanjevozila.core.ItemTypeInfoDTO(it.id, count(*),it.ime ) " +
+                        "from TipVozila it join it.items i " +
                         "where i.id not in " +
                         "(select distinct i.id " +
                         "from ReservationEntry  re left outer join re.item i " +

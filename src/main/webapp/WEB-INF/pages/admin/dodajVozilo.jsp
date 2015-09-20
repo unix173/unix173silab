@@ -20,9 +20,9 @@
         <form:form method="POST" modelAttribute="item">
             <div>
                 <label>Tip vozila</label>
-                <form:select path="itemType.id">
+                <form:select path="tipVozila.id">
                     <c:forEach items="${itemTypes}" var="itemType">
-                        <form:option value="${itemType.id} ">${itemType.name}</form:option>
+                        <form:option value="${itemType.id} ">${itemType.ime}</form:option>
                     </c:forEach>
                 </form:select>
             </div>

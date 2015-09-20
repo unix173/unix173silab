@@ -7,20 +7,20 @@ import java.util.Set;
 @Entity
 @NamedQueries(
         @NamedQuery(name="getItemTypeByName",
-                query="from ItemType i where i.name like :name")
+                query="from TipVozila i where i.ime like :name")
         )
-public class ItemType {
+public class TipVozila {
 
     @Id
     @GeneratedValue
     private Long id;
 
     @NotNull
-    private String name;
+    private String ime;
 
-    private Double price;
+    private Double cena;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "itemType")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "tipVozila")
     private Set<Item> items;
 
     public Long getId() {
@@ -31,20 +31,20 @@ public class ItemType {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getIme() {
+        return ime;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setIme(String ime) {
+        this.ime = ime;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getCena() {
+        return cena;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setCena(Double cena) {
+        this.cena = cena;
     }
 
     public Set<Item> getItems() {
@@ -57,6 +57,6 @@ public class ItemType {
 
     @Override
     public String toString() {
-        return "ID: " + id + ", Name: " + name + ", Price: " + price;
+        return "ID: " + id + ", Name: " + ime + ", Price: " + cena;
     }
 }

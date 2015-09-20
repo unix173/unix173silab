@@ -2,7 +2,7 @@ package com.zuehlke.sistemzaizdavanjevozila.controller.admin;
 
 import com.zuehlke.sistemzaizdavanjevozila.model.Item;
 import com.zuehlke.sistemzaizdavanjevozila.service.ItemService;
-import com.zuehlke.sistemzaizdavanjevozila.service.ItemTypeService;
+import com.zuehlke.sistemzaizdavanjevozila.service.TipVozilaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class VoziloController {
 
     private ItemService itemService;
-    private ItemTypeService itemTypeService;
+    private TipVozilaService tipVozilaService;
 
     @Autowired
-    public VoziloController(ItemService itemService, ItemTypeService itemTypeService) {
+    public VoziloController(ItemService itemService, TipVozilaService tipVozilaService) {
         this.itemService = itemService;
-        this.itemTypeService = itemTypeService;
+        this.tipVozilaService = tipVozilaService;
     }
 
     @RequestMapping(value = "admin/dodajVozilo", method = RequestMethod.GET)
     public String prikaziDodavanjeVozila(Model model) {
         model.addAttribute("item", new Item());
-        model.addAttribute("itemTypes", itemTypeService.getItemTypes());
+        model.addAttribute("itemTypes", tipVozilaService.getItemTypes());
         return "admin/dodajVozilo";
     }
 

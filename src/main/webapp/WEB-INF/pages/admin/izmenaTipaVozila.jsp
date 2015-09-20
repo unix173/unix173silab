@@ -21,8 +21,8 @@
         <br/>
         <form:form name="modify" commandName="itemType" method="post" action="izmeniTipVozilaAkcija">
             <form:input type="hidden" path="id" value="${itemType.id}"/>
-            <form:input type="text" path="name" value="${itemType.name}"/>
-            <form:input type="text" path="price" value="${itemType.price}"/>
+            <form:input type="text" path="ime" value="${itemType.ime}"/>
+            <form:input type="text" path="cena" value="${itemType.cena}"/>
             <button type="submit" class="btn btn-primary btn-sm">Sačuvaj</button>
         </form:form>
     </div>

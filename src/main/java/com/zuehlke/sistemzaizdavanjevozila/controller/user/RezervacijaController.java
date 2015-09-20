@@ -4,7 +4,7 @@ import com.zuehlke.sistemzaizdavanjevozila.core.ReservationUtil;
 import com.zuehlke.sistemzaizdavanjevozila.form.AddReservationEntryForm;
 import com.zuehlke.sistemzaizdavanjevozila.model.Reservation;
 import com.zuehlke.sistemzaizdavanjevozila.model.ReservationEntry;
-import com.zuehlke.sistemzaizdavanjevozila.service.ItemTypeService;
+import com.zuehlke.sistemzaizdavanjevozila.service.TipVozilaService;
 import com.zuehlke.sistemzaizdavanjevozila.service.ReservationService;
 import com.zuehlke.sistemzaizdavanjevozila.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class RezervacijaController {
     private UserService userService;
 
     @Autowired
-    private ItemTypeService itemTypeService;
+    private TipVozilaService tipVozilaService;
 
     @RequestMapping(value = "user/dodajRezervaciju", method = RequestMethod.GET)
     public String prikazDodajRezervaciju(Model model) {
@@ -62,7 +62,7 @@ public class RezervacijaController {
             addReservationEntryForm.setReservationStartDate(null);
         } else {
             model.addAttribute("reservationInProgress", true);
-            model.addAttribute("itemTypeDTOList", itemTypeService.getAvailableItemTypes(ReservationUtil.reservedItemTypeIdList(addReservationEntryForms),
+            model.addAttribute("itemTypeDTOList", tipVozilaService.getAvailableItemTypes(ReservationUtil.reservedItemTypeIdList(addReservationEntryForms),
                     addReservationEntryForm.getReservationStartDate(), addReservationEntryForm.getReservationEndDate()));
         }
         model.addAttribute("addReservationEntryForm", addReservationEntryForm);
@@ -76,7 +76,7 @@ public class RezervacijaController {
             addReservationEntryForm.setDesiredQuantity(null);
             redirectAttributes.addFlashAttribute("addReservationEntryForm", addReservationEntryForm);
             redirectAttributes.addFlashAttribute("validationFailed", true);
-            redirectAttributes.addFlashAttribute("itemTypeDTOList", itemTypeService.getAvailableItemTypes(ReservationUtil.reservedItemTypeIdList(addReservationEntryForms),
+            redirectAttributes.addFlashAttribute("itemTypeDTOList", tipVozilaService.getAvailableItemTypes(ReservationUtil.reservedItemTypeIdList(addReservationEntryForms),
                     addReservationEntryForm.getReservationStartDate(), addReservationEntryForm.getReservationEndDate()));
             return "redirect:/user/dodajRezervaciju";
         } else {

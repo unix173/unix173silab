@@ -20,9 +20,9 @@
         <form:form method="POST" modelAttribute="itemType">
             <div>
                 <label>Model: </label>
-                <form:input path="name" id="inputName" placeholder="Unesite model vozila"/>
+                <form:input path="ime" id="inputName" placeholder="Unesite model vozila"/>
                 <label>Cena :</label>
-                <form:input path="price" id="inputPrice" placeholder="Unesite cenu vozila"/>
+                <form:input path="cena" id="inputPrice" placeholder="Unesite cenu vozila"/>
                 <button type="submit"  class="btn btn-primary btn-sm">SAČUVAJ</button>
             </div>
         </form:form>

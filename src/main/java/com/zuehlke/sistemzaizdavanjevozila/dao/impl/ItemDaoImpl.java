@@ -48,7 +48,7 @@ public class ItemDaoImpl implements ItemDao {
     @Override
     public List<Item> getAvailableItemsOfItemType(Long itemTypeId, String startDate, String endDate) {
         String query = "from Item i " +
-                "where i.itemType.id = :itemTypeId and i.id not in " +
+                "where i.tipVozila.id = :itemTypeId and i.id not in " +
                 "(select distinct i.id " +
                 "from ReservationEntry  re right outer join re.item i " +
                 "where (re.reservationStartDate <= :endDate and re.reservationEndDate >= :startDate))";

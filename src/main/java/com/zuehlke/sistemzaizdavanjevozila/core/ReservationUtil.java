@@ -21,7 +21,7 @@ public class ReservationUtil {
     public static double countReservationPrice(List<ReservationEntry> reservationEntries) {
         double totalPrice = 0;
         for (ReservationEntry reservationEntry : reservationEntries) {
-            totalPrice += reservationEntry.getItem().getItemType().getPrice() * ((reservationEntry.getReservationEndDate().getTime() - reservationEntry.getReservationStartDate().getTime()) / (1000*60*60*24));
+            totalPrice += reservationEntry.getItem().getTipVozila().getCena() * ((reservationEntry.getReservationEndDate().getTime() - reservationEntry.getReservationStartDate().getTime()) / (1000*60*60*24));
         }
         return totalPrice;
     }
