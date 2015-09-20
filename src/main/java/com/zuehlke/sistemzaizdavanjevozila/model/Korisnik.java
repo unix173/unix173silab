@@ -6,9 +6,9 @@ import java.util.Set;
 @Entity
 @NamedQueries(
         @NamedQuery(name = "getUsersByUsername",
-                query = "from User u where (u.name like :name and u.isAdmin = 0)")
+                query = "from Korisnik u where (u.name like :name and u.isAdmin = 0)")
 )
-public class User {
+public class Korisnik {
 
     @Id
     @GeneratedValue
@@ -34,7 +34,7 @@ public class User {
 
     private String confirmationId;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "korisnik", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Reservation> reservations;
 
     public Long getId() {

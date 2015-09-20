@@ -2,21 +2,21 @@ package com.zuehlke.sistemzaizdavanjevozila.service;
 
 import com.zuehlke.sistemzaizdavanjevozila.form.ChangePasswordForm;
 import com.zuehlke.sistemzaizdavanjevozila.form.UserRegistrationForm;
-import com.zuehlke.sistemzaizdavanjevozila.model.User;
+import com.zuehlke.sistemzaizdavanjevozila.model.Korisnik;
 
 import java.util.List;
 
-public interface UserService {
+public interface KorisnikService {
 
     void addUser(UserRegistrationForm userRegistrationForm, String confirmationId);
 
-    List<User> getUsers();
+    List<Korisnik> getUsers();
 
-    User getUserById(Long id);
+    Korisnik getUserById(Long id);
 
-    User getUserByUsername(String username);
+    Korisnik getUserByUsername(String username);
 
-    void deleteUser(User user);
+    void deleteUser(Korisnik korisnik);
 
     void changePassword(ChangePasswordForm changePasswordForm);
 
@@ -24,7 +24,7 @@ public interface UserService {
 
     boolean checkIfPasswordIsCorrect(Long id, String oldPassword);
 
-    List<User> getUsersByUsername(String username);
+    List<Korisnik> getUsersByUsername(String username);
 
     boolean confirmRegistration(String confirmationId);
 }

@@ -45,8 +45,8 @@
 
     <beans:bean id="userDetailService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
         <beans:property name="dataSource" ref="dataSource"/>
-        <beans:property name="usersByUsernameQuery" value="select username,password,enabled from user where username = ?"/>
-        <beans:property name="authoritiesByUsernameQuery" value="select username , (case when isAdmin = 1 then 'ROLE_ADMIN' else 'ROLE_USER' end) as authority from user where username = ?"/>
+        <beans:property name="usersByUsernameQuery" value="select username,password,enabled from korisnik where username = ?"/>
+        <beans:property name="authoritiesByUsernameQuery" value="select username , (case when isAdmin = 1 then 'ROLE_ADMIN' else 'ROLE_USER' end) as authority from korisnik where username = ?"/>
     </beans:bean>
 
     <beans:bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />

@@ -1,7 +1,7 @@
 package com.zuehlke.sistemzaizdavanjevozila.controller.admin;
 
-import com.zuehlke.sistemzaizdavanjevozila.model.User;
-import com.zuehlke.sistemzaizdavanjevozila.service.UserService;
+import com.zuehlke.sistemzaizdavanjevozila.model.Korisnik;
+import com.zuehlke.sistemzaizdavanjevozila.service.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,22 +14,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class KorisnikControllerAdmin {
 
     @Autowired
-    private UserService userService;
+    private KorisnikService korisnikService;
 
     @RequestMapping(value = "admin/prikaziKorisnike", method = RequestMethod.GET)
     public String prikaziKorisnike(Model model, @RequestParam(value = "keyword", required = false) String keyword) {
         if(keyword == null || keyword.isEmpty()) {
-            model.addAttribute("users", userService.getUsers());
+            model.addAttribute("users", korisnikService.getUsers());
         }else {
-            model.addAttribute("users", userService.getUsersByUsername(keyword));
+            model.addAttribute("users", korisnikService.getUsersByUsername(keyword));
         }
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new Korisnik());
         return "admin/prikaziKorisnike";
     }
 
     @RequestMapping(value = "admin/obrisiKorisnikaAkcija", method = RequestMethod.POST)
-    public String procesObrisiKorisnika(@ModelAttribute("user") User user, Model model) {
-        userService.deleteUser(user);
+    public String procesObrisiKorisnika(@ModelAttribute("user") Korisnik korisnik, Model model) {
+        korisnikService.deleteUser(korisnik);
         return "redirect:/admin/prikaziKorisnike";
     }
 }

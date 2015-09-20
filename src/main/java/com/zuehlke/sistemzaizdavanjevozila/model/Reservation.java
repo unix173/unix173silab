@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @NamedQueries(
-        @NamedQuery(name = "getReservationsByUserId", query = "from Reservation r where r.user.id = :userid")
+        @NamedQuery(name = "getReservationsByUserId", query = "from Reservation r where r.korisnik.id = :userid")
 )
 public class Reservation {
 
@@ -16,7 +16,7 @@ public class Reservation {
     private Long id;
 
     @ManyToOne
-    private User user;
+    private Korisnik korisnik;
 
     private Date creationDate;
 
@@ -43,12 +43,12 @@ public class Reservation {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Korisnik getKorisnik() {
+        return korisnik;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
     }
 
     public Date getCreationDate() {

@@ -34,12 +34,12 @@
                     <td>
                             <fmt:formatDate value="${reservation.creationDate}" pattern="yyyy-MM-dd"/>
                     <td>
-                            ${reservation.user.name} ${reservation.user.lastName}
+                            ${reservation.korisnik.name} ${reservation.korisnik.lastName}
                     </td>
                     <td>
                         <form:form action="prikazStavkiRezervacija" commandName="reservation" method="get">
                             <input type="hidden" name="id" value="${reservation.id}"/>
-                            <input type="hidden" name="user.id" value="${reservation.user.id}">
+                            <input type="hidden" name="user.id" value="${reservation.korisnik.id}">
                             <input type="submit" value="DETALJI" class="btn btn-primary btn-sm">
                         </form:form>
                     </td>

@@ -1,5 +1,6 @@
 package com.zuehlke.sistemzaizdavanjevozila.controller.admin;
 
+import com.zuehlke.sistemzaizdavanjevozila.model.Korisnik;
 import com.zuehlke.sistemzaizdavanjevozila.model.Reservation;
 import com.zuehlke.sistemzaizdavanjevozila.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,23 +26,23 @@ public class RezervacijaControllerAdmin {
     }
 
     @RequestMapping(value = "admin/prikazRezervacijaPoKorisniku", method = RequestMethod.GET)
-    public String priaziRezervacijePoKorisniku(@ModelAttribute("user") com.zuehlke.sistemzaizdavanjevozila.model.User user, Model model) {
-        List<Reservation> reservations = reservationService.getReservationsByUserId(user.getId());
+    public String priaziRezervacijePoKorisniku(@ModelAttribute("user") Korisnik korisnik, Model model) {
+        List<Reservation> reservations = reservationService.getReservationsByUserId(korisnik.getId());
         Reservation reservation = new Reservation();
-        reservation.setUser(new com.zuehlke.sistemzaizdavanjevozila.model.User());
+        reservation.setKorisnik(new Korisnik());
         model.addAttribute("reservation", reservation);
         model.addAttribute("reservations", reservations);
-        model.addAttribute("user", user);
+        model.addAttribute("user", korisnik);
         return "admin/prikazRezervacijaPoKorisniku";
     }
 
     @RequestMapping(value = "admin/obrisiRezervacijuAkcija", method = RequestMethod.POST)
     public String obrisiRezervaciju(@ModelAttribute("reservation") Reservation reservation, RedirectAttributes redirectAttributes) {
         reservation = reservationService.getReservationById(reservation.getId());
-        Long userId = reservation.getUser().getId();
+        Long userId = reservation.getKorisnik().getId();
         reservationService.deleteReservation(reservation);
         redirectAttributes.addFlashAttribute("reservations", reservationService.getReservationsByUserId(userId));
-        redirectAttributes.addFlashAttribute("user", reservation.getUser());
+        redirectAttributes.addFlashAttribute("user", reservation.getKorisnik());
         return "redirect:/admin/prikazRezervacijaPoKorisniku?id=" + userId;
     }
 

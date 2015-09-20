@@ -2,11 +2,12 @@ package com.zuehlke.sistemzaizdavanjevozila.controller.user;
 
 import com.zuehlke.sistemzaizdavanjevozila.core.ReservationUtil;
 import com.zuehlke.sistemzaizdavanjevozila.form.AddReservationEntryForm;
+import com.zuehlke.sistemzaizdavanjevozila.model.Korisnik;
 import com.zuehlke.sistemzaizdavanjevozila.model.Reservation;
 import com.zuehlke.sistemzaizdavanjevozila.model.ReservationEntry;
 import com.zuehlke.sistemzaizdavanjevozila.service.TipVozilaService;
 import com.zuehlke.sistemzaizdavanjevozila.service.ReservationService;
-import com.zuehlke.sistemzaizdavanjevozila.service.UserService;
+import com.zuehlke.sistemzaizdavanjevozila.service.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -34,7 +35,7 @@ public class RezervacijaController {
     private ReservationService reservationService;
 
     @Autowired
-    private UserService userService;
+    private KorisnikService korisnikService;
 
     @Autowired
     private TipVozilaService tipVozilaService;
@@ -88,7 +89,7 @@ public class RezervacijaController {
     @RequestMapping(value = "user/dodajRezervacijuAkcija", method = RequestMethod.POST)
     public String dodajRezervacijuAkcija(@ModelAttribute("addReservationEntryForms") List<AddReservationEntryForm> addReservationEntryForms, Principal principal, RedirectAttributes redirectAttributes) {
 
-        reservationService.addReservation(reservationService.createReservation(addReservationEntryForms, userService.getUserByUsername(((User) ((Authentication) principal).getPrincipal()).getUsername())));
+        reservationService.addReservation(reservationService.createReservation(addReservationEntryForms, korisnikService.getUserByUsername(((User) ((Authentication) principal).getPrincipal()).getUsername())));
         redirectAttributes.addFlashAttribute("successfulReservation", true);
         //do a redirect to user's reservation page
         redirectAttributes.addFlashAttribute("addReservationEntryForms", new ArrayList<AddReservationEntryForm>());
@@ -104,9 +105,9 @@ public class RezervacijaController {
 
     @RequestMapping(value = "user/prikazRezervacijaKorisnika", method = RequestMethod.GET)
     public String prikaziRezervacijeKorisnika(Model model, Principal principal) {
-        List<Reservation> reservations = reservationService.getReservationsByUserId(userService.getUserByUsername(((User) ((Authentication) principal).getPrincipal()).getUsername()).getId());
+        List<Reservation> reservations = reservationService.getReservationsByUserId(korisnikService.getUserByUsername(((User) ((Authentication) principal).getPrincipal()).getUsername()).getId());
         Reservation reservation = new Reservation();
-        reservation.setUser(new com.zuehlke.sistemzaizdavanjevozila.model.User());
+        reservation.setKorisnik(new Korisnik());
         model.addAttribute("reservation", reservation);
         model.addAttribute("reservations", reservations);
         return "user/prikazRezervacijaKorisnika";

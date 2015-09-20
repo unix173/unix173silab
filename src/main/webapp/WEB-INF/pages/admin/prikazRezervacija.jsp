@@ -32,7 +32,7 @@
                     <fmt:formatDate value="${reservation.creationDate}" pattern="yyyy-MM-dd"/>
                 </td>
                 <td>
-                        ${reservation.user.name} ${reservation.user.lastName}
+                        ${reservation.korisnik.name} ${reservation.korisnik.lastName}
                 </td>
                 <td>
                         ${reservation.price}

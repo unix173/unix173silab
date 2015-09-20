@@ -54,12 +54,12 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public Reservation createReservation(List<AddReservationEntryForm> addReservationEntryForms, User user) {
+    public Reservation createReservation(List<AddReservationEntryForm> addReservationEntryForms, Korisnik korisnik) {
         List<ReservationEntry> reservationEntries = getReservationEntries(addReservationEntryForms);
         Reservation reservation = new Reservation();
         reservation.setCreationDate(new Date());
         reservation.setPrice(ReservationUtil.countReservationPrice(reservationEntries));
-        reservation.setUser(user);
+        reservation.setKorisnik(korisnik);
         reservation.setReservationStatus(ReservationStatus.CREATED);
         for (ReservationEntry reservationEntry : reservationEntries) {
             reservation.addReservationEntry(reservationEntry);
