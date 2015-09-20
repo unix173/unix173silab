@@ -14,7 +14,7 @@ public class ReservationEntry {
     private Reservation reservation;
 
     @OneToOne
-    private Item item;
+    private Vozilo vozilo;
 
     private Date reservationStartDate;
 
@@ -36,12 +36,12 @@ public class ReservationEntry {
         this.reservation = reservation;
     }
 
-    public Item getItem() {
-        return item;
+    public Vozilo getVozilo() {
+        return vozilo;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setVozilo(Vozilo vozilo) {
+        this.vozilo = vozilo;
     }
 
     public Date getReservationStartDate() {

@@ -64,10 +64,10 @@ public class TipVozilaDaoImpl implements TipVozilaDao {
         String query =
                 "select " +
                         "new com.zuehlke.sistemzaizdavanjevozila.core.ItemTypeInfoDTO(it.id, count(*),it.ime ) " +
-                        "from TipVozila it join it.items i " +
+                        "from TipVozila it join it.vozila i " +
                         "where i.id not in " +
                         "(select distinct i.id " +
-                        "from ReservationEntry  re left outer join re.item i " +
+                        "from ReservationEntry  re left outer join re.vozilo i " +
                         "where (re.reservationStartDate <= :endDate and re.reservationEndDate >= :startDate)) " +
                         "group by it.id";
         List<ItemTypeInfoDTO> itemTypeInfoDTOList =

@@ -1,7 +1,7 @@
 package com.zuehlke.sistemzaizdavanjevozila.service.impl;
 
 import com.zuehlke.sistemzaizdavanjevozila.core.ItemTypeInfoDTO;
-import com.zuehlke.sistemzaizdavanjevozila.dao.ItemDao;
+import com.zuehlke.sistemzaizdavanjevozila.dao.VoziloDao;
 import com.zuehlke.sistemzaizdavanjevozila.dao.TipVozilaDao;
 import com.zuehlke.sistemzaizdavanjevozila.model.TipVozila;
 import com.zuehlke.sistemzaizdavanjevozila.service.TipVozilaService;
@@ -20,7 +20,7 @@ public class TipVozilaServiceImpl implements TipVozilaService {
     private TipVozilaDao tipVozilaDao;
 
     @Autowired
-    private ItemDao itemDao;
+    private VoziloDao voziloDao;
 
     @Override
     public void addItemType(TipVozila tipVozila) {

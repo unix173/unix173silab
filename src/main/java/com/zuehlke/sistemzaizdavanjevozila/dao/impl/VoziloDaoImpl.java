@@ -1,7 +1,7 @@
 package com.zuehlke.sistemzaizdavanjevozila.dao.impl;
 
-import com.zuehlke.sistemzaizdavanjevozila.dao.ItemDao;
-import com.zuehlke.sistemzaizdavanjevozila.model.Item;
+import com.zuehlke.sistemzaizdavanjevozila.dao.VoziloDao;
+import com.zuehlke.sistemzaizdavanjevozila.model.Vozilo;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,55 +11,55 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class ItemDaoImpl implements ItemDao {
+public class VoziloDaoImpl implements VoziloDao {
 
     private SessionFactory sessionFactory;
 
     @Autowired
-    public ItemDaoImpl(SessionFactory sessionFactory) {
+    public VoziloDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
     @Override
-    public List<Item> getItems() {
-        return sessionFactory.getCurrentSession().createCriteria(Item.class).list();
+    public List<Vozilo> getItems() {
+        return sessionFactory.getCurrentSession().createCriteria(Vozilo.class).list();
     }
 
     @Override
-    public Item getItemById(String id) {
-        return (Item) sessionFactory.getCurrentSession().get(Item.class, id);
+    public Vozilo getItemById(String id) {
+        return (Vozilo) sessionFactory.getCurrentSession().get(Vozilo.class, id);
     }
 
     @Override
-    public void addItem(Item item) {
-        sessionFactory.getCurrentSession().save(item);
+    public void addItem(Vozilo vozilo) {
+        sessionFactory.getCurrentSession().save(vozilo);
     }
 
     @Override
-    public void setItem(Item item) {
-        sessionFactory.getCurrentSession().update(item);
+    public void setItem(Vozilo vozilo) {
+        sessionFactory.getCurrentSession().update(vozilo);
     }
 
     @Override
-    public void deleteItem(Item item) {
-        sessionFactory.getCurrentSession().delete(item);
+    public void deleteItem(Vozilo vozilo) {
+        sessionFactory.getCurrentSession().delete(vozilo);
     }
 
     @Override
-    public List<Item> getAvailableItemsOfItemType(Long itemTypeId, String startDate, String endDate) {
-        String query = "from Item i " +
+    public List<Vozilo> getAvailableItemsOfItemType(Long itemTypeId, String startDate, String endDate) {
+        String query = "from Vozilo i " +
                 "where i.tipVozila.id = :itemTypeId and i.id not in " +
                 "(select distinct i.id " +
-                "from ReservationEntry  re right outer join re.item i " +
+                "from ReservationEntry  re right outer join re.vozilo i " +
                 "where (re.reservationStartDate <= :endDate and re.reservationEndDate >= :startDate))";
 
-            List<Item> items =
+            List<Vozilo> vozila =
                     sessionFactory.getCurrentSession().createQuery(query)
                             .setString("startDate", startDate)
                             .setString("endDate", endDate)
                             .setLong("itemTypeId", itemTypeId)
                             .list();
-            return items;
+            return vozila;
         }
 }
 

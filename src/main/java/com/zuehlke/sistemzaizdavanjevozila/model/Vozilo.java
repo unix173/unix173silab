@@ -5,7 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Item {
+public class Vozilo {
 
     @Id
     private String id;
@@ -32,6 +32,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return " Item ID: " + id;
+        return " Vozilo ID: " + id;
     }
 }

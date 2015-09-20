@@ -1,7 +1,7 @@
 package com.zuehlke.sistemzaizdavanjevozila.controller.admin;
 
-import com.zuehlke.sistemzaizdavanjevozila.model.Item;
-import com.zuehlke.sistemzaizdavanjevozila.service.ItemService;
+import com.zuehlke.sistemzaizdavanjevozila.model.Vozilo;
+import com.zuehlke.sistemzaizdavanjevozila.service.VoziloService;
 import com.zuehlke.sistemzaizdavanjevozila.service.TipVozilaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,25 +13,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class VoziloController {
 
-    private ItemService itemService;
+    private VoziloService voziloService;
     private TipVozilaService tipVozilaService;
 
     @Autowired
-    public VoziloController(ItemService itemService, TipVozilaService tipVozilaService) {
-        this.itemService = itemService;
+    public VoziloController(VoziloService voziloService, TipVozilaService tipVozilaService) {
+        this.voziloService = voziloService;
         this.tipVozilaService = tipVozilaService;
     }
 
     @RequestMapping(value = "admin/dodajVozilo", method = RequestMethod.GET)
     public String prikaziDodavanjeVozila(Model model) {
-        model.addAttribute("item", new Item());
+        model.addAttribute("item", new Vozilo());
         model.addAttribute("itemTypes", tipVozilaService.getItemTypes());
         return "admin/dodajVozilo";
     }
 
     @RequestMapping(value = "admin/dodajVozilo", method = RequestMethod.POST)
-    public String procesDodavanjaVozila(@ModelAttribute("item") Item item, Model model) {
-        itemService.addItem(item);
+    public String procesDodavanjaVozila(@ModelAttribute("item") Vozilo vozilo, Model model) {
+        voziloService.addItem(vozilo);
         return "redirect:/pocetna";
     }
 

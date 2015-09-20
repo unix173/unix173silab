@@ -49,7 +49,7 @@
                         <form:form name="delete" method="post" action="obrisiTipVozila" commandName="itemType">
                             <form:input type="hidden" path="id" value="${itemType.id}"/>
                             <input type="submit" name="button" value="UKLONI" class="btn btn-primary btn-sm"
-                                   <c:if test="${itemType.items.size() !=0 }">disabled</c:if> />
+                                   <c:if test="${itemType.vozila.size() !=0 }">disabled</c:if> />
                         </form:form>
                     </td>
 

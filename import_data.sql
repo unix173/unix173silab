@@ -11,14 +11,14 @@ INSERT INTO `sziv`.`tipvozila` (`id`, `ime`, `cena`) VALUES (NULL, 'Yugo 55', '3
 INSERT INTO `sziv`.`tipvozila` (`id`, `ime`, `cena`) VALUES (NULL, 'Lada Niva', '50');
 INSERT INTO `sziv`.`tipvozila` (`id`, `ime`, `cena`) VALUES (NULL, 'Suzuki Vitara', '50');
 
-INSERT INTO `sziv`.`item` (`id`, `tipvozila_id`) VALUES ('BG312TR', '1');
-INSERT INTO `sziv`.`item` (`id`, `tipvozila_id`) VALUES ('BG558YH', '1');
-INSERT INTO `sziv`.`item` (`id`, `tipvozila_id`) VALUES ('BG665OI', '2');
-INSERT INTO `sziv`.`item` (`id`, `tipvozila_id`) VALUES ('BG332PP', '2');
-INSERT INTO `sziv`.`item` (`id`, `tipvozila_id`) VALUES ('BG183RT', '3');
-INSERT INTO `sziv`.`item` (`id`, `tipvozila_id`) VALUES ('BG129RT', '4');
-INSERT INTO `sziv`.`item` (`id`, `tipvozila_id`) VALUES ('BG111RX', '3');
-INSERT INTO `sziv`.`item` (`id`, `tipvozila_id`) VALUES ('BG322OO', '5');
+INSERT INTO `sziv`.`vozilo` (`id`, `tipvozila_id`) VALUES ('BG312TR', '1');
+INSERT INTO `sziv`.`vozilo` (`id`, `tipvozila_id`) VALUES ('BG558YH', '1');
+INSERT INTO `sziv`.`vozilo` (`id`, `tipvozila_id`) VALUES ('BG665OI', '2');
+INSERT INTO `sziv`.`vozilo` (`id`, `tipvozila_id`) VALUES ('BG332PP', '2');
+INSERT INTO `sziv`.`vozilo` (`id`, `tipvozila_id`) VALUES ('BG183RT', '3');
+INSERT INTO `sziv`.`vozilo` (`id`, `tipvozila_id`) VALUES ('BG129RT', '4');
+INSERT INTO `sziv`.`vozilo` (`id`, `tipvozila_id`) VALUES ('BG111RX', '3');
+INSERT INTO `sziv`.`vozilo` (`id`, `tipvozila_id`) VALUES ('BG322OO', '5');
 
 insert into user values (NULL,1,'admin@email.com',1, 1,'AdminLNM','AdminFNM','$2a$10$cGtOPvnrDnS8EJWU4I4CNuu19v4GX8cBzv5TbLfTZoT8kwf9nxxjy','admin');
 insert into user values (NULL,2,'user@email.com',1, 0,'Ivanovic','Ivan','$2a$10$j2J9l2Z5SiPkwKHMr/DG5ue4t0OdkKykIuiaOusCOz3senq8kZAp.','user');

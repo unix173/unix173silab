@@ -28,8 +28,8 @@
             <c:forEach items="${reservationEntries}" var="reservationEntry">
                 <tr>
                     <td>${reservationEntry.id}</td>
-                    <td>${reservationEntry.item.tipVozila.ime}</td>
-                    <td>${reservationEntry.item}</td>
+                    <td>${reservationEntry.vozilo.tipVozila.ime}</td>
+                    <td>${reservationEntry.vozilo}</td>
                     <td><fmt:formatDate value="${reservationEntry.reservationStartDate}" pattern="yyyy-MM-dd"/></td>
                     <td><fmt:formatDate value="${reservationEntry.reservationEndDate}" pattern="yyyy-MM-dd"/></td>
                 </tr>

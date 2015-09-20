@@ -4,7 +4,7 @@ import com.zuehlke.sistemzaizdavanjevozila.core.ReservationUtil;
 import com.zuehlke.sistemzaizdavanjevozila.dao.ReservationDao;
 import com.zuehlke.sistemzaizdavanjevozila.form.AddReservationEntryForm;
 import com.zuehlke.sistemzaizdavanjevozila.model.*;
-import com.zuehlke.sistemzaizdavanjevozila.service.ItemService;
+import com.zuehlke.sistemzaizdavanjevozila.service.VoziloService;
 import com.zuehlke.sistemzaizdavanjevozila.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class ReservationServiceImpl implements ReservationService{
     private ReservationDao reservationDao;
 
     @Autowired
-    private ItemService itemService;
+    private VoziloService voziloService;
 
     @Override
     public List<Reservation> getReservations() {
@@ -71,9 +71,9 @@ public class ReservationServiceImpl implements ReservationService{
     private List<ReservationEntry> getReservationEntries(List<AddReservationEntryForm> addReservationEntryForms) {
         List<ReservationEntry> reservationEntries = new ArrayList<ReservationEntry>();
         for (AddReservationEntryForm addReservationEntryForm : addReservationEntryForms) {
-            List<Item> items = itemService.getBestItemsForReservationFromItemTypeId(addReservationEntryForm.getItemTypeId(), addReservationEntryForm.getDesiredQuantity(), addReservationEntryForm.getReservationStartDate(), addReservationEntryForm.getReservationEndDate());
-            for (Item item : items) {
-                reservationEntries.add(ReservationUtil.createReservationEntry(item, addReservationEntryForm));
+            List<Vozilo> vozilos = voziloService.getBestItemsForReservationFromItemTypeId(addReservationEntryForm.getItemTypeId(), addReservationEntryForm.getDesiredQuantity(), addReservationEntryForm.getReservationStartDate(), addReservationEntryForm.getReservationEndDate());
+            for (Vozilo vozilo : vozilos) {
+                reservationEntries.add(ReservationUtil.createReservationEntry(vozilo, addReservationEntryForm));
             }
         }
         return reservationEntries;

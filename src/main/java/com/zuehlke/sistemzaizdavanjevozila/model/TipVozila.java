@@ -21,7 +21,7 @@ public class TipVozila {
     private Double cena;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "tipVozila")
-    private Set<Item> items;
+    private Set<Vozilo> vozila;
 
     public Long getId() {
         return id;
@@ -47,12 +47,12 @@ public class TipVozila {
         this.cena = cena;
     }
 
-    public Set<Item> getItems() {
-        return items;
+    public Set<Vozilo> getVozila() {
+        return vozila;
     }
 
-    public void setItems(Set<Item> items) {
-        this.items = items;
+    public void setVozila(Set<Vozilo> vozila) {
+        this.vozila = vozila;
     }
 
     @Override

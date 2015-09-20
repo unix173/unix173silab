@@ -32,10 +32,10 @@
                     <fmt:formatDate value="${reservation.creationDate}" pattern="yyyy-MM-dd"/>
                 </td>
                 <td>
-                        ${reservation.user.ime} ${reservation.user.lastName}
+                        ${reservation.user.name} ${reservation.user.lastName}
                 </td>
                 <td>
-                        ${reservation.cena}
+                        ${reservation.price}
                 </td>
                 </tr>
             </c:forEach>

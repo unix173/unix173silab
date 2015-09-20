@@ -50,7 +50,7 @@
 
         <property name="annotatedClasses">
             <list>
-                <value>com.zuehlke.sistemzaizdavanjevozila.model.Item</value>
+                <value>com.zuehlke.sistemzaizdavanjevozila.model.Vozilo</value>
                 <value>com.zuehlke.sistemzaizdavanjevozila.model.TipVozila</value>
                 <value>com.zuehlke.sistemzaizdavanjevozila.model.User</value>
                 <value>com.zuehlke.sistemzaizdavanjevozila.model.Reservation</value>
