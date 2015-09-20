@@ -50,7 +50,7 @@ public class VoziloDaoImpl implements VoziloDao {
         String query = "from Vozilo i " +
                 "where i.tipVozila.id = :itemTypeId and i.id not in " +
                 "(select distinct i.id " +
-                "from ReservationEntry  re right outer join re.vozilo i " +
+                "from StavkaRezervacije  re right outer join re.vozilo i " +
                 "where (re.reservationStartDate <= :endDate and re.reservationEndDate >= :startDate))";
 
             List<Vozilo> vozila =

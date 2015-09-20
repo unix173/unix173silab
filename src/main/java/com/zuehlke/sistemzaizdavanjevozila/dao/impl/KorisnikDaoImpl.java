@@ -63,7 +63,7 @@ public class KorisnikDaoImpl implements KorisnikDao {
 
     @Override
     public Korisnik getUserByConfirmationId(String confirmationId) {
-        return (Korisnik) sessionFactory.getCurrentSession().createQuery("FROM User u where u.confirmationId = :confirmationId")
+        return (Korisnik) sessionFactory.getCurrentSession().createQuery("FROM Korisnik u where u.confirmationId = :confirmationId")
                 .setString("confirmationId", confirmationId)
                 .uniqueResult();
     }

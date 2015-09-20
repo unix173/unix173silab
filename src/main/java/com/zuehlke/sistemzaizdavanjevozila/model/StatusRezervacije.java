@@ -1,6 +1,6 @@
 package com.zuehlke.sistemzaizdavanjevozila.model;
 
-public enum ReservationStatus {
+public enum StatusRezervacije {
 
     CREATED,
     IN_PROGRESS,

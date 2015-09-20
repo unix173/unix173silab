@@ -55,21 +55,21 @@ public class RezervacijaServiceImpl implements RezervacijaService {
 
     @Override
     public Rezervacija createReservation(List<AddReservationEntryForm> addReservationEntryForms, Korisnik korisnik) {
-        List<ReservationEntry> reservationEntries = getReservationEntries(addReservationEntryForms);
+        List<StavkaRezervacije> reservationEntries = getReservationEntries(addReservationEntryForms);
         Rezervacija rezervacija = new Rezervacija();
         rezervacija.setCreationDate(new Date());
         rezervacija.setPrice(ReservationUtil.countReservationPrice(reservationEntries));
         rezervacija.setKorisnik(korisnik);
-        rezervacija.setReservationStatus(ReservationStatus.CREATED);
-        for (ReservationEntry reservationEntry : reservationEntries) {
-            rezervacija.addReservationEntry(reservationEntry);
+        rezervacija.setStatusRezervacije(StatusRezervacije.CREATED);
+        for (StavkaRezervacije stavkaRezervacije : reservationEntries) {
+            rezervacija.addReservationEntry(stavkaRezervacije);
         }
-        rezervacija.setReservationEntries(new HashSet<ReservationEntry>(reservationEntries));
+        rezervacija.setReservationEntries(new HashSet<StavkaRezervacije>(reservationEntries));
         return rezervacija;
     }
 
-    private List<ReservationEntry> getReservationEntries(List<AddReservationEntryForm> addReservationEntryForms) {
-        List<ReservationEntry> reservationEntries = new ArrayList<ReservationEntry>();
+    private List<StavkaRezervacije> getReservationEntries(List<AddReservationEntryForm> addReservationEntryForms) {
+        List<StavkaRezervacije> reservationEntries = new ArrayList<StavkaRezervacije>();
         for (AddReservationEntryForm addReservationEntryForm : addReservationEntryForms) {
             List<Vozilo> vozilos = voziloService.getBestItemsForReservationFromItemTypeId(addReservationEntryForm.getItemTypeId(), addReservationEntryForm.getDesiredQuantity(), addReservationEntryForm.getReservationStartDate(), addReservationEntryForm.getReservationEndDate());
             for (Vozilo vozilo : vozilos) {

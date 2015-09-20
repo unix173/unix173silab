@@ -67,7 +67,7 @@ public class TipVozilaDaoImpl implements TipVozilaDao {
                         "from TipVozila it join it.vozila i " +
                         "where i.id not in " +
                         "(select distinct i.id " +
-                        "from ReservationEntry  re left outer join re.vozilo i " +
+                        "from StavkaRezervacije  re left outer join re.vozilo i " +
                         "where (re.reservationStartDate <= :endDate and re.reservationEndDate >= :startDate)) " +
                         "group by it.id";
         List<ItemTypeInfoDTO> itemTypeInfoDTOList =

@@ -23,16 +23,16 @@ public class Rezervacija {
     private Double price;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "rezervacija")
-    private Set<ReservationEntry> reservationEntries = new HashSet<ReservationEntry>();
+    private Set<StavkaRezervacije> reservationEntries = new HashSet<StavkaRezervacije>();
 
-    private ReservationStatus reservationStatus;
+    private StatusRezervacije statusRezervacije;
 
-    public ReservationStatus getReservationStatus() {
-        return reservationStatus;
+    public StatusRezervacije getStatusRezervacije() {
+        return statusRezervacije;
     }
 
-    public void setReservationStatus(ReservationStatus reservationStatus) {
-        this.reservationStatus = reservationStatus;
+    public void setStatusRezervacije(StatusRezervacije statusRezervacije) {
+        this.statusRezervacije = statusRezervacije;
     }
 
     public Long getId() {
@@ -67,16 +67,16 @@ public class Rezervacija {
         this.price = price;
     }
 
-    public Set<ReservationEntry> getReservationEntries() {
+    public Set<StavkaRezervacije> getReservationEntries() {
         return reservationEntries;
     }
 
-    public void setReservationEntries(Set<ReservationEntry> reservationEntries) {
+    public void setReservationEntries(Set<StavkaRezervacije> reservationEntries) {
         this.reservationEntries = reservationEntries;
     }
 
-    public void addReservationEntry(ReservationEntry reservationEntry) {
-        reservationEntry.setRezervacija(this);
-        reservationEntries.add(reservationEntry);
+    public void addReservationEntry(StavkaRezervacije stavkaRezervacije) {
+        stavkaRezervacije.setRezervacija(this);
+        reservationEntries.add(stavkaRezervacije);
     }
 }

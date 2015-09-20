@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class ReservationEntry {
+public class StavkaRezervacije {
 
     @Id
     @GeneratedValue

@@ -54,7 +54,7 @@
                 <value>com.zuehlke.sistemzaizdavanjevozila.model.TipVozila</value>
                 <value>com.zuehlke.sistemzaizdavanjevozila.model.Korisnik</value>
                 <value>com.zuehlke.sistemzaizdavanjevozila.model.Rezervacija</value>
-                <value>com.zuehlke.sistemzaizdavanjevozila.model.ReservationEntry</value>
+                <value>com.zuehlke.sistemzaizdavanjevozila.model.StavkaRezervacije</value>
             </list>
         </property>
     </bean>

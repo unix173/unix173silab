@@ -4,7 +4,7 @@ import com.zuehlke.sistemzaizdavanjevozila.core.ReservationUtil;
 import com.zuehlke.sistemzaizdavanjevozila.form.AddReservationEntryForm;
 import com.zuehlke.sistemzaizdavanjevozila.model.Korisnik;
 import com.zuehlke.sistemzaizdavanjevozila.model.Rezervacija;
-import com.zuehlke.sistemzaizdavanjevozila.model.ReservationEntry;
+import com.zuehlke.sistemzaizdavanjevozila.model.StavkaRezervacije;
 import com.zuehlke.sistemzaizdavanjevozila.service.TipVozilaService;
 import com.zuehlke.sistemzaizdavanjevozila.service.RezervacijaService;
 import com.zuehlke.sistemzaizdavanjevozila.service.KorisnikService;
@@ -93,7 +93,7 @@ public class RezervacijaController {
         redirectAttributes.addFlashAttribute("successfulReservation", true);
         //do a redirect to user's reservation page
         redirectAttributes.addFlashAttribute("addReservationEntryForms", new ArrayList<AddReservationEntryForm>());
-        redirectAttributes.addFlashAttribute("reservationEntry", new ReservationEntry());
+        redirectAttributes.addFlashAttribute("reservationEntry", new StavkaRezervacije());
         return "redirect:/user/dodajRezervaciju";
     }
 
@@ -115,7 +115,7 @@ public class RezervacijaController {
 
     @RequestMapping(value = "user/prikazStavkiRezervacijeKorisnika", method = RequestMethod.GET)
     public String prikaziStavkeRezervacijeKorisnikaAkcija(@ModelAttribute("reservation") Rezervacija rezervacija, Model model) {
-        List<ReservationEntry> reservationEntries = new ArrayList<ReservationEntry>(rezervacijaService.getReservationById(rezervacija.getId()).getReservationEntries());
+        List<StavkaRezervacije> reservationEntries = new ArrayList<StavkaRezervacije>(rezervacijaService.getReservationById(rezervacija.getId()).getReservationEntries());
         model.addAttribute("reservationEntries", reservationEntries);
         return "user/prikazStavkiRezervacijeKorisnika";
     }
