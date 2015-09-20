@@ -16,7 +16,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-                    <li><a href="${pageContext.request.contextPath}/home"><span class="glyphicon glyphicon-home"></span> </a></li>
+                    <li><a href="${pageContext.request.contextPath}/pocetna"><span class="glyphicon glyphicon-home"></span> </a></li>
 
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <li><a href="${pageContext.request.contextPath}/admin/addItem">Dodavanje vozila </a></li>
@@ -35,8 +35,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <%-- Register and login / logout --%>
                 <sec:authorize access="isAnonymous()">
-                    <li><a href="${pageContext.request.contextPath}/register">Registracija</a></li>
-                    <li><a href="${pageContext.request.contextPath}/login">Prijavljivanje</a></li>
+                    <li><a href="${pageContext.request.contextPath}/registracija">Registracija</a></li>
+                    <li><a href="${pageContext.request.contextPath}/prijavljivanje">Prijavljivanje</a></li>
                 </sec:authorize>
 
                     <sec:authorize access="isAuthenticated()">

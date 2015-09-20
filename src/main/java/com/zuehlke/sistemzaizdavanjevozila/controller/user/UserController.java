@@ -32,10 +32,10 @@ public class UserController {
     @Autowired
     private MailingService mailingService;
 
-    @RequestMapping(value = "register", method = RequestMethod.GET)
+    @RequestMapping(value = "registracija", method = RequestMethod.GET)
     public String userView(Model model) {
         model.addAttribute("userRegistrationForm", new UserRegistrationForm());
-        return "register";
+        return "registracija";
     }
 
     @RequestMapping(value = "confirm", method = RequestMethod.GET)
@@ -46,22 +46,22 @@ public class UserController {
         else{
             model.addAttribute("msg","URL za potvrdu nije ispravan");
         }
-        return "login";
+        return "prijavljivanje";
     }
 
-    @RequestMapping(value = "register", method = RequestMethod.POST)
+    @RequestMapping(value = "registracija", method = RequestMethod.POST)
     public ModelAndView register(@ModelAttribute("userRegistrationForm") @Valid UserRegistrationForm userRegistrationForm, BindingResult result, WebRequest request, Errors errors) {
         if (result.hasErrors()) {
-            return new ModelAndView("register", "userRegistrationForm", userRegistrationForm);
+            return new ModelAndView("registracija", "userRegistrationForm", userRegistrationForm);
         } else if (!userService.checkIfUnique(userRegistrationForm)) {
             result.addError(new ObjectError("message", "Username or Email are duplicated"));
-            return new ModelAndView("register", "userRegistrationForm", userRegistrationForm);
+            return new ModelAndView("registracija", "userRegistrationForm", userRegistrationForm);
         } else {
             final String confirmationId = UUID.randomUUID().toString().replaceAll("-", "");
             mailingService.sendMail(userRegistrationForm.getEmail(),"Potvrda registracije", "localhost:8080/confirm?confirmationId=" + confirmationId);
             userService.addUser(userRegistrationForm, confirmationId);
         }
-        return new ModelAndView("redirect:/login");
+        return new ModelAndView("redirect:/prijavljivanje?registered");
     }
 
     @RequestMapping(value = "user/changePassword", method = RequestMethod.GET)
@@ -86,7 +86,7 @@ public class UserController {
         } else {
             userService.changePassword(changePasswordForm);
         }
-        return new ModelAndView("home");
+        return new ModelAndView("pocetna");
     }
 
 }

@@ -12,28 +12,32 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class LoginController {
+public class PrijavljivanjeController {
 
-    private final static Logger logger = LoggerFactory.getLogger(LoginController.class);
+    private final static Logger logger = LoggerFactory.getLogger(PrijavljivanjeController.class);
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/prijavljivanje", method = RequestMethod.GET)
     public ModelAndView login(
             @RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "logout", required = false) String logout,
+            @RequestParam(value = "registered", required = false) String registered,
             HttpSession httpSession) {
 
         ModelAndView model = new ModelAndView();
         if (error != null) {
             AuthenticationException springSecurityLastException = (AuthenticationException)httpSession.getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
             logger.info("Login failed: AuthenticationException: " + springSecurityLastException.getMessage());
-            model.addObject("error", "Pogrešno korisničko ime ili lozinka!");
+            model.addObject("error", "Sistem ne može da prijavi korisnika!");
         }
-
         if (logout != null) {
             logger.info("Successful login");
-            model.addObject("msg", "Uspešno ste se odjavili.");
+            model.addObject("msg", "Sistem je odjavio korisnika.");
         }
-        model.setViewName("login");
+        if (registered != null) {
+            logger.info("Successful registered");
+            model.addObject("msg", "Sistem je kreirao korisnika.");
+        }
+        model.setViewName("prijavljivanje");
 
         return model;
     }

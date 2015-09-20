@@ -6,25 +6,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class MainController {
+public class GlavniController {
 
-    private final static Logger logger = LoggerFactory.getLogger(MainController.class);
+    private final static Logger logger = LoggerFactory.getLogger(GlavniController.class);
 
-    @RequestMapping(value = {"/home", "/"})
-    public String showHomeView(ModelMap model) {
-        logger.trace("method invoked: showHomeView");
-        return "home";
+    @RequestMapping(value = {"/pocetna", "/"})
+    public String prikaziPocetnuStranu(ModelMap model, @RequestParam(value = "success", required = false) String success) {
+        logger.trace("method invoked: prikaziPocetnuStranu");
+        if (success != null) {
+            model.addAttribute("success", "Sistem je prijavio korisnika");
+        }
+        return "pocetna";
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public String showAboutView() {
-        logger.trace("method invoked: showAboutView");
+    public String prikaziAboutStranu() {
+        logger.trace("method invoked: prikaziAboutStranu");
         return "about";
     }
 
@@ -41,10 +45,10 @@ public class MainController {
         return "errorHandlingPage";
     }
 
-    @RequestMapping(value = "/contact", method = RequestMethod.GET)
-    public String showContactView() {
-        logger.trace("method invoked: showContactView");
-        return "contact";
+    @RequestMapping(value = "/kontakt", method = RequestMethod.GET)
+    public String prikaziKontaktStranu() {
+        logger.trace("method invoked: prikaziKontaktStranu");
+        return "kontakt";
     }
 
     @RequestMapping(value = "/exception")

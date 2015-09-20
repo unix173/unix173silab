@@ -4,10 +4,10 @@
 <nav id="footer" class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
             <div class="col-sm-4 col-md-3 text-center">
-                    <a href="${pageContext.request.contextPath}/home">Generic Rental System</a>
+                    <a href="${pageContext.request.contextPath}/pocetna">Sistem za izdavanje vozila</a>
             </div>
             <div class="col-sm-4 col-md-6 text-center">
-                    <a href="${pageContext.request.contextPath}/contact">Contact</a>
+                    <a href="${pageContext.request.contextPath}/kontakt">Kontakt</a>
                     &bull;
                     <a href="${pageContext.request.contextPath}/about">About</a>
             </div>

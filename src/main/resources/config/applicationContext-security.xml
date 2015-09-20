@@ -10,21 +10,21 @@
     <http auto-config='true'>
         <intercept-url pattern="/user/**" access="ROLE_USER"/>
         <intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
-        <intercept-url pattern="/login" access="ROLE_ANONYMOUS"/>
-        <intercept-url pattern="/register" access="ROLE_ANONYMOUS"/>
-        <form-login login-page='/login'
-                    authentication-failure-url="/login?error"
+        <intercept-url pattern="/prijavljivanje" access="ROLE_ANONYMOUS"/>
+        <intercept-url pattern="/registracija" access="ROLE_ANONYMOUS"/>
+        <form-login login-page='/prijavljivanje'
+                    authentication-failure-url="/prijavljivanje?error"
                     username-parameter="username"
                     password-parameter="password"
-                    default-target-url="/"/>
+                    default-target-url="/?success"/>
         <access-denied-handler error-page="/accessDenied"/>
-        <logout logout-success-url="/login?logout"/>
+        <logout logout-success-url="/prijavljivanje?logout"/>
         <csrf/>
     </http>
 
     <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <beans:property name="url" value="jdbc:mysql://localhost:3306/grs"/>
+        <beans:property name="url" value="jdbc:mysql://localhost:3306/sziv"/>
         <beans:property name="username" value="root"/>
         <beans:property name="password" value=""/>
     </beans:bean>

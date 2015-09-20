@@ -17,6 +17,10 @@
 
         <h2>DOBRODOŠLI NA SISTEM ZA IZDAVANJE VOZILA</h2>
         <br/>
+
+        <div>
+            <c:if test="${not empty success}">${success}</c:if>
+        </div>
     </div>
 </div>
 
