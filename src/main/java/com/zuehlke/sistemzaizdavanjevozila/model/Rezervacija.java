@@ -7,9 +7,9 @@ import java.util.Set;
 
 @Entity
 @NamedQueries(
-        @NamedQuery(name = "getReservationsByUserId", query = "from Reservation r where r.korisnik.id = :userid")
+        @NamedQuery(name = "getReservationsByUserId", query = "from Rezervacija r where r.korisnik.id = :userid")
 )
-public class Reservation {
+public class Rezervacija {
 
     @Id
     @GeneratedValue
@@ -22,7 +22,7 @@ public class Reservation {
 
     private Double price;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "reservation")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "rezervacija")
     private Set<ReservationEntry> reservationEntries = new HashSet<ReservationEntry>();
 
     private ReservationStatus reservationStatus;
@@ -76,7 +76,7 @@ public class Reservation {
     }
 
     public void addReservationEntry(ReservationEntry reservationEntry) {
-        reservationEntry.setReservation(this);
+        reservationEntry.setRezervacija(this);
         reservationEntries.add(reservationEntry);
     }
 }

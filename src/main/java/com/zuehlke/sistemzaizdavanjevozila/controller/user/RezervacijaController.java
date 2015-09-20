@@ -3,10 +3,10 @@ package com.zuehlke.sistemzaizdavanjevozila.controller.user;
 import com.zuehlke.sistemzaizdavanjevozila.core.ReservationUtil;
 import com.zuehlke.sistemzaizdavanjevozila.form.AddReservationEntryForm;
 import com.zuehlke.sistemzaizdavanjevozila.model.Korisnik;
-import com.zuehlke.sistemzaizdavanjevozila.model.Reservation;
+import com.zuehlke.sistemzaizdavanjevozila.model.Rezervacija;
 import com.zuehlke.sistemzaizdavanjevozila.model.ReservationEntry;
 import com.zuehlke.sistemzaizdavanjevozila.service.TipVozilaService;
-import com.zuehlke.sistemzaizdavanjevozila.service.ReservationService;
+import com.zuehlke.sistemzaizdavanjevozila.service.RezervacijaService;
 import com.zuehlke.sistemzaizdavanjevozila.service.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -32,7 +32,7 @@ import java.util.List;
 public class RezervacijaController {
 
     @Autowired
-    private ReservationService reservationService;
+    private RezervacijaService rezervacijaService;
 
     @Autowired
     private KorisnikService korisnikService;
@@ -89,7 +89,7 @@ public class RezervacijaController {
     @RequestMapping(value = "user/dodajRezervacijuAkcija", method = RequestMethod.POST)
     public String dodajRezervacijuAkcija(@ModelAttribute("addReservationEntryForms") List<AddReservationEntryForm> addReservationEntryForms, Principal principal, RedirectAttributes redirectAttributes) {
 
-        reservationService.addReservation(reservationService.createReservation(addReservationEntryForms, korisnikService.getUserByUsername(((User) ((Authentication) principal).getPrincipal()).getUsername())));
+        rezervacijaService.addReservation(rezervacijaService.createReservation(addReservationEntryForms, korisnikService.getUserByUsername(((User) ((Authentication) principal).getPrincipal()).getUsername())));
         redirectAttributes.addFlashAttribute("successfulReservation", true);
         //do a redirect to user's reservation page
         redirectAttributes.addFlashAttribute("addReservationEntryForms", new ArrayList<AddReservationEntryForm>());
@@ -105,17 +105,17 @@ public class RezervacijaController {
 
     @RequestMapping(value = "user/prikazRezervacijaKorisnika", method = RequestMethod.GET)
     public String prikaziRezervacijeKorisnika(Model model, Principal principal) {
-        List<Reservation> reservations = reservationService.getReservationsByUserId(korisnikService.getUserByUsername(((User) ((Authentication) principal).getPrincipal()).getUsername()).getId());
-        Reservation reservation = new Reservation();
-        reservation.setKorisnik(new Korisnik());
-        model.addAttribute("reservation", reservation);
-        model.addAttribute("reservations", reservations);
+        List<Rezervacija> rezervacijas = rezervacijaService.getReservationsByUserId(korisnikService.getUserByUsername(((User) ((Authentication) principal).getPrincipal()).getUsername()).getId());
+        Rezervacija rezervacija = new Rezervacija();
+        rezervacija.setKorisnik(new Korisnik());
+        model.addAttribute("reservation", rezervacija);
+        model.addAttribute("reservations", rezervacijas);
         return "user/prikazRezervacijaKorisnika";
     }
 
     @RequestMapping(value = "user/prikazStavkiRezervacijeKorisnika", method = RequestMethod.GET)
-    public String prikaziStavkeRezervacijeKorisnikaAkcija(@ModelAttribute("reservation") Reservation reservation, Model model) {
-        List<ReservationEntry> reservationEntries = new ArrayList<ReservationEntry>(reservationService.getReservationById(reservation.getId()).getReservationEntries());
+    public String prikaziStavkeRezervacijeKorisnikaAkcija(@ModelAttribute("reservation") Rezervacija rezervacija, Model model) {
+        List<ReservationEntry> reservationEntries = new ArrayList<ReservationEntry>(rezervacijaService.getReservationById(rezervacija.getId()).getReservationEntries());
         model.addAttribute("reservationEntries", reservationEntries);
         return "user/prikazStavkiRezervacijeKorisnika";
     }

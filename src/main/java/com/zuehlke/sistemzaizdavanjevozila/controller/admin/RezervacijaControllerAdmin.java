@@ -1,8 +1,8 @@
 package com.zuehlke.sistemzaizdavanjevozila.controller.admin;
 
 import com.zuehlke.sistemzaizdavanjevozila.model.Korisnik;
-import com.zuehlke.sistemzaizdavanjevozila.model.Reservation;
-import com.zuehlke.sistemzaizdavanjevozila.service.ReservationService;
+import com.zuehlke.sistemzaizdavanjevozila.model.Rezervacija;
+import com.zuehlke.sistemzaizdavanjevozila.service.RezervacijaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,38 +17,38 @@ import java.util.List;
 public class RezervacijaControllerAdmin {
 
     @Autowired
-    private ReservationService reservationService;
+    private RezervacijaService rezervacijaService;
 
     @RequestMapping(value = "admin/prikazRezervacija", method = RequestMethod.GET)
     public String prikaziRezervacije(Model model) {
-        model.addAttribute("reservations", reservationService.getReservations());
+        model.addAttribute("reservations", rezervacijaService.getReservations());
         return "admin/prikazRezervacija";
     }
 
     @RequestMapping(value = "admin/prikazRezervacijaPoKorisniku", method = RequestMethod.GET)
     public String priaziRezervacijePoKorisniku(@ModelAttribute("user") Korisnik korisnik, Model model) {
-        List<Reservation> reservations = reservationService.getReservationsByUserId(korisnik.getId());
-        Reservation reservation = new Reservation();
-        reservation.setKorisnik(new Korisnik());
-        model.addAttribute("reservation", reservation);
-        model.addAttribute("reservations", reservations);
+        List<Rezervacija> rezervacijas = rezervacijaService.getReservationsByUserId(korisnik.getId());
+        Rezervacija rezervacija = new Rezervacija();
+        rezervacija.setKorisnik(new Korisnik());
+        model.addAttribute("reservation", rezervacija);
+        model.addAttribute("reservations", rezervacijas);
         model.addAttribute("user", korisnik);
         return "admin/prikazRezervacijaPoKorisniku";
     }
 
     @RequestMapping(value = "admin/obrisiRezervacijuAkcija", method = RequestMethod.POST)
-    public String obrisiRezervaciju(@ModelAttribute("reservation") Reservation reservation, RedirectAttributes redirectAttributes) {
-        reservation = reservationService.getReservationById(reservation.getId());
-        Long userId = reservation.getKorisnik().getId();
-        reservationService.deleteReservation(reservation);
-        redirectAttributes.addFlashAttribute("reservations", reservationService.getReservationsByUserId(userId));
-        redirectAttributes.addFlashAttribute("user", reservation.getKorisnik());
+    public String obrisiRezervaciju(@ModelAttribute("reservation") Rezervacija rezervacija, RedirectAttributes redirectAttributes) {
+        rezervacija = rezervacijaService.getReservationById(rezervacija.getId());
+        Long userId = rezervacija.getKorisnik().getId();
+        rezervacijaService.deleteReservation(rezervacija);
+        redirectAttributes.addFlashAttribute("reservations", rezervacijaService.getReservationsByUserId(userId));
+        redirectAttributes.addFlashAttribute("user", rezervacija.getKorisnik());
         return "redirect:/admin/prikazRezervacijaPoKorisniku?id=" + userId;
     }
 
     @RequestMapping(value = "admin/prikazStavkiRezervacija", method = RequestMethod.GET)
-    public String prikaziStavkeRezervacijeAkcija(@ModelAttribute("reservation") Reservation reservation, Model model) {
-        model.addAttribute("reservationEntries", reservationService.getReservationById(reservation.getId()).getReservationEntries());
+    public String prikaziStavkeRezervacijeAkcija(@ModelAttribute("reservation") Rezervacija rezervacija, Model model) {
+        model.addAttribute("reservationEntries", rezervacijaService.getReservationById(rezervacija.getId()).getReservationEntries());
         return "admin/prikazStavkiRezervacija";
     }
 }

@@ -35,7 +35,7 @@ public class Korisnik {
     private String confirmationId;
 
     @OneToMany(mappedBy = "korisnik", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Reservation> reservations;
+    private Set<Rezervacija> rezervacijas;
 
     public Long getId() {
         return id;
@@ -86,12 +86,12 @@ public class Korisnik {
     }
 
 
-    public Set<Reservation> getReservations() {
-        return reservations;
+    public Set<Rezervacija> getRezervacijas() {
+        return rezervacijas;
     }
 
-    public void setReservations(Set<Reservation> reservations) {
-        this.reservations = reservations;
+    public void setRezervacijas(Set<Rezervacija> rezervacijas) {
+        this.rezervacijas = rezervacijas;
     }
 
     public Boolean IsAdmin() {

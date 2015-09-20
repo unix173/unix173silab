@@ -11,7 +11,7 @@ public class ReservationEntry {
     private Long id;
 
     @ManyToOne
-    private Reservation reservation;
+    private Rezervacija rezervacija;
 
     @OneToOne
     private Vozilo vozilo;
@@ -28,12 +28,12 @@ public class ReservationEntry {
         this.id = id;
     }
 
-    public Reservation getReservation() {
-        return reservation;
+    public Rezervacija getRezervacija() {
+        return rezervacija;
     }
 
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
+    public void setRezervacija(Rezervacija rezervacija) {
+        this.rezervacija = rezervacija;
     }
 
     public Vozilo getVozilo() {

@@ -1,11 +1,11 @@
 package com.zuehlke.sistemzaizdavanjevozila.service.impl;
 
 import com.zuehlke.sistemzaizdavanjevozila.core.ReservationUtil;
-import com.zuehlke.sistemzaizdavanjevozila.dao.ReservationDao;
+import com.zuehlke.sistemzaizdavanjevozila.dao.RezervacijaDao;
 import com.zuehlke.sistemzaizdavanjevozila.form.AddReservationEntryForm;
 import com.zuehlke.sistemzaizdavanjevozila.model.*;
 import com.zuehlke.sistemzaizdavanjevozila.service.VoziloService;
-import com.zuehlke.sistemzaizdavanjevozila.service.ReservationService;
+import com.zuehlke.sistemzaizdavanjevozila.service.RezervacijaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,57 +15,57 @@ import java.util.HashSet;
 import java.util.List;
 
 @Service
-public class ReservationServiceImpl implements ReservationService{
+public class RezervacijaServiceImpl implements RezervacijaService {
 
     @Autowired
-    private ReservationDao reservationDao;
+    private RezervacijaDao rezervacijaDao;
 
     @Autowired
     private VoziloService voziloService;
 
     @Override
-    public List<Reservation> getReservations() {
-        return reservationDao.getReservations();
+    public List<Rezervacija> getReservations() {
+        return rezervacijaDao.getReservations();
     }
 
     @Override
-    public Reservation getReservationById(Long id) {
-        return (reservationDao.getReservationById(id));
+    public Rezervacija getReservationById(Long id) {
+        return (rezervacijaDao.getReservationById(id));
     }
 
     @Override
-    public void addReservation(Reservation reservation) {
-        reservationDao.addReservation(reservation);
+    public void addReservation(Rezervacija rezervacija) {
+        rezervacijaDao.addReservation(rezervacija);
     }
 
     @Override
-    public void setReservation(Reservation reservation) {
-        reservationDao.setReservation(reservation);
+    public void setReservation(Rezervacija rezervacija) {
+        rezervacijaDao.setReservation(rezervacija);
     }
 
     @Override
-    public void deleteReservation(Reservation reservation) {
-        reservationDao.deleteReservation(reservation);
+    public void deleteReservation(Rezervacija rezervacija) {
+        rezervacijaDao.deleteReservation(rezervacija);
     }
 
     @Override
-    public List<Reservation> getReservationsByUserId(Long id) {
-        return reservationDao.getReservationsByUserId(id);
+    public List<Rezervacija> getReservationsByUserId(Long id) {
+        return rezervacijaDao.getReservationsByUserId(id);
     }
 
     @Override
-    public Reservation createReservation(List<AddReservationEntryForm> addReservationEntryForms, Korisnik korisnik) {
+    public Rezervacija createReservation(List<AddReservationEntryForm> addReservationEntryForms, Korisnik korisnik) {
         List<ReservationEntry> reservationEntries = getReservationEntries(addReservationEntryForms);
-        Reservation reservation = new Reservation();
-        reservation.setCreationDate(new Date());
-        reservation.setPrice(ReservationUtil.countReservationPrice(reservationEntries));
-        reservation.setKorisnik(korisnik);
-        reservation.setReservationStatus(ReservationStatus.CREATED);
+        Rezervacija rezervacija = new Rezervacija();
+        rezervacija.setCreationDate(new Date());
+        rezervacija.setPrice(ReservationUtil.countReservationPrice(reservationEntries));
+        rezervacija.setKorisnik(korisnik);
+        rezervacija.setReservationStatus(ReservationStatus.CREATED);
         for (ReservationEntry reservationEntry : reservationEntries) {
-            reservation.addReservationEntry(reservationEntry);
+            rezervacija.addReservationEntry(reservationEntry);
         }
-        reservation.setReservationEntries(new HashSet<ReservationEntry>(reservationEntries));
-        return reservation;
+        rezervacija.setReservationEntries(new HashSet<ReservationEntry>(reservationEntries));
+        return rezervacija;
     }
 
     private List<ReservationEntry> getReservationEntries(List<AddReservationEntryForm> addReservationEntryForms) {
