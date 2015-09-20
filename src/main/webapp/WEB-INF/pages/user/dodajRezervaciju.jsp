@@ -79,7 +79,7 @@
             </c:if>
 
             <c:forEach items="${itemTypeDTOList}" var="itemTypeDTO">
-                <form:form action="actionAddEntry" method="post" commandName="addReservationEntryForm">
+                <form:form action="dodajStavkuRezervacijeAkcija" method="post" commandName="addReservationEntryForm">
                     <div>
                         <span>${itemTypeDTO.itemTypeName},</span><span> količina : ${itemTypeDTO.quantity}</span>
                         <form:input path="itemTypeId" value="${itemTypeDTO.itemTypeId}" type="hidden"/>
@@ -103,13 +103,13 @@
             <table class="table table-striped">
                 <tr>
                     <td>
-                        <form:form action="actionRestartReservation">
+                        <form:form action="restartujRezervacijuAkcija">
                             <form:errors path="*" element="div"/>
                             <input type="submit" value="KREIRAJ NOVU REZERVACIJU" class="btn btn-primary btn-sm"/>
                         </form:form>
                     </td>
                     <td>
-                        <form:form action="actionAddReservation">
+                        <form:form action="dodajRezervacijuAkcija">
                             <form:errors path="*" element="div"/>
                             <input type="submit" value="SAČUVAJ REZERVACIJU" class="btn btn-primary btn-sm"/>
                         </form:form>

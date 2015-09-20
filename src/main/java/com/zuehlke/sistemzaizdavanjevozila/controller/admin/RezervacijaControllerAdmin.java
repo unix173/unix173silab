@@ -13,41 +13,41 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-public class ReservationControllerAdmin {
+public class RezervacijaControllerAdmin {
 
     @Autowired
     private ReservationService reservationService;
 
-    @RequestMapping(value = "admin/viewReservations", method = RequestMethod.GET)
-    public String allReservationsView(Model model) {
+    @RequestMapping(value = "admin/prikazRezervacija", method = RequestMethod.GET)
+    public String prikaziRezervacije(Model model) {
         model.addAttribute("reservations", reservationService.getReservations());
-        return "admin/viewReservations";
+        return "admin/prikazRezervacija";
     }
 
-    @RequestMapping(value = "admin/viewReservationsPerUser", method = RequestMethod.GET)
-    public String viewReservationPerUser(@ModelAttribute("user") com.zuehlke.sistemzaizdavanjevozila.model.User user, Model model) {
+    @RequestMapping(value = "admin/prikazRezervacijaPoKorisniku", method = RequestMethod.GET)
+    public String priaziRezervacijePoKorisniku(@ModelAttribute("user") com.zuehlke.sistemzaizdavanjevozila.model.User user, Model model) {
         List<Reservation> reservations = reservationService.getReservationsByUserId(user.getId());
         Reservation reservation = new Reservation();
         reservation.setUser(new com.zuehlke.sistemzaizdavanjevozila.model.User());
         model.addAttribute("reservation", reservation);
         model.addAttribute("reservations", reservations);
         model.addAttribute("user", user);
-        return "admin/viewReservationsPerUser";
+        return "admin/prikazRezervacijaPoKorisniku";
     }
 
-    @RequestMapping(value = "admin/deleteReservationAction", method = RequestMethod.POST)
-    public String deleteReservation(@ModelAttribute("reservation") Reservation reservation, RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "admin/obrisiRezervacijuAkcija", method = RequestMethod.POST)
+    public String obrisiRezervaciju(@ModelAttribute("reservation") Reservation reservation, RedirectAttributes redirectAttributes) {
         reservation = reservationService.getReservationById(reservation.getId());
         Long userId = reservation.getUser().getId();
         reservationService.deleteReservation(reservation);
         redirectAttributes.addFlashAttribute("reservations", reservationService.getReservationsByUserId(userId));
         redirectAttributes.addFlashAttribute("user", reservation.getUser());
-        return "redirect:/admin/viewReservationsPerUser?id=" + userId;
+        return "redirect:/admin/prikazRezervacijaPoKorisniku?id=" + userId;
     }
 
-    @RequestMapping(value = "admin/viewReservationEntries", method = RequestMethod.GET)
-    public String viewReservationEntriesAction(@ModelAttribute("reservation") Reservation reservation, Model model) {
+    @RequestMapping(value = "admin/prikazStavkiRezervacija", method = RequestMethod.GET)
+    public String prikaziStavkeRezervacijeAkcija(@ModelAttribute("reservation") Reservation reservation, Model model) {
         model.addAttribute("reservationEntries", reservationService.getReservationById(reservation.getId()).getReservationEntries());
-        return "admin/viewReservationEntries";
+        return "admin/prikazStavkiRezervacija";
     }
 }

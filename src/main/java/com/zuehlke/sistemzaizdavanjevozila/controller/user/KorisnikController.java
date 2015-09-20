@@ -24,7 +24,7 @@ import java.security.Principal;
 import java.util.UUID;
 
 @Controller
-public class UserController {
+public class KorisnikController {
 
     @Autowired
     private UserService userService;
@@ -33,13 +33,13 @@ public class UserController {
     private MailingService mailingService;
 
     @RequestMapping(value = "registracija", method = RequestMethod.GET)
-    public String userView(Model model) {
+    public String prikazRegistracije(Model model) {
         model.addAttribute("userRegistrationForm", new UserRegistrationForm());
         return "registracija";
     }
 
     @RequestMapping(value = "confirm", method = RequestMethod.GET)
-    public String confirmEmail(Model model, @RequestParam(value = "confirmationId") String confirmationId){
+    public String potvrdaEmaila(Model model, @RequestParam(value = "confirmationId") String confirmationId){
         if(userService.confirmRegistration(confirmationId)){
             model.addAttribute("msg", "Email je uspešno potvrđen, molimo prijavite se.");
         }
@@ -50,11 +50,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "registracija", method = RequestMethod.POST)
-    public ModelAndView register(@ModelAttribute("userRegistrationForm") @Valid UserRegistrationForm userRegistrationForm, BindingResult result, WebRequest request, Errors errors) {
+    public ModelAndView procesRegistracije(@ModelAttribute("userRegistrationForm") @Valid UserRegistrationForm userRegistrationForm, BindingResult result, WebRequest request, Errors errors) {
         if (result.hasErrors()) {
             return new ModelAndView("registracija", "userRegistrationForm", userRegistrationForm);
         } else if (!userService.checkIfUnique(userRegistrationForm)) {
-            result.addError(new ObjectError("message", "Username or Email are duplicated"));
+            result.addError(new ObjectError("message", "Korisnička šifra ili email su duplirani"));
             return new ModelAndView("registracija", "userRegistrationForm", userRegistrationForm);
         } else {
             final String confirmationId = UUID.randomUUID().toString().replaceAll("-", "");
@@ -64,8 +64,8 @@ public class UserController {
         return new ModelAndView("redirect:/prijavljivanje?registered");
     }
 
-    @RequestMapping(value = "user/changePassword", method = RequestMethod.GET)
-    public ModelAndView updateProfile(Principal principal) {
+    @RequestMapping(value = "user/izmeniLozinku", method = RequestMethod.GET)
+    public ModelAndView izmeniProfilKorisnika(Principal principal) {
         User currentUser = userService.getUserByUsername(((org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal()).getUsername());
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
         changePasswordForm.setId(currentUser.getId());
@@ -73,16 +73,16 @@ public class UserController {
         changePasswordForm.setName(currentUser.getName());
         changePasswordForm.setLastName(currentUser.getLastName());
         changePasswordForm.setUsername(currentUser.getUsername());
-        return new ModelAndView("user/changePassword", "changePasswordForm", changePasswordForm);
+        return new ModelAndView("user/izmeniLozinku", "changePasswordForm", changePasswordForm);
     }
 
-    @RequestMapping(value = "user/changePassword", method = RequestMethod.POST)
-    public ModelAndView updateProfile(@ModelAttribute("changePasswordForm") @Valid ChangePasswordForm changePasswordForm, BindingResult result, WebRequest request, Errors errors) {
+    @RequestMapping(value = "user/izmeniLozinku", method = RequestMethod.POST)
+    public ModelAndView procesIzmeneProfilaKorisnika(@ModelAttribute("changePasswordForm") @Valid ChangePasswordForm changePasswordForm, BindingResult result, WebRequest request, Errors errors) {
         if (result.hasErrors()) {
-            return new ModelAndView("user/changePassword", "changePasswordForm", changePasswordForm);
+            return new ModelAndView("user/izmeniLozinku", "changePasswordForm", changePasswordForm);
         } else if (!userService.checkIfPasswordIsCorrect(changePasswordForm.getId(), changePasswordForm.getOldPassword())) {
             result.addError(new ObjectError("message", "Old password is not correct!"));
-            return new ModelAndView("user/changePassword", "changePasswordForm", changePasswordForm);
+            return new ModelAndView("user/izmeniLozinku", "changePasswordForm", changePasswordForm);
         } else {
             userService.changePassword(changePasswordForm);
         }

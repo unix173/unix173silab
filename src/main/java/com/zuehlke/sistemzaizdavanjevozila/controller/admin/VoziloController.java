@@ -11,28 +11,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class ItemController {
+public class VoziloController {
 
     private ItemService itemService;
     private ItemTypeService itemTypeService;
 
     @Autowired
-    public ItemController(ItemService itemService, ItemTypeService itemTypeService) {
+    public VoziloController(ItemService itemService, ItemTypeService itemTypeService) {
         this.itemService = itemService;
         this.itemTypeService = itemTypeService;
     }
 
-    @RequestMapping(value = "admin/addItem", method = RequestMethod.GET)
-    public String itemView(Model model) {
+    @RequestMapping(value = "admin/dodajVozilo", method = RequestMethod.GET)
+    public String prikaziDodavanjeVozila(Model model) {
         model.addAttribute("item", new Item());
         model.addAttribute("itemTypes", itemTypeService.getItemTypes());
-        return "admin/addItem";
+        return "admin/dodajVozilo";
     }
 
-    @RequestMapping(value = "admin/addItem", method = RequestMethod.POST)
-    public String itemProcess(@ModelAttribute("item") Item item, Model model) {
+    @RequestMapping(value = "admin/dodajVozilo", method = RequestMethod.POST)
+    public String procesDodavanjaVozila(@ModelAttribute("item") Item item, Model model) {
         itemService.addItem(item);
-        return "redirect:/home";
+        return "redirect:/pocetna";
     }
 
 }

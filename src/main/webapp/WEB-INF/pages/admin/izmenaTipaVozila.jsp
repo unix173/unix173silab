@@ -19,7 +19,7 @@
 
         <p>IZMENA TIPA VOZILA</p>
         <br/>
-        <form:form name="modify" commandName="itemType" method="post" action="updateItemTypeAction">
+        <form:form name="modify" commandName="itemType" method="post" action="izmeniTipVozilaAkcija">
             <form:input type="hidden" path="id" value="${itemType.id}"/>
             <form:input type="text" path="name" value="${itemType.name}"/>
             <form:input type="text" path="price" value="${itemType.price}"/>

@@ -28,7 +28,7 @@ import java.util.List;
 
 @Controller
 @SessionAttributes({"addReservationEntryForms"})
-public class ReservationController {
+public class RezervacijaController {
 
     @Autowired
     private ReservationService reservationService;
@@ -39,8 +39,8 @@ public class ReservationController {
     @Autowired
     private ItemTypeService itemTypeService;
 
-    @RequestMapping(value = "user/addReservation", method = RequestMethod.GET)
-    public String addReservationView(Model model) {
+    @RequestMapping(value = "user/dodajRezervaciju", method = RequestMethod.GET)
+    public String prikazDodajRezervaciju(Model model) {
         if (!model.containsAttribute("addReservationEntryForms")) {
             model.addAttribute("addReservationEntryForms", new ArrayList<AddReservationEntryForm>());
         }
@@ -48,13 +48,13 @@ public class ReservationController {
             model.addAttribute("addReservationEntryForm", new AddReservationEntryForm());
         }
         model.addAttribute("reservationInProgress", false);
-        return "user/addReservation";
+        return "user/dodajRezervaciju";
     }
 
-    @RequestMapping(value = "user/addReservation", method = RequestMethod.POST)
-    public String addReservationProcess(@ModelAttribute("addReservationEntryForm") @Valid AddReservationEntryForm addReservationEntryForm,
-                                        BindingResult result, Model model,
-                                        @ModelAttribute("addReservationEntryForms") List<AddReservationEntryForm> addReservationEntryForms) {
+    @RequestMapping(value = "user/dodajRezervaciju", method = RequestMethod.POST)
+    public String procesDodajRezervaciju(@ModelAttribute("addReservationEntryForm") @Valid AddReservationEntryForm addReservationEntryForm,
+                                         BindingResult result, Model model,
+                                         @ModelAttribute("addReservationEntryForms") List<AddReservationEntryForm> addReservationEntryForms) {
         if (result.hasErrors()) {
             model.addAttribute("reservationInProgress", false);
             model.addAttribute("dateValidationError", "Invalid date interval");
@@ -66,57 +66,57 @@ public class ReservationController {
                     addReservationEntryForm.getReservationStartDate(), addReservationEntryForm.getReservationEndDate()));
         }
         model.addAttribute("addReservationEntryForm", addReservationEntryForm);
-        return "user/addReservation";
+        return "user/dodajRezervaciju";
     }
 
-    @RequestMapping(value = "user/actionAddEntry", method = RequestMethod.POST)
-    public String addReservationEntry(@ModelAttribute("addReservationEntryForm") @Valid AddReservationEntryForm addReservationEntryForm, BindingResult result, @ModelAttribute("addReservationEntryForms") List<AddReservationEntryForm> addReservationEntryForms,
-                                      WebRequest request, Errors errors, RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "user/dodajStavkuRezervacijeAkcija", method = RequestMethod.POST)
+    public String procesDodajStavkuRezervacije(@ModelAttribute("addReservationEntryForm") @Valid AddReservationEntryForm addReservationEntryForm, BindingResult result, @ModelAttribute("addReservationEntryForms") List<AddReservationEntryForm> addReservationEntryForms,
+                                               WebRequest request, Errors errors, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             addReservationEntryForm.setDesiredQuantity(null);
             redirectAttributes.addFlashAttribute("addReservationEntryForm", addReservationEntryForm);
             redirectAttributes.addFlashAttribute("validationFailed", true);
             redirectAttributes.addFlashAttribute("itemTypeDTOList", itemTypeService.getAvailableItemTypes(ReservationUtil.reservedItemTypeIdList(addReservationEntryForms),
                     addReservationEntryForm.getReservationStartDate(), addReservationEntryForm.getReservationEndDate()));
-            return "redirect:/user/addReservation";
+            return "redirect:/user/dodajRezervaciju";
         } else {
             addReservationEntryForms.add(addReservationEntryForm);
         }
-        return "redirect:/user/addReservation";
+        return "redirect:/user/dodajRezervaciju";
     }
 
-    @RequestMapping(value = "user/actionAddReservation", method = RequestMethod.POST)
-    public String addReservation(@ModelAttribute("addReservationEntryForms") List<AddReservationEntryForm> addReservationEntryForms, Principal principal, RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "user/dodajRezervacijuAkcija", method = RequestMethod.POST)
+    public String dodajRezervacijuAkcija(@ModelAttribute("addReservationEntryForms") List<AddReservationEntryForm> addReservationEntryForms, Principal principal, RedirectAttributes redirectAttributes) {
 
         reservationService.addReservation(reservationService.createReservation(addReservationEntryForms, userService.getUserByUsername(((User) ((Authentication) principal).getPrincipal()).getUsername())));
         redirectAttributes.addFlashAttribute("successfulReservation", true);
         //do a redirect to user's reservation page
         redirectAttributes.addFlashAttribute("addReservationEntryForms", new ArrayList<AddReservationEntryForm>());
         redirectAttributes.addFlashAttribute("reservationEntry", new ReservationEntry());
-        return "redirect:/user/addReservation";
+        return "redirect:/user/dodajRezervaciju";
     }
 
-    @RequestMapping(value = "user/actionRestartReservation", method = RequestMethod.POST)
-    public String restartReservation(@ModelAttribute("addReservationEntryForms") List<AddReservationEntryForm> addReservationEntryForms){
+    @RequestMapping(value = "user/restartujRezervacijuAkcija", method = RequestMethod.POST)
+    public String restartujRezervaciju(@ModelAttribute("addReservationEntryForms") List<AddReservationEntryForm> addReservationEntryForms){
         addReservationEntryForms.clear();
-        return "redirect:/user/addReservation";
+        return "redirect:/user/dodajRezervaciju";
     }
 
-    @RequestMapping(value = "user/viewUserReservations", method = RequestMethod.GET)
-    public String viewUserReservations(Model model, Principal principal) {
+    @RequestMapping(value = "user/prikazRezervacijaKorisnika", method = RequestMethod.GET)
+    public String prikaziRezervacijeKorisnika(Model model, Principal principal) {
         List<Reservation> reservations = reservationService.getReservationsByUserId(userService.getUserByUsername(((User) ((Authentication) principal).getPrincipal()).getUsername()).getId());
         Reservation reservation = new Reservation();
         reservation.setUser(new com.zuehlke.sistemzaizdavanjevozila.model.User());
         model.addAttribute("reservation", reservation);
         model.addAttribute("reservations", reservations);
-        return "user/viewUserReservations";
+        return "user/prikazRezervacijaKorisnika";
     }
 
-    @RequestMapping(value = "user/viewUserReservationEntries", method = RequestMethod.GET)
-    public String viewUserReservationEntriesAction(@ModelAttribute("reservation") Reservation reservation, Model model) {
+    @RequestMapping(value = "user/prikazStavkiRezervacijeKorisnika", method = RequestMethod.GET)
+    public String prikaziStavkeRezervacijeKorisnikaAkcija(@ModelAttribute("reservation") Reservation reservation, Model model) {
         List<ReservationEntry> reservationEntries = new ArrayList<ReservationEntry>(reservationService.getReservationById(reservation.getId()).getReservationEntries());
         model.addAttribute("reservationEntries", reservationEntries);
-        return "user/viewUserReservationEntries";
+        return "user/prikazStavkiRezervacijeKorisnika";
     }
 
 

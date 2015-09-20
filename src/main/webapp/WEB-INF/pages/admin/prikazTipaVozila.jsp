@@ -34,19 +34,19 @@
                     <td>${itemType.name}</td>
                     <td>${itemType.price}</td>
                     <td>
-                        <form:form name="viewItems" method="get" action="viewItems" commandName="itemType">
+                        <form:form name="viewItems" method="get" action="prikaziVozila" commandName="itemType">
                             <form:input type="hidden" path="id" value="${itemType.id}"/>
                             <input type="submit" name="button" value="VOZILA" class="btn btn-primary btn-sm"/>
                         </form:form>
                     </td>
                     <td>
-                        <form:form name="modify" method="post" action="modifyItemTypeAction" commandName="itemType">
+                        <form:form name="modify" method="post" action="promeniTipVozilaAkcija" commandName="itemType">
                             <form:input type="hidden" path="id" value="${itemType.id}"/>
                             <input type="submit" name="button" value="IZMENI" class="btn btn-primary btn-sm"/>
                         </form:form>
                     </td>
                     <td>
-                        <form:form name="delete" method="post" action="deleteItemType" commandName="itemType">
+                        <form:form name="delete" method="post" action="obrisiTipVozila" commandName="itemType">
                             <form:input type="hidden" path="id" value="${itemType.id}"/>
                             <input type="submit" name="button" value="UKLONI" class="btn btn-primary btn-sm"
                                    <c:if test="${itemType.items.size() !=0 }">disabled</c:if> />

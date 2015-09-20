@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class UserControllerAdmin {
+public class KorisnikControllerAdmin {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "admin/viewUsers", method = RequestMethod.GET)
-    public String allUsersView(Model model, @RequestParam(value = "keyword", required = false) String keyword) {
+    @RequestMapping(value = "admin/prikaziKorisnike", method = RequestMethod.GET)
+    public String prikaziKorisnike(Model model, @RequestParam(value = "keyword", required = false) String keyword) {
         if(keyword == null || keyword.isEmpty()) {
             model.addAttribute("users", userService.getUsers());
         }else {
             model.addAttribute("users", userService.getUsersByUsername(keyword));
         }
         model.addAttribute("user", new User());
-        return "admin/viewUsers";
+        return "admin/prikaziKorisnike";
     }
 
-    @RequestMapping(value = "admin/deleteUserAction", method = RequestMethod.POST)
-    public String deleteUser(@ModelAttribute("user") User user, Model model) {
+    @RequestMapping(value = "admin/obrisiKorisnikaAkcija", method = RequestMethod.POST)
+    public String procesObrisiKorisnika(@ModelAttribute("user") User user, Model model) {
         userService.deleteUser(user);
-        return "redirect:/admin/viewUsers";
+        return "redirect:/admin/prikaziKorisnike";
     }
 }

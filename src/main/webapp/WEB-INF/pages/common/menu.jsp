@@ -19,17 +19,17 @@
                     <li><a href="${pageContext.request.contextPath}/pocetna"><span class="glyphicon glyphicon-home"></span> </a></li>
 
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <li><a href="${pageContext.request.contextPath}/admin/addItem">Dodavanje vozila </a></li>
-                    <li><a href="${pageContext.request.contextPath}/admin/addItemType">Dodavanje tipa vozila</a></li>
-                    <li><a href="${pageContext.request.contextPath}/admin/viewItemTypes">Tipovi vozila</a></li>
-                    <li><a href="${pageContext.request.contextPath}/admin/viewUsers">Korisnici</a></li>
-                    <li><a href="${pageContext.request.contextPath}/admin/viewReservations">Rezervacije</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/dodajVozilo">Dodavanje vozila </a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/dodajTipVozila">Dodavanje tipa vozila</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/prikazTipaVozila">Tipovi vozila</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/prikaziKorisnike">Korisnici</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/prikazRezervacija">Rezervacije</a></li>
                 </sec:authorize>
 
                 <sec:authorize access="hasRole('ROLE_USER')">
-                    <li><a href="${pageContext.request.contextPath}/user/addReservation">Kreiranje rezervacije</a></li>
-                    <li><a href="${pageContext.request.contextPath}/user/changePassword">Promena šifre</a></li>
-                    <li><a href="${pageContext.request.contextPath}/user/viewUserReservations">Prethodne rezervacije</a></li>
+                    <li><a href="${pageContext.request.contextPath}/user/dodajRezervaciju">Kreiranje rezervacije</a></li>
+                    <li><a href="${pageContext.request.contextPath}/user/izmeniLozinku">Promena šifre</a></li>
+                    <li><a href="${pageContext.request.contextPath}/user/prikazRezervacijaKorisnika">Prethodne rezervacije</a></li>
                 </sec:authorize>
             </ul>
             <ul class="nav navbar-nav navbar-right">
