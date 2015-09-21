@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @NamedQueries(
-        @NamedQuery(name="getItemTypeByName",
+        @NamedQuery(name="pretraziTipoveVozilaIme",
                 query="from TipVozila i where i.ime like :name")
         )
 public class TipVozila {

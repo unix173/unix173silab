@@ -5,7 +5,7 @@ import java.util.Set;
 
 @Entity
 @NamedQueries(
-        @NamedQuery(name = "getUsersByUsername",
+        @NamedQuery(name = "pretraziKorisnikeUsername",
                 query = "from Korisnik u where (u.ime like :name and u.isAdmin = 0)")
 )
 public class Korisnik {

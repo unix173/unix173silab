@@ -32,27 +32,27 @@ public class KorisnikServiceImpl implements KorisnikService {
         korisnik.setPassword(bCryptPasswordEncoder.encode(registracijaKorisnikaForm.getPassword()));
         korisnik.setIsAdmin(false);
         korisnik.setConfirmationId(confirmationId);
-        korisnikDao.addUser(korisnik);
+        korisnikDao.sacuvajKorisnika(korisnik);
     }
 
     @Override
     public List<Korisnik> getUsers() {
-        return korisnikDao.getUsers();
+        return korisnikDao.vratiKorisnike();
     }
 
     @Override
     public Korisnik getUserById(Long id) {
-        return korisnikDao.getUserById(id);
+        return korisnikDao.ucitajKorisnikaID(id);
     }
 
     @Override
     public Korisnik getUserByUsername(String username) {
-        return korisnikDao.getUserByUsername(username);
+        return korisnikDao.ucitajKorisnikaUsername(username);
     }
 
     @Override
     public void deleteUser(Korisnik korisnik) {
-        korisnikDao.deleteUser(korisnik);
+        korisnikDao.obrisiKorisnika(korisnik);
     }
 
     @Override
@@ -66,35 +66,35 @@ public class KorisnikServiceImpl implements KorisnikService {
         korisnik.setPassword(bCryptPasswordEncoder.encode(izmenaLozinkeForm.getNewPassword()));
         korisnik.setEnabled(true);
         korisnik.setIsAdmin(false);
-        korisnikDao.setUser(korisnik);
+        korisnikDao.izmeniKorisnika(korisnik);
     }
 
 
     @Override
     public boolean checkIfUnique(RegistracijaKorisnikaForm registracijaKorisnikaForm) {
-        boolean usernameExists = korisnikDao.getUserByUsername(registracijaKorisnikaForm.getUsername()) != null;
-        boolean emailExists = korisnikDao.getUserByEmail(registracijaKorisnikaForm.getEmail()) != null;
+        boolean usernameExists = korisnikDao.ucitajKorisnikaUsername(registracijaKorisnikaForm.getUsername()) != null;
+        boolean emailExists = korisnikDao.ucitajKorisnikaEmail(registracijaKorisnikaForm.getEmail()) != null;
         return !usernameExists && !emailExists;
     }
 
     @Override
     public boolean checkIfPasswordIsCorrect(Long id, String oldPassword) {
-        Korisnik korisnik = korisnikDao.getUserById(id);
+        Korisnik korisnik = korisnikDao.ucitajKorisnikaID(id);
         return bCryptPasswordEncoder.matches(oldPassword, korisnik.getPassword());
     }
 
     @Override
     public List<Korisnik> getUsersByUsername(String username) {
-        return korisnikDao.getUsersByUsername(username);
+        return korisnikDao.pretraziKorisnikeUsername(username);
     }
 
     @Override
     public boolean confirmRegistration(String confirmationId) {
 
-        Korisnik korisnik = korisnikDao.getUserByConfirmationId(confirmationId);
+        Korisnik korisnik = korisnikDao.ucitajKorisnikaConfID(confirmationId);
         if (korisnik != null) {
             korisnik.setEnabled(true);
-            korisnikDao.setUser(korisnik);
+            korisnikDao.izmeniKorisnika(korisnik);
             return true;
         }
         return false;

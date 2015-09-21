@@ -25,24 +25,24 @@ public class VoziloServiceImpl implements VoziloService {
 
     @Override
     public void addItem(Vozilo vozilo) {
-        voziloDao.addItem(vozilo);
+        voziloDao.sacuvajVozilo(vozilo);
     }
 
     @Override
     public void setItem(Vozilo vozilo) {
-        voziloDao.setItem(vozilo);
+        voziloDao.izmeniVozilo(vozilo);
     }
 
     @Override
     public void deleteItem(Vozilo vozilo) {
-        voziloDao.deleteItem(vozilo);
+        voziloDao.obrisiVozilo(vozilo);
     }
 
     @Override
     public List<Vozilo> getBestItemsForReservationFromItemTypeId(Long id, Integer quantity, Date startDate, Date endDate) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         List<Vozilo> vozila = new ArrayList<Vozilo>();
-        List<Vozilo> availableVozilos = voziloDao.getAvailableItemsOfItemType(id, df.format(startDate), df.format(endDate));
+        List<Vozilo> availableVozilos = voziloDao.vratiSlobodnaVozila(id, df.format(startDate), df.format(endDate));
 
         for(Vozilo vozilo : availableVozilos){
             if(quantity-- == 0) break;
@@ -53,11 +53,11 @@ public class VoziloServiceImpl implements VoziloService {
 
     @Override
     public List<Vozilo> getItems() {
-        return voziloDao.getItems();
+        return voziloDao.vratiVozila();
     }
 
     @Override
     public Vozilo getItemById(String id) {
-        return voziloDao.getItemById(id);
+        return voziloDao.ucitajVoziloID(id);
     }
 }

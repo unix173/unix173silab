@@ -21,27 +21,27 @@ public class StavkaRezervacijeDaoImpl implements StavkaRezervacijeDao {
     }
 
     @Override
-    public void addReservationEntry(StavkaRezervacije stavkaRezervacije) {
+    public void sacuvajStavkuRezervacije(StavkaRezervacije stavkaRezervacije) {
         sessionFactory.getCurrentSession().save(stavkaRezervacije);
     }
 
     @Override
-    public List<StavkaRezervacije> getReservationEntries() {
+    public List<StavkaRezervacije> vratiStavkeRezervacije() {
         return sessionFactory.getCurrentSession().createCriteria(StavkaRezervacije.class).list();
     }
 
     @Override
-    public StavkaRezervacije getReservationEntryById(Long id) {
+    public StavkaRezervacije ucitajStavkuRezervacijeID(Long id) {
         return (StavkaRezervacije) sessionFactory.getCurrentSession().get(StavkaRezervacije.class, id);
     }
 
     @Override
-    public void deleteReservationEntry(StavkaRezervacije stavkaRezervacije) {
+    public void obrisiStavkuRezervacije(StavkaRezervacije stavkaRezervacije) {
         sessionFactory.getCurrentSession().delete(stavkaRezervacije);
     }
 
     @Override
-    public void setReservationEntry(StavkaRezervacije stavkaRezervacije) {
+    public void izmeniStavkuRezervacije(StavkaRezervacije stavkaRezervacije) {
         sessionFactory.getCurrentSession().update(stavkaRezervacije);
     }
 }

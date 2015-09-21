@@ -4,9 +4,9 @@
     <title>Exception Handling page</title>
 </head>
 <body>
-<p>Exception handling page</p>
+<p>Doslo je do greske</p>
 
-<p><a href="${pageContext.request.contextPath}/home">Povratak na početnu stranicu.</a></p>
+<p><a href="${pageContext.request.contextPath}/pocetak">Povratak na početnu stranicu.</a></p>
 
 </body>
 </html>

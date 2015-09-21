@@ -6,21 +6,21 @@ import java.util.List;
 
 public interface KorisnikDao {
 
-    void addUser(Korisnik korisnik);
+    void sacuvajKorisnika(Korisnik korisnik);
 
-    List<Korisnik> getUsers();
+    List<Korisnik> vratiKorisnike();
 
-    Korisnik getUserById(Long id);
+    Korisnik ucitajKorisnikaID(Long id);
 
-    Korisnik getUserByUsername(String username);
+    Korisnik ucitajKorisnikaUsername(String username);
 
-    Korisnik getUserByEmail(String email);
+    Korisnik ucitajKorisnikaEmail(String email);
 
-    void deleteUser(Korisnik korisnik);
+    void obrisiKorisnika(Korisnik korisnik);
 
-    void setUser(Korisnik korisnik);
+    void izmeniKorisnika(Korisnik korisnik);
 
-    List<Korisnik> getUsersByUsername(String username);
+    List<Korisnik> pretraziKorisnikeUsername(String username);
 
-    Korisnik getUserByConfirmationId(String confirmationId);
+    Korisnik ucitajKorisnikaConfID(String confirmationId);
 }

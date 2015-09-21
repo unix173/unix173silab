@@ -22,32 +22,32 @@ public class RezervacijaDaoImpl implements RezervacijaDao {
     }
 
     @Override
-    public List<Rezervacija> getReservations() {
+    public List<Rezervacija> vratiRezervacije() {
         return sessionFactory.getCurrentSession().createCriteria(Rezervacija.class).setResultTransformer((Criteria.DISTINCT_ROOT_ENTITY)).list();
     }
 
     @Override
-    public Rezervacija getReservationById(Long id) {
+    public Rezervacija ucitajRezervacijuID(Long id) {
         return (Rezervacija) sessionFactory.getCurrentSession().get(Rezervacija.class, id);
     }
 
     @Override
-    public void addReservation(Rezervacija rezervacija) {
+    public void sacuvajRezervaciju(Rezervacija rezervacija) {
         sessionFactory.getCurrentSession().save(rezervacija);
     }
 
     @Override
-    public void setReservation(Rezervacija rezervacija) {
+    public void izmeniRezervaciju(Rezervacija rezervacija) {
         sessionFactory.getCurrentSession().update(rezervacija);
     }
 
     @Override
-    public void deleteReservation(Rezervacija rezervacija) {
+    public void obrisiRezervaciju(Rezervacija rezervacija) {
         sessionFactory.getCurrentSession().delete(rezervacija);
     }
 
     @Override
-    public List<Rezervacija> getReservationsByUserId(Long id) {
-        return sessionFactory.getCurrentSession().getNamedQuery("getReservationsByUserId").setLong("userid", id).setResultTransformer((Criteria.DISTINCT_ROOT_ENTITY)).list();
+    public List<Rezervacija> ucitajRezervacijeKorisnik(Long id) {
+        return sessionFactory.getCurrentSession().getNamedQuery("ucitajRezervacijeKorisnika").setLong("userid", id).setResultTransformer((Criteria.DISTINCT_ROOT_ENTITY)).list();
     }
 }

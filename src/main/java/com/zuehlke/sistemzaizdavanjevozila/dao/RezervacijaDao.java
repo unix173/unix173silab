@@ -6,16 +6,16 @@ import java.util.List;
 
 public interface RezervacijaDao {
 
-    List<Rezervacija> getReservations();
+    List<Rezervacija> vratiRezervacije();
 
-    Rezervacija getReservationById(Long id);
+    Rezervacija ucitajRezervacijuID(Long id);
 
-    void addReservation(Rezervacija rezervacija);
+    void sacuvajRezervaciju(Rezervacija rezervacija);
 
-    void setReservation(Rezervacija rezervacija);
+    void izmeniRezervaciju(Rezervacija rezervacija);
 
-    void deleteReservation(Rezervacija rezervacija);
+    void obrisiRezervaciju(Rezervacija rezervacija);
 
-    List<Rezervacija> getReservationsByUserId(Long id);
+    List<Rezervacija> ucitajRezervacijeKorisnik(Long id);
 
 }

@@ -18,51 +18,51 @@ public class KorisnikDaoImpl implements KorisnikDao {
     SessionFactory sessionFactory;
 
     @Override
-    public void addUser(Korisnik korisnik) {
+    public void sacuvajKorisnika(Korisnik korisnik) {
         sessionFactory.getCurrentSession().persist(korisnik);
     }
 
     @Override
-    public List<Korisnik> getUsers() {
+    public List<Korisnik> vratiKorisnike() {
         return sessionFactory.getCurrentSession().createCriteria(Korisnik.class).setResultTransformer((Criteria.DISTINCT_ROOT_ENTITY)).list();
     }
 
     @Override
-    public Korisnik getUserById(Long id) {
+    public Korisnik ucitajKorisnikaID(Long id) {
         return (Korisnik) sessionFactory.getCurrentSession().get(Korisnik.class, id);
     }
 
     @Override
-    public Korisnik getUserByUsername(String username) {
+    public Korisnik ucitajKorisnikaUsername(String username) {
         return (Korisnik) sessionFactory.getCurrentSession().createQuery("FROM Korisnik u where u.username = :username")
                 .setString("username", username)
                 .uniqueResult();
     }
 
     @Override
-    public Korisnik getUserByEmail(String email) {
+    public Korisnik ucitajKorisnikaEmail(String email) {
         return (Korisnik) sessionFactory.getCurrentSession().createQuery("FROM Korisnik u where u.email = :email")
                 .setString("email", email)
                 .uniqueResult();
     }
 
     @Override
-    public void deleteUser(Korisnik korisnik) {
+    public void obrisiKorisnika(Korisnik korisnik) {
         sessionFactory.getCurrentSession().delete(korisnik);
     }
 
     @Override
-    public void setUser(Korisnik korisnik) {
+    public void izmeniKorisnika(Korisnik korisnik) {
         sessionFactory.getCurrentSession().update(korisnik);
     }
 
     @Override
-    public List<Korisnik> getUsersByUsername(String name) {
-        return sessionFactory.getCurrentSession().getNamedQuery("getUsersByUsername").setString("name", "%" + name + "%").setResultTransformer((Criteria.DISTINCT_ROOT_ENTITY)).list();
+    public List<Korisnik> pretraziKorisnikeUsername(String name) {
+        return sessionFactory.getCurrentSession().getNamedQuery("pretraziKorisnikeUsername").setString("name", "%" + name + "%").setResultTransformer((Criteria.DISTINCT_ROOT_ENTITY)).list();
     }
 
     @Override
-    public Korisnik getUserByConfirmationId(String confirmationId) {
+    public Korisnik ucitajKorisnikaConfID(String confirmationId) {
         return (Korisnik) sessionFactory.getCurrentSession().createQuery("FROM Korisnik u where u.confirmationId = :confirmationId")
                 .setString("confirmationId", confirmationId)
                 .uniqueResult();

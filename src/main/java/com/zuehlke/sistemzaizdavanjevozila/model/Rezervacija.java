@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @NamedQueries(
-        @NamedQuery(name = "getReservationsByUserId", query = "from Rezervacija r where r.korisnik.id = :userid")
+        @NamedQuery(name = "ucitajRezervacijeKorisnika", query = "from Rezervacija r where r.korisnik.id = :userid")
 )
 public class Rezervacija {
 

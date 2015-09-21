@@ -8,19 +8,19 @@ import java.util.List;
 
 public interface TipVozilaDao {
 
-    List<TipVozila> getItemTypes();
+    List<TipVozila> vratiTipoveVozila();
 
-    TipVozila getItemTypeById(Long id);
+    TipVozila ucitajTipVozilaID(Long id);
 
-    void addItemType(TipVozila tipVozila);
+    void sacuvajTipVozila(TipVozila tipVozila);
 
-    void setItemType(TipVozila tipVozila);
+    void izmeniTipVozila(TipVozila tipVozila);
 
-    List<TipVozila> getItemTypeByName(String name);
+    List<TipVozila> pretraziTipoveVozilaIme(String name);
 
-    void deleteItemType(TipVozila tipVozila);
+    void obrisiTipVozila(TipVozila tipVozila);
 
-    List<TipVozilaInfoDTO> getAvailableItemTypes(Date startDate, Date endDate);
+    List<TipVozilaInfoDTO> vratiSlobdneTipoveVozila(Date startDate, Date endDate);
 
 
 }

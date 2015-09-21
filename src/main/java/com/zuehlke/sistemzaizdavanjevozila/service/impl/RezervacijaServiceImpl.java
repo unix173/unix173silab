@@ -28,32 +28,32 @@ public class RezervacijaServiceImpl implements RezervacijaService {
 
     @Override
     public List<Rezervacija> getReservations() {
-        return rezervacijaDao.getReservations();
+        return rezervacijaDao.vratiRezervacije();
     }
 
     @Override
     public Rezervacija getReservationById(Long id) {
-        return (rezervacijaDao.getReservationById(id));
+        return (rezervacijaDao.ucitajRezervacijuID(id));
     }
 
     @Override
     public void addReservation(Rezervacija rezervacija) {
-        rezervacijaDao.addReservation(rezervacija);
+        rezervacijaDao.sacuvajRezervaciju(rezervacija);
     }
 
     @Override
     public void setReservation(Rezervacija rezervacija) {
-        rezervacijaDao.setReservation(rezervacija);
+        rezervacijaDao.izmeniRezervaciju(rezervacija);
     }
 
     @Override
     public void deleteReservation(Rezervacija rezervacija) {
-        rezervacijaDao.deleteReservation(rezervacija);
+        rezervacijaDao.obrisiRezervaciju(rezervacija);
     }
 
     @Override
     public List<Rezervacija> getReservationsByUserId(Long id) {
-        return rezervacijaDao.getReservationsByUserId(id);
+        return rezervacijaDao.ucitajRezervacijeKorisnik(id);
     }
 
     @Override

@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface VoziloDao {
 
-    List<Vozilo> getItems();
+    List<Vozilo> vratiVozila();
 
-    Vozilo getItemById(String id);
+    Vozilo ucitajVoziloID(String id);
 
-    void addItem(Vozilo vozilo);
+    void sacuvajVozilo(Vozilo vozilo);
 
-    void setItem(Vozilo vozilo);
+    void izmeniVozilo(Vozilo vozilo);
 
-    void deleteItem(Vozilo vozilo);
+    void obrisiVozilo(Vozilo vozilo);
 
-    List<Vozilo> getAvailableItemsOfItemType(Long itemTypeId, String startDate, String endDate);
+    List<Vozilo> vratiSlobodnaVozila(Long itemTypeId, String startDate, String endDate);
 }

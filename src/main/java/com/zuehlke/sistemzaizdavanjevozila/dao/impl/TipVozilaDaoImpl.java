@@ -26,37 +26,37 @@ public class TipVozilaDaoImpl implements TipVozilaDao {
     }
 
     @Override
-    public List<TipVozila> getItemTypes() {
+    public List<TipVozila> vratiTipoveVozila() {
         return sessionFactory.getCurrentSession().createCriteria(TipVozila.class).setResultTransformer((Criteria.DISTINCT_ROOT_ENTITY)).list();
     }
 
     @Override
-    public TipVozila getItemTypeById(Long id) {
+    public TipVozila ucitajTipVozilaID(Long id) {
         return (TipVozila) sessionFactory.getCurrentSession().get(TipVozila.class, id);
     }
 
     @Override
-    public void addItemType(TipVozila tipVozila) {
+    public void sacuvajTipVozila(TipVozila tipVozila) {
         sessionFactory.getCurrentSession().save(tipVozila);
     }
 
     @Override
-    public void setItemType(TipVozila tipVozila) {
+    public void izmeniTipVozila(TipVozila tipVozila) {
         sessionFactory.getCurrentSession().update(tipVozila);
     }
 
     @Override
-    public List<TipVozila> getItemTypeByName(String name) {
-        return sessionFactory.getCurrentSession().getNamedQuery("getItemTypeByName").setString("name", "%" + name + "%").list();
+    public List<TipVozila> pretraziTipoveVozilaIme(String name) {
+        return sessionFactory.getCurrentSession().getNamedQuery("pretraziTipoveVozilaIme").setString("name", "%" + name + "%").list();
     }
 
     @Override
-    public void deleteItemType(TipVozila tipVozila) {
+    public void obrisiTipVozila(TipVozila tipVozila) {
         sessionFactory.getCurrentSession().delete(tipVozila);
     }
 
     @Override
-    public List<TipVozilaInfoDTO> getAvailableItemTypes(Date startDate, Date endDate) {
+    public List<TipVozilaInfoDTO> vratiSlobdneTipoveVozila(Date startDate, Date endDate) {
         /**TODO:
          * Thread safety
          */

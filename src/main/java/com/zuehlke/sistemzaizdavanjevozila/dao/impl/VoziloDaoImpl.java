@@ -21,32 +21,32 @@ public class VoziloDaoImpl implements VoziloDao {
     }
 
     @Override
-    public List<Vozilo> getItems() {
+    public List<Vozilo> vratiVozila() {
         return sessionFactory.getCurrentSession().createCriteria(Vozilo.class).list();
     }
 
     @Override
-    public Vozilo getItemById(String id) {
+    public Vozilo ucitajVoziloID(String id) {
         return (Vozilo) sessionFactory.getCurrentSession().get(Vozilo.class, id);
     }
 
     @Override
-    public void addItem(Vozilo vozilo) {
+    public void sacuvajVozilo(Vozilo vozilo) {
         sessionFactory.getCurrentSession().save(vozilo);
     }
 
     @Override
-    public void setItem(Vozilo vozilo) {
+    public void izmeniVozilo(Vozilo vozilo) {
         sessionFactory.getCurrentSession().update(vozilo);
     }
 
     @Override
-    public void deleteItem(Vozilo vozilo) {
+    public void obrisiVozilo(Vozilo vozilo) {
         sessionFactory.getCurrentSession().delete(vozilo);
     }
 
     @Override
-    public List<Vozilo> getAvailableItemsOfItemType(Long itemTypeId, String startDate, String endDate) {
+    public List<Vozilo> vratiSlobodnaVozila(Long itemTypeId, String startDate, String endDate) {
         String query = "from Vozilo i " +
                 "where i.tipVozila.id = :itemTypeId and i.id not in " +
                 "(select distinct i.id " +
