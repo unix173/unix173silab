@@ -1,6 +1,6 @@
 package com.zuehlke.sistemzaizdavanjevozila.dao.impl;
 
-import com.zuehlke.sistemzaizdavanjevozila.core.ItemTypeInfoDTO;
+import com.zuehlke.sistemzaizdavanjevozila.core.TipVozilaInfoDTO;
 import com.zuehlke.sistemzaizdavanjevozila.dao.TipVozilaDao;
 import com.zuehlke.sistemzaizdavanjevozila.model.TipVozila;
 import org.hibernate.Criteria;
@@ -56,26 +56,26 @@ public class TipVozilaDaoImpl implements TipVozilaDao {
     }
 
     @Override
-    public List<ItemTypeInfoDTO> getAvailableItemTypes(Date startDate, Date endDate) {
+    public List<TipVozilaInfoDTO> getAvailableItemTypes(Date startDate, Date endDate) {
         /**TODO:
          * Thread safety
          */
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String query =
                 "select " +
-                        "new com.zuehlke.sistemzaizdavanjevozila.core.ItemTypeInfoDTO(it.id, count(*),it.ime ) " +
+                        "new com.zuehlke.sistemzaizdavanjevozila.core.TipVozilaInfoDTO(it.id, count(*),it.ime ) " +
                         "from TipVozila it join it.vozila i " +
                         "where i.id not in " +
                         "(select distinct i.id " +
                         "from StavkaRezervacije  re left outer join re.vozilo i " +
                         "where (re.reservationStartDate <= :endDate and re.reservationEndDate >= :startDate)) " +
                         "group by it.id";
-        List<ItemTypeInfoDTO> itemTypeInfoDTOList =
+        List<TipVozilaInfoDTO> tipVozilaInfoDTOList =
                 sessionFactory.getCurrentSession().createQuery(query)
                         .setString("startDate", df.format(startDate))
                         .setString("endDate", df.format(endDate))
                         .list();
-        return itemTypeInfoDTOList;
+        return tipVozilaInfoDTOList;
     }
 
 }

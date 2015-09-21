@@ -4,7 +4,7 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class ChangePasswordForm {
+public class IzmenaLozinkeForm {
 
     private Long id;
 

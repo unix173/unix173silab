@@ -1,6 +1,6 @@
 package com.zuehlke.sistemzaizdavanjevozila.form;
 
-public class UserSearchForm {
+public class PretragaKorisnikaForm {
 
     private int id;
 

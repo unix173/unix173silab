@@ -6,7 +6,7 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class UserRegistrationForm {
+public class RegistracijaKorisnikaForm {
 
     private Long id;
 

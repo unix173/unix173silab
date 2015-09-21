@@ -1,7 +1,7 @@
 package com.zuehlke.sistemzaizdavanjevozila.controller.user;
 
-import com.zuehlke.sistemzaizdavanjevozila.form.ChangePasswordForm;
-import com.zuehlke.sistemzaizdavanjevozila.form.UserRegistrationForm;
+import com.zuehlke.sistemzaizdavanjevozila.form.IzmenaLozinkeForm;
+import com.zuehlke.sistemzaizdavanjevozila.form.RegistracijaKorisnikaForm;
 import com.zuehlke.sistemzaizdavanjevozila.model.Korisnik;
 import com.zuehlke.sistemzaizdavanjevozila.service.MailingService;
 import com.zuehlke.sistemzaizdavanjevozila.service.KorisnikService;
@@ -34,7 +34,7 @@ public class KorisnikController {
 
     @RequestMapping(value = "registracija", method = RequestMethod.GET)
     public String prikazRegistracije(Model model) {
-        model.addAttribute("userRegistrationForm", new UserRegistrationForm());
+        model.addAttribute("userRegistrationForm", new RegistracijaKorisnikaForm());
         return "registracija";
     }
 
@@ -50,16 +50,16 @@ public class KorisnikController {
     }
 
     @RequestMapping(value = "registracija", method = RequestMethod.POST)
-    public ModelAndView procesRegistracije(@ModelAttribute("userRegistrationForm") @Valid UserRegistrationForm userRegistrationForm, BindingResult result, WebRequest request, Errors errors) {
+    public ModelAndView procesRegistracije(@ModelAttribute("userRegistrationForm") @Valid RegistracijaKorisnikaForm registracijaKorisnikaForm, BindingResult result, WebRequest request, Errors errors) {
         if (result.hasErrors()) {
-            return new ModelAndView("registracija", "userRegistrationForm", userRegistrationForm);
-        } else if (!korisnikService.checkIfUnique(userRegistrationForm)) {
+            return new ModelAndView("registracija", "userRegistrationForm", registracijaKorisnikaForm);
+        } else if (!korisnikService.checkIfUnique(registracijaKorisnikaForm)) {
             result.addError(new ObjectError("message", "Korisnička šifra ili email su duplirani"));
-            return new ModelAndView("registracija", "userRegistrationForm", userRegistrationForm);
+            return new ModelAndView("registracija", "userRegistrationForm", registracijaKorisnikaForm);
         } else {
             final String confirmationId = UUID.randomUUID().toString().replaceAll("-", "");
-            mailingService.sendMail(userRegistrationForm.getEmail(),"Potvrda registracije", "localhost:8080/confirm?confirmationId=" + confirmationId);
-            korisnikService.addUser(userRegistrationForm, confirmationId);
+            mailingService.sendMail(registracijaKorisnikaForm.getEmail(),"Potvrda registracije", "localhost:8080/confirm?confirmationId=" + confirmationId);
+            korisnikService.addUser(registracijaKorisnikaForm, confirmationId);
         }
         return new ModelAndView("redirect:/prijavljivanje?registered");
     }
@@ -67,24 +67,24 @@ public class KorisnikController {
     @RequestMapping(value = "user/izmeniLozinku", method = RequestMethod.GET)
     public ModelAndView izmeniProfilKorisnika(Principal principal) {
         Korisnik currentKorisnik = korisnikService.getUserByUsername(((org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal()).getUsername());
-        ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setId(currentKorisnik.getId());
-        changePasswordForm.setEmail(currentKorisnik.getEmail());
-        changePasswordForm.setName(currentKorisnik.getName());
-        changePasswordForm.setLastName(currentKorisnik.getLastName());
-        changePasswordForm.setUsername(currentKorisnik.getUsername());
-        return new ModelAndView("user/izmeniLozinku", "changePasswordForm", changePasswordForm);
+        IzmenaLozinkeForm izmenaLozinkeForm = new IzmenaLozinkeForm();
+        izmenaLozinkeForm.setId(currentKorisnik.getId());
+        izmenaLozinkeForm.setEmail(currentKorisnik.getEmail());
+        izmenaLozinkeForm.setName(currentKorisnik.getName());
+        izmenaLozinkeForm.setLastName(currentKorisnik.getLastName());
+        izmenaLozinkeForm.setUsername(currentKorisnik.getUsername());
+        return new ModelAndView("user/izmeniLozinku", "changePasswordForm", izmenaLozinkeForm);
     }
 
     @RequestMapping(value = "user/izmeniLozinku", method = RequestMethod.POST)
-    public ModelAndView procesIzmeneProfilaKorisnika(@ModelAttribute("changePasswordForm") @Valid ChangePasswordForm changePasswordForm, BindingResult result, WebRequest request, Errors errors) {
+    public ModelAndView procesIzmeneProfilaKorisnika(@ModelAttribute("changePasswordForm") @Valid IzmenaLozinkeForm izmenaLozinkeForm, BindingResult result, WebRequest request, Errors errors) {
         if (result.hasErrors()) {
-            return new ModelAndView("user/izmeniLozinku", "changePasswordForm", changePasswordForm);
-        } else if (!korisnikService.checkIfPasswordIsCorrect(changePasswordForm.getId(), changePasswordForm.getOldPassword())) {
+            return new ModelAndView("user/izmeniLozinku", "changePasswordForm", izmenaLozinkeForm);
+        } else if (!korisnikService.checkIfPasswordIsCorrect(izmenaLozinkeForm.getId(), izmenaLozinkeForm.getOldPassword())) {
             result.addError(new ObjectError("message", "Old password is not correct!"));
-            return new ModelAndView("user/izmeniLozinku", "changePasswordForm", changePasswordForm);
+            return new ModelAndView("user/izmeniLozinku", "changePasswordForm", izmenaLozinkeForm);
         } else {
-            korisnikService.changePassword(changePasswordForm);
+            korisnikService.changePassword(izmenaLozinkeForm);
         }
         return new ModelAndView("pocetna");
     }

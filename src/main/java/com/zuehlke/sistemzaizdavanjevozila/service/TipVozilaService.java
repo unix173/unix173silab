@@ -1,6 +1,6 @@
 package com.zuehlke.sistemzaizdavanjevozila.service;
 
-import com.zuehlke.sistemzaizdavanjevozila.core.ItemTypeInfoDTO;
+import com.zuehlke.sistemzaizdavanjevozila.core.TipVozilaInfoDTO;
 import com.zuehlke.sistemzaizdavanjevozila.model.TipVozila;
 
 import java.util.Date;
@@ -21,5 +21,5 @@ public interface TipVozilaService {
 
     void deleteItemType(TipVozila tipVozila);
 
-    List<ItemTypeInfoDTO> getAvailableItemTypes(Set<Long> reservedItemTypeIdList, Date startDate, Date endDate);
+    List<TipVozilaInfoDTO> getAvailableItemTypes(Set<Long> reservedItemTypeIdList, Date startDate, Date endDate);
 }

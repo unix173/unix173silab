@@ -1,6 +1,6 @@
 package com.zuehlke.sistemzaizdavanjevozila.dao;
 
-import com.zuehlke.sistemzaizdavanjevozila.core.ItemTypeInfoDTO;
+import com.zuehlke.sistemzaizdavanjevozila.core.TipVozilaInfoDTO;
 import com.zuehlke.sistemzaizdavanjevozila.model.TipVozila;
 
 import java.util.Date;
@@ -20,7 +20,7 @@ public interface TipVozilaDao {
 
     void deleteItemType(TipVozila tipVozila);
 
-    List<ItemTypeInfoDTO> getAvailableItemTypes(Date startDate, Date endDate);
+    List<TipVozilaInfoDTO> getAvailableItemTypes(Date startDate, Date endDate);
 
 
 }

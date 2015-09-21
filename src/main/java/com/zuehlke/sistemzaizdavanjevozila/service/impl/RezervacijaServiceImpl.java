@@ -1,11 +1,11 @@
 package com.zuehlke.sistemzaizdavanjevozila.service.impl;
 
-import com.zuehlke.sistemzaizdavanjevozila.core.ReservationUtil;
+import com.zuehlke.sistemzaizdavanjevozila.core.RezervacijaUtil;
 import com.zuehlke.sistemzaizdavanjevozila.dao.RezervacijaDao;
-import com.zuehlke.sistemzaizdavanjevozila.form.AddReservationEntryForm;
+import com.zuehlke.sistemzaizdavanjevozila.form.DodajStavkuRezervacijeForm;
 import com.zuehlke.sistemzaizdavanjevozila.model.*;
-import com.zuehlke.sistemzaizdavanjevozila.service.VoziloService;
 import com.zuehlke.sistemzaizdavanjevozila.service.RezervacijaService;
+import com.zuehlke.sistemzaizdavanjevozila.service.VoziloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +22,9 @@ public class RezervacijaServiceImpl implements RezervacijaService {
 
     @Autowired
     private VoziloService voziloService;
+
+    @Autowired
+    RezervacijaUtil rezervacijaUtil;
 
     @Override
     public List<Rezervacija> getReservations() {
@@ -54,11 +57,11 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     }
 
     @Override
-    public Rezervacija createReservation(List<AddReservationEntryForm> addReservationEntryForms, Korisnik korisnik) {
-        List<StavkaRezervacije> reservationEntries = getReservationEntries(addReservationEntryForms);
+    public Rezervacija createReservation(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms, Korisnik korisnik) {
+        List<StavkaRezervacije> reservationEntries = getReservationEntries(dodajStavkuRezervacijeForms);
         Rezervacija rezervacija = new Rezervacija();
         rezervacija.setCreationDate(new Date());
-        rezervacija.setPrice(ReservationUtil.countReservationPrice(reservationEntries));
+        rezervacija.setPrice(rezervacijaUtil.countReservationPrice(reservationEntries));
         rezervacija.setKorisnik(korisnik);
         rezervacija.setStatusRezervacije(StatusRezervacije.CREATED);
         for (StavkaRezervacije stavkaRezervacije : reservationEntries) {
@@ -68,12 +71,12 @@ public class RezervacijaServiceImpl implements RezervacijaService {
         return rezervacija;
     }
 
-    private List<StavkaRezervacije> getReservationEntries(List<AddReservationEntryForm> addReservationEntryForms) {
+    private List<StavkaRezervacije> getReservationEntries(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms) {
         List<StavkaRezervacije> reservationEntries = new ArrayList<StavkaRezervacije>();
-        for (AddReservationEntryForm addReservationEntryForm : addReservationEntryForms) {
-            List<Vozilo> vozilos = voziloService.getBestItemsForReservationFromItemTypeId(addReservationEntryForm.getItemTypeId(), addReservationEntryForm.getDesiredQuantity(), addReservationEntryForm.getReservationStartDate(), addReservationEntryForm.getReservationEndDate());
+        for (DodajStavkuRezervacijeForm dodajStavkuRezervacijeForm : dodajStavkuRezervacijeForms) {
+            List<Vozilo> vozilos = voziloService.getBestItemsForReservationFromItemTypeId(dodajStavkuRezervacijeForm.getItemTypeId(), dodajStavkuRezervacijeForm.getDesiredQuantity(), dodajStavkuRezervacijeForm.getReservationStartDate(), dodajStavkuRezervacijeForm.getReservationEndDate());
             for (Vozilo vozilo : vozilos) {
-                reservationEntries.add(ReservationUtil.createReservationEntry(vozilo, addReservationEntryForm));
+                reservationEntries.add(rezervacijaUtil.createReservationEntry(vozilo, dodajStavkuRezervacijeForm));
             }
         }
         return reservationEntries;

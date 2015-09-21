@@ -1,8 +1,8 @@
 package com.zuehlke.sistemzaizdavanjevozila.service.impl;
 
 import com.zuehlke.sistemzaizdavanjevozila.dao.KorisnikDao;
-import com.zuehlke.sistemzaizdavanjevozila.form.ChangePasswordForm;
-import com.zuehlke.sistemzaizdavanjevozila.form.UserRegistrationForm;
+import com.zuehlke.sistemzaizdavanjevozila.form.IzmenaLozinkeForm;
+import com.zuehlke.sistemzaizdavanjevozila.form.RegistracijaKorisnikaForm;
 import com.zuehlke.sistemzaizdavanjevozila.model.Korisnik;
 import com.zuehlke.sistemzaizdavanjevozila.service.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +21,15 @@ public class KorisnikServiceImpl implements KorisnikService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void addUser(UserRegistrationForm userRegistrationForm, String confirmationId) {
+    public void addUser(RegistracijaKorisnikaForm registracijaKorisnikaForm, String confirmationId) {
         Korisnik korisnik = new Korisnik();
-        korisnik.setId(userRegistrationForm.getId());
-        korisnik.setUsername(userRegistrationForm.getUsername());
-        korisnik.setName(userRegistrationForm.getName());
-        korisnik.setLastName(userRegistrationForm.getLastName());
-        korisnik.setEmail(userRegistrationForm.getEmail());
+        korisnik.setId(registracijaKorisnikaForm.getId());
+        korisnik.setUsername(registracijaKorisnikaForm.getUsername());
+        korisnik.setName(registracijaKorisnikaForm.getName());
+        korisnik.setLastName(registracijaKorisnikaForm.getLastName());
+        korisnik.setEmail(registracijaKorisnikaForm.getEmail());
         korisnik.setEnabled(false);
-        korisnik.setPassword(bCryptPasswordEncoder.encode(userRegistrationForm.getPassword()));
+        korisnik.setPassword(bCryptPasswordEncoder.encode(registracijaKorisnikaForm.getPassword()));
         korisnik.setIsAdmin(false);
         korisnik.setConfirmationId(confirmationId);
         korisnikDao.addUser(korisnik);
@@ -56,14 +56,14 @@ public class KorisnikServiceImpl implements KorisnikService {
     }
 
     @Override
-    public void changePassword(ChangePasswordForm changePasswordForm) {
+    public void changePassword(IzmenaLozinkeForm izmenaLozinkeForm) {
         Korisnik korisnik = new Korisnik();
-        korisnik.setId(changePasswordForm.getId());
-        korisnik.setUsername(changePasswordForm.getUsername());
-        korisnik.setName(changePasswordForm.getName());
-        korisnik.setLastName(changePasswordForm.getLastName());
-        korisnik.setEmail(changePasswordForm.getEmail());
-        korisnik.setPassword(bCryptPasswordEncoder.encode(changePasswordForm.getNewPassword()));
+        korisnik.setId(izmenaLozinkeForm.getId());
+        korisnik.setUsername(izmenaLozinkeForm.getUsername());
+        korisnik.setName(izmenaLozinkeForm.getName());
+        korisnik.setLastName(izmenaLozinkeForm.getLastName());
+        korisnik.setEmail(izmenaLozinkeForm.getEmail());
+        korisnik.setPassword(bCryptPasswordEncoder.encode(izmenaLozinkeForm.getNewPassword()));
         korisnik.setEnabled(true);
         korisnik.setIsAdmin(false);
         korisnikDao.setUser(korisnik);
@@ -71,9 +71,9 @@ public class KorisnikServiceImpl implements KorisnikService {
 
 
     @Override
-    public boolean checkIfUnique(UserRegistrationForm userRegistrationForm) {
-        boolean usernameExists = korisnikDao.getUserByUsername(userRegistrationForm.getUsername()) != null;
-        boolean emailExists = korisnikDao.getUserByEmail(userRegistrationForm.getEmail()) != null;
+    public boolean checkIfUnique(RegistracijaKorisnikaForm registracijaKorisnikaForm) {
+        boolean usernameExists = korisnikDao.getUserByUsername(registracijaKorisnikaForm.getUsername()) != null;
+        boolean emailExists = korisnikDao.getUserByEmail(registracijaKorisnikaForm.getEmail()) != null;
         return !usernameExists && !emailExists;
     }
 

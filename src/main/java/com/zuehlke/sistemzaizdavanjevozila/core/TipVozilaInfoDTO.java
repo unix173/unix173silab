@@ -1,6 +1,6 @@
 package com.zuehlke.sistemzaizdavanjevozila.core;
 
-public class ItemTypeInfoDTO {
+public class TipVozilaInfoDTO {
 
     private Long itemTypeId;
 
@@ -8,7 +8,7 @@ public class ItemTypeInfoDTO {
 
     private String itemTypeName;
 
-    public ItemTypeInfoDTO(Long itemTypeId, Long quantity, String itemTypeName) {
+    public TipVozilaInfoDTO(Long itemTypeId, Long quantity, String itemTypeName) {
         this.itemTypeId = itemTypeId;
         this.quantity = quantity;
         this.itemTypeName = itemTypeName;

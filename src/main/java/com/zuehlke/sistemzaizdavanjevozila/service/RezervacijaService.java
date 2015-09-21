@@ -1,6 +1,6 @@
 package com.zuehlke.sistemzaizdavanjevozila.service;
 
-import com.zuehlke.sistemzaizdavanjevozila.form.AddReservationEntryForm;
+import com.zuehlke.sistemzaizdavanjevozila.form.DodajStavkuRezervacijeForm;
 import com.zuehlke.sistemzaizdavanjevozila.model.Korisnik;
 import com.zuehlke.sistemzaizdavanjevozila.model.Rezervacija;
 
@@ -20,6 +20,6 @@ public interface RezervacijaService {
 
     List<Rezervacija> getReservationsByUserId(Long id);
 
-    Rezervacija createReservation(List<AddReservationEntryForm> addReservationEntryForms, Korisnik korisnik);
+    Rezervacija createReservation(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms, Korisnik korisnik);
 
 }

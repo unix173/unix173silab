@@ -3,7 +3,7 @@ package com.zuehlke.sistemzaizdavanjevozila.form;
 import javax.validation.constraints.AssertTrue;
 import java.util.Date;
 
-public class AddReservationEntryForm {
+public class DodajStavkuRezervacijeForm {
 
     private Long itemTypeId;
 

@@ -1,14 +1,14 @@
 package com.zuehlke.sistemzaizdavanjevozila.service;
 
-import com.zuehlke.sistemzaizdavanjevozila.form.ChangePasswordForm;
-import com.zuehlke.sistemzaizdavanjevozila.form.UserRegistrationForm;
+import com.zuehlke.sistemzaizdavanjevozila.form.IzmenaLozinkeForm;
+import com.zuehlke.sistemzaizdavanjevozila.form.RegistracijaKorisnikaForm;
 import com.zuehlke.sistemzaizdavanjevozila.model.Korisnik;
 
 import java.util.List;
 
 public interface KorisnikService {
 
-    void addUser(UserRegistrationForm userRegistrationForm, String confirmationId);
+    void addUser(RegistracijaKorisnikaForm registracijaKorisnikaForm, String confirmationId);
 
     List<Korisnik> getUsers();
 
@@ -18,9 +18,9 @@ public interface KorisnikService {
 
     void deleteUser(Korisnik korisnik);
 
-    void changePassword(ChangePasswordForm changePasswordForm);
+    void changePassword(IzmenaLozinkeForm izmenaLozinkeForm);
 
-    boolean checkIfUnique(UserRegistrationForm userRegistrationForm);
+    boolean checkIfUnique(RegistracijaKorisnikaForm registracijaKorisnikaForm);
 
     boolean checkIfPasswordIsCorrect(Long id, String oldPassword);
 

@@ -1,6 +1,6 @@
 package com.zuehlke.sistemzaizdavanjevozila.service.impl;
 
-import com.zuehlke.sistemzaizdavanjevozila.core.ItemTypeInfoDTO;
+import com.zuehlke.sistemzaizdavanjevozila.core.TipVozilaInfoDTO;
 import com.zuehlke.sistemzaizdavanjevozila.dao.VoziloDao;
 import com.zuehlke.sistemzaizdavanjevozila.dao.TipVozilaDao;
 import com.zuehlke.sistemzaizdavanjevozila.model.TipVozila;
@@ -43,13 +43,13 @@ public class TipVozilaServiceImpl implements TipVozilaService {
     }
 
     @Override
-    public List<ItemTypeInfoDTO> getAvailableItemTypes(Set<Long> reservedItemTypeIdList, Date startDate, Date endDate) {
+    public List<TipVozilaInfoDTO> getAvailableItemTypes(Set<Long> reservedItemTypeIdList, Date startDate, Date endDate) {
 
-        List<ItemTypeInfoDTO> availableItemTypes = tipVozilaDao.getAvailableItemTypes(startDate,endDate);
-        List<ItemTypeInfoDTO> filteredAvailableItemTypes = new ArrayList<ItemTypeInfoDTO>();
-        for(ItemTypeInfoDTO itemTypeInfoDTO : availableItemTypes) {
-            if (!reservedItemTypeIdList.contains(itemTypeInfoDTO.getItemTypeId())) {
-                filteredAvailableItemTypes.add(itemTypeInfoDTO);
+        List<TipVozilaInfoDTO> availableItemTypes = tipVozilaDao.getAvailableItemTypes(startDate,endDate);
+        List<TipVozilaInfoDTO> filteredAvailableItemTypes = new ArrayList<TipVozilaInfoDTO>();
+        for(TipVozilaInfoDTO tipVozilaInfoDTO : availableItemTypes) {
+            if (!reservedItemTypeIdList.contains(tipVozilaInfoDTO.getItemTypeId())) {
+                filteredAvailableItemTypes.add(tipVozilaInfoDTO);
             }
         }
         return filteredAvailableItemTypes;
