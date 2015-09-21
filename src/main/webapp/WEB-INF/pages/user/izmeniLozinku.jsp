@@ -20,8 +20,8 @@
         <form:form method="POST" modelAttribute="changePasswordForm">
             <form:errors path="*" element="div"/>
             <form:input type="hidden" path="id" placeholder="${changePasswordForm.id}"/>
-            <form:input type="hidden" path="name" placeholder="${changePasswordForm.name}"/>
-            <form:input type="hidden" path="lastName" placeholder="${changePasswordForm.lastName}"/>
+            <form:input type="hidden" path="ime" placeholder="${changePasswordForm.ime}"/>
+            <form:input type="hidden" path="prezime" placeholder="${changePasswordForm.prezime}"/>
             <form:input type="hidden" path="username" placeholder="${changePasswordForm.username}"/>
             <form:input type="hidden" path="email" placeholder="${changePasswordForm.email}"/>
             <div>

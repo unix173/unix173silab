@@ -18,9 +18,9 @@ public class Rezervacija {
     @ManyToOne
     private Korisnik korisnik;
 
-    private Date creationDate;
+    private Date datumKreiranja;
 
-    private Double price;
+    private Double ukupnaCena;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "rezervacija")
     private Set<StavkaRezervacije> reservationEntries = new HashSet<StavkaRezervacije>();
@@ -51,20 +51,20 @@ public class Rezervacija {
         this.korisnik = korisnik;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public Date getDatumKreiranja() {
+        return datumKreiranja;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setDatumKreiranja(Date datumKreiranja) {
+        this.datumKreiranja = datumKreiranja;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getUkupnaCena() {
+        return ukupnaCena;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setUkupnaCena(Double ukupnaCena) {
+        this.ukupnaCena = ukupnaCena;
     }
 
     public Set<StavkaRezervacije> getReservationEntries() {

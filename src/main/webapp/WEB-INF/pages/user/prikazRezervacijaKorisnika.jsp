@@ -30,10 +30,10 @@
                             ${reservation.id}
                     </td>
                     <td>
-                        <fmt:formatDate value="${reservation.creationDate}" pattern="yyyy-MM-dd"/>
+                        <fmt:formatDate value="${reservation.datumKreiranja}" pattern="yyyy-MM-dd"/>
                     </td>
                     <td>
-                            ${reservation.price}
+                            ${reservation.ukupnaCena}
                     </td>
                     <td>
                         <form action="prikazStavkiRezervacijeKorisnika" method="get">

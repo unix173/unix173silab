@@ -70,8 +70,8 @@ public class KorisnikController {
         IzmenaLozinkeForm izmenaLozinkeForm = new IzmenaLozinkeForm();
         izmenaLozinkeForm.setId(currentKorisnik.getId());
         izmenaLozinkeForm.setEmail(currentKorisnik.getEmail());
-        izmenaLozinkeForm.setName(currentKorisnik.getName());
-        izmenaLozinkeForm.setLastName(currentKorisnik.getLastName());
+        izmenaLozinkeForm.setName(currentKorisnik.getIme());
+        izmenaLozinkeForm.setLastName(currentKorisnik.getPrezime());
         izmenaLozinkeForm.setUsername(currentKorisnik.getUsername());
         return new ModelAndView("user/izmeniLozinku", "changePasswordForm", izmenaLozinkeForm);
     }

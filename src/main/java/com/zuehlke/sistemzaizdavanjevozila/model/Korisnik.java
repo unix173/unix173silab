@@ -6,7 +6,7 @@ import java.util.Set;
 @Entity
 @NamedQueries(
         @NamedQuery(name = "getUsersByUsername",
-                query = "from Korisnik u where (u.name like :name and u.isAdmin = 0)")
+                query = "from Korisnik u where (u.ime like :name and u.isAdmin = 0)")
 )
 public class Korisnik {
 
@@ -23,9 +23,9 @@ public class Korisnik {
     @Column(unique = true, nullable = false)
     private String email;
 
-    private String name;
+    private String ime;
 
-    private String lastName;
+    private String prezime;
 
     @Column(nullable = false)
     private Boolean isAdmin;
@@ -69,20 +69,20 @@ public class Korisnik {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getIme() {
+        return ime;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setIme(String ime) {
+        this.ime = ime;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getPrezime() {
+        return prezime;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPrezime(String prezime) {
+        this.prezime = prezime;
     }
 
 

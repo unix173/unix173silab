@@ -25,8 +25,8 @@ public class KorisnikServiceImpl implements KorisnikService {
         Korisnik korisnik = new Korisnik();
         korisnik.setId(registracijaKorisnikaForm.getId());
         korisnik.setUsername(registracijaKorisnikaForm.getUsername());
-        korisnik.setName(registracijaKorisnikaForm.getName());
-        korisnik.setLastName(registracijaKorisnikaForm.getLastName());
+        korisnik.setIme(registracijaKorisnikaForm.getName());
+        korisnik.setPrezime(registracijaKorisnikaForm.getLastName());
         korisnik.setEmail(registracijaKorisnikaForm.getEmail());
         korisnik.setEnabled(false);
         korisnik.setPassword(bCryptPasswordEncoder.encode(registracijaKorisnikaForm.getPassword()));
@@ -60,8 +60,8 @@ public class KorisnikServiceImpl implements KorisnikService {
         Korisnik korisnik = new Korisnik();
         korisnik.setId(izmenaLozinkeForm.getId());
         korisnik.setUsername(izmenaLozinkeForm.getUsername());
-        korisnik.setName(izmenaLozinkeForm.getName());
-        korisnik.setLastName(izmenaLozinkeForm.getLastName());
+        korisnik.setIme(izmenaLozinkeForm.getName());
+        korisnik.setPrezime(izmenaLozinkeForm.getLastName());
         korisnik.setEmail(izmenaLozinkeForm.getEmail());
         korisnik.setPassword(bCryptPasswordEncoder.encode(izmenaLozinkeForm.getNewPassword()));
         korisnik.setEnabled(true);

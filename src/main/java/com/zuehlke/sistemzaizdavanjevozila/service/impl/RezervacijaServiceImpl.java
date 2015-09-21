@@ -60,8 +60,8 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     public Rezervacija createReservation(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms, Korisnik korisnik) {
         List<StavkaRezervacije> reservationEntries = getReservationEntries(dodajStavkuRezervacijeForms);
         Rezervacija rezervacija = new Rezervacija();
-        rezervacija.setCreationDate(new Date());
-        rezervacija.setPrice(rezervacijaUtil.countReservationPrice(reservationEntries));
+        rezervacija.setDatumKreiranja(new Date());
+        rezervacija.setUkupnaCena(rezervacijaUtil.countReservationPrice(reservationEntries));
         rezervacija.setKorisnik(korisnik);
         rezervacija.setStatusRezervacije(StatusRezervacije.CREATED);
         for (StavkaRezervacije stavkaRezervacije : reservationEntries) {

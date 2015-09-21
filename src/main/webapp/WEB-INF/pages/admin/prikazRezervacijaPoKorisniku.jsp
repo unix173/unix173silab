@@ -32,9 +32,9 @@
                             ${reservation.id}
                     </td>
                     <td>
-                            <fmt:formatDate value="${reservation.creationDate}" pattern="yyyy-MM-dd"/>
+                            <fmt:formatDate value="${reservation.datumKreiranja}" pattern="yyyy-MM-dd"/>
                     <td>
-                            ${reservation.korisnik.name} ${reservation.korisnik.lastName}
+                            ${reservation.korisnik.ime} ${reservation.korisnik.prezime}
                     </td>
                     <td>
                         <form:form action="prikazStavkiRezervacija" commandName="reservation" method="get">
