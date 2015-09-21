@@ -27,56 +27,56 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     RezervacijaUtil rezervacijaUtil;
 
     @Override
-    public List<Rezervacija> getReservations() {
+    public List<Rezervacija> vratiRezervacije() {
         return rezervacijaDao.vratiRezervacije();
     }
 
     @Override
-    public Rezervacija getReservationById(Long id) {
+    public Rezervacija ucitajRezervacijuID(Long id) {
         return (rezervacijaDao.ucitajRezervacijuID(id));
     }
 
     @Override
-    public void addReservation(Rezervacija rezervacija) {
+    public void sacuvajRezervaciju(Rezervacija rezervacija) {
         rezervacijaDao.sacuvajRezervaciju(rezervacija);
     }
 
     @Override
-    public void setReservation(Rezervacija rezervacija) {
+    public void izmeniRezervaciju(Rezervacija rezervacija) {
         rezervacijaDao.izmeniRezervaciju(rezervacija);
     }
 
     @Override
-    public void deleteReservation(Rezervacija rezervacija) {
+    public void obrisiRezervaciju(Rezervacija rezervacija) {
         rezervacijaDao.obrisiRezervaciju(rezervacija);
     }
 
     @Override
-    public List<Rezervacija> getReservationsByUserId(Long id) {
+    public List<Rezervacija> vratiRezervacijeUserID(Long id) {
         return rezervacijaDao.ucitajRezervacijeKorisnik(id);
     }
 
     @Override
-    public Rezervacija createReservation(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms, Korisnik korisnik) {
+    public Rezervacija kreirajRezervaciju(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms, Korisnik korisnik) {
         List<StavkaRezervacije> reservationEntries = getReservationEntries(dodajStavkuRezervacijeForms);
         Rezervacija rezervacija = new Rezervacija();
         rezervacija.setDatumKreiranja(new Date());
-        rezervacija.setUkupnaCena(rezervacijaUtil.countReservationPrice(reservationEntries));
+        rezervacija.setUkupnaCena(rezervacijaUtil.izracunajCenuRezervacije(reservationEntries));
         rezervacija.setKorisnik(korisnik);
         rezervacija.setStatusRezervacije(StatusRezervacije.CREATED);
         for (StavkaRezervacije stavkaRezervacije : reservationEntries) {
-            rezervacija.addReservationEntry(stavkaRezervacije);
+            rezervacija.dodajStavkuRezervacije(stavkaRezervacije);
         }
-        rezervacija.setReservationEntries(new HashSet<StavkaRezervacije>(reservationEntries));
+        rezervacija.setStavkeRezervacije(new HashSet<StavkaRezervacije>(reservationEntries));
         return rezervacija;
     }
 
     private List<StavkaRezervacije> getReservationEntries(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms) {
         List<StavkaRezervacije> reservationEntries = new ArrayList<StavkaRezervacije>();
         for (DodajStavkuRezervacijeForm dodajStavkuRezervacijeForm : dodajStavkuRezervacijeForms) {
-            List<Vozilo> vozilos = voziloService.getBestItemsForReservationFromItemTypeId(dodajStavkuRezervacijeForm.getItemTypeId(), dodajStavkuRezervacijeForm.getDesiredQuantity(), dodajStavkuRezervacijeForm.getReservationStartDate(), dodajStavkuRezervacijeForm.getReservationEndDate());
+            List<Vozilo> vozilos = voziloService.vratiAdekvatnaVozilaZaRezervisanje(dodajStavkuRezervacijeForm.getItemTypeId(), dodajStavkuRezervacijeForm.getDesiredQuantity(), dodajStavkuRezervacijeForm.getReservationStartDate(), dodajStavkuRezervacijeForm.getReservationEndDate());
             for (Vozilo vozilo : vozilos) {
-                reservationEntries.add(rezervacijaUtil.createReservationEntry(vozilo, dodajStavkuRezervacijeForm));
+                reservationEntries.add(rezervacijaUtil.kreirajStavkuRezervacije(vozilo, dodajStavkuRezervacijeForm));
             }
         }
         return reservationEntries;

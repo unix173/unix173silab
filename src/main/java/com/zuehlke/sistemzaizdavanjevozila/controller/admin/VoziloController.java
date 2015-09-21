@@ -25,13 +25,13 @@ public class VoziloController {
     @RequestMapping(value = "admin/dodajVozilo", method = RequestMethod.GET)
     public String prikaziDodavanjeVozila(Model model) {
         model.addAttribute("item", new Vozilo());
-        model.addAttribute("itemTypes", tipVozilaService.getItemTypes());
+        model.addAttribute("itemTypes", tipVozilaService.vratiTipoveVozila());
         return "admin/dodajVozilo";
     }
 
     @RequestMapping(value = "admin/dodajVozilo", method = RequestMethod.POST)
     public String procesDodavanjaVozila(@ModelAttribute("item") Vozilo vozilo, Model model) {
-        voziloService.addItem(vozilo);
+        voziloService.sacuvajVozilo(vozilo);
         return "redirect:/pocetna";
     }
 

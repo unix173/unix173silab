@@ -15,27 +15,27 @@ public class StavkaRezervacijeServiceImpl implements StavkaRezervacijeService {
     private StavkaRezervacijeDao stavkaRezervacijeDao;
 
     @Override
-    public void addReservationEntry(StavkaRezervacije stavkaRezervacije) {
+    public void sacuvajStavkuRezervacije(StavkaRezervacije stavkaRezervacije) {
         stavkaRezervacijeDao.sacuvajStavkuRezervacije(stavkaRezervacije);
     }
 
     @Override
-    public List<StavkaRezervacije> getReservationEntries() {
+    public List<StavkaRezervacije> vratiStavkeRezervacije() {
         return stavkaRezervacijeDao.vratiStavkeRezervacije();
     }
 
     @Override
-    public StavkaRezervacije getReservationEntryById(Long id) {
+    public StavkaRezervacije ucitajStavkuRezervacijeID(Long id) {
         return stavkaRezervacijeDao.ucitajStavkuRezervacijeID(id);
     }
 
     @Override
-    public void deleteReservationEntry(StavkaRezervacije stavkaRezervacije) {
+    public void obrisiStavkuRezervacije(StavkaRezervacije stavkaRezervacije) {
         stavkaRezervacijeDao.sacuvajStavkuRezervacije(stavkaRezervacije);
     }
 
     @Override
-    public void setReservationEntry(StavkaRezervacije stavkaRezervacije) {
+    public void izmeniStavkuRezervacije(StavkaRezervacije stavkaRezervacije) {
         stavkaRezervacijeDao.izmeniStavkuRezervacije(stavkaRezervacije);
     }
 }

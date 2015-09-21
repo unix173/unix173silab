@@ -59,14 +59,14 @@ public class KorisnikController {
         } else {
             final String confirmationId = UUID.randomUUID().toString().replaceAll("-", "");
             mailingService.sendMail(registracijaKorisnikaForm.getEmail(),"Potvrda registracije", "localhost:8080/confirm?confirmationId=" + confirmationId);
-            korisnikService.addUser(registracijaKorisnikaForm, confirmationId);
+            korisnikService.sacuvajKorisnika(registracijaKorisnikaForm, confirmationId);
         }
         return new ModelAndView("redirect:/prijavljivanje?registered");
     }
 
     @RequestMapping(value = "user/izmeniLozinku", method = RequestMethod.GET)
     public ModelAndView izmeniProfilKorisnika(Principal principal) {
-        Korisnik currentKorisnik = korisnikService.getUserByUsername(((org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal()).getUsername());
+        Korisnik currentKorisnik = korisnikService.ucitajKorisnikaUsername(((org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal()).getUsername());
         IzmenaLozinkeForm izmenaLozinkeForm = new IzmenaLozinkeForm();
         izmenaLozinkeForm.setId(currentKorisnik.getId());
         izmenaLozinkeForm.setEmail(currentKorisnik.getEmail());
@@ -84,7 +84,7 @@ public class KorisnikController {
             result.addError(new ObjectError("message", "Old password is not correct!"));
             return new ModelAndView("user/izmeniLozinku", "changePasswordForm", izmenaLozinkeForm);
         } else {
-            korisnikService.changePassword(izmenaLozinkeForm);
+            korisnikService.izmeniKorisnika(izmenaLozinkeForm);
         }
         return new ModelAndView("pocetna");
     }

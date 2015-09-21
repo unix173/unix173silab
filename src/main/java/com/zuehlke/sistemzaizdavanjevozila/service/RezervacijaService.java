@@ -8,18 +8,18 @@ import java.util.List;
 
 public interface RezervacijaService {
 
-    List<Rezervacija> getReservations();
+    List<Rezervacija> vratiRezervacije();
 
-    Rezervacija getReservationById(Long id);
+    Rezervacija ucitajRezervacijuID(Long id);
 
-    void addReservation(Rezervacija rezervacija);
+    void sacuvajRezervaciju(Rezervacija rezervacija);
 
-    void setReservation(Rezervacija rezervacija);
+    void izmeniRezervaciju(Rezervacija rezervacija);
 
-    void deleteReservation(Rezervacija rezervacija);
+    void obrisiRezervaciju(Rezervacija rezervacija);
 
-    List<Rezervacija> getReservationsByUserId(Long id);
+    List<Rezervacija> vratiRezervacijeUserID(Long id);
 
-    Rezervacija createReservation(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms, Korisnik korisnik);
+    Rezervacija kreirajRezervaciju(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms, Korisnik korisnik);
 
 }

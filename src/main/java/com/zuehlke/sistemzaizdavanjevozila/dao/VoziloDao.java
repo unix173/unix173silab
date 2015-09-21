@@ -16,5 +16,5 @@ public interface VoziloDao {
 
     void obrisiVozilo(Vozilo vozilo);
 
-    List<Vozilo> vratiSlobodnaVozila(Long itemTypeId, String startDate, String endDate);
+    List<Vozilo> vratiAdekvatnaVozilaZaRezervisanje(Long itemTypeId, String startDate, String endDate);
 }

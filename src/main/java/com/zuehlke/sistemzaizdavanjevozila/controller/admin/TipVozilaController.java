@@ -24,9 +24,9 @@ public class TipVozilaController {
     @RequestMapping(value = "admin/prikazTipaVozila", method = RequestMethod.GET)
     public String prikaziTipovaVozila(Model model, @RequestParam(value = "keyword", required = false) String keyword) {
         if (keyword == null || keyword.isEmpty()) {
-            model.addAttribute("itemTypes", tipVozilaService.getItemTypes());
+            model.addAttribute("itemTypes", tipVozilaService.vratiTipoveVozila());
         } else {
-            model.addAttribute("itemTypes", tipVozilaService.getItemTypeByName(keyword));
+            model.addAttribute("itemTypes", tipVozilaService.pretraziVozilaPoImenu(keyword));
         }
         model.addAttribute("itemType", new TipVozila());
         return "admin/prikazTipaVozila";
@@ -34,33 +34,33 @@ public class TipVozilaController {
 
     @RequestMapping(value = "admin/izmenaTipaVozila", method = RequestMethod.GET)
     public String izmeniTipVozila(@ModelAttribute("itemType") TipVozila tipVozilaHelper, Model model) {
-        TipVozila tipVozila = tipVozilaService.getItemTypeById(tipVozilaHelper.getId());
+        TipVozila tipVozila = tipVozilaService.ucitajTipVozilaID(tipVozilaHelper.getId());
         model.addAttribute("itemType", tipVozila);
         return "admin/izmenaTipaVozila";
     }
 
     @RequestMapping(value = "admin/promeniTipVozilaAkcija", method = RequestMethod.POST)
     public String procesIzmeneTipaVozila(@ModelAttribute("itemType") TipVozila tipVozilaHelper, RedirectAttributes redirectAttributes) {
-        TipVozila tipVozila = tipVozilaService.getItemTypeById(tipVozilaHelper.getId());
+        TipVozila tipVozila = tipVozilaService.ucitajTipVozilaID(tipVozilaHelper.getId());
         redirectAttributes.addFlashAttribute("itemType", tipVozila);
         return "redirect:/admin/izmenaTipaVozila";
     }
 
     @RequestMapping(value = "admin/izmeniTipVozilaAkcija", method = RequestMethod.POST)
     public String akcijaIzmeneTipaVozila(@ModelAttribute("itemType") TipVozila tipVozila, Model model) {
-        tipVozilaService.setItemType(tipVozila);
+        tipVozilaService.izmeniTipVozila(tipVozila);
         return "redirect:/admin/prikazTipaVozila";
     }
 
     @RequestMapping(value = "admin/obrisiTipVozila", method = RequestMethod.POST)
     public String procesBrisanjaTipaVozila(@ModelAttribute("itemType") TipVozila tipVozila, Model model) {
-        tipVozilaService.deleteItemType(tipVozila);
+        tipVozilaService.obrisiTipVozila(tipVozila);
         return "redirect:/admin/prikazTipaVozila";
     }
 
     @RequestMapping(value = "admin/prikaziVozila", method = RequestMethod.GET)
     public String prikaziVozilaPoTipuVozila(@ModelAttribute("itemType") TipVozila tipVozilaHelper, Model model) {
-        model.addAttribute("itemType", tipVozilaService.getItemTypeById(tipVozilaHelper.getId()));
+        model.addAttribute("itemType", tipVozilaService.ucitajTipVozilaID(tipVozilaHelper.getId()));
         return "admin/prikaziVozila";
     }
 
@@ -72,7 +72,7 @@ public class TipVozilaController {
 
     @RequestMapping(value = "admin/dodajTipVozila", method = RequestMethod.POST)
     public String procesDodajTipVozila(@ModelAttribute("itemType") TipVozila tipVozila, Model model) {
-        tipVozilaService.addItemType(tipVozila);
+        tipVozilaService.sacuvajTipVozila(tipVozila);
         return "redirect:/pocetna";
     }
 

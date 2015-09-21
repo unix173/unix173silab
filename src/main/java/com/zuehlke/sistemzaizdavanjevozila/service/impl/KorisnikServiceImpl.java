@@ -21,7 +21,7 @@ public class KorisnikServiceImpl implements KorisnikService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void addUser(RegistracijaKorisnikaForm registracijaKorisnikaForm, String confirmationId) {
+    public void sacuvajKorisnika(RegistracijaKorisnikaForm registracijaKorisnikaForm, String confirmationId) {
         Korisnik korisnik = new Korisnik();
         korisnik.setId(registracijaKorisnikaForm.getId());
         korisnik.setUsername(registracijaKorisnikaForm.getUsername());
@@ -36,27 +36,27 @@ public class KorisnikServiceImpl implements KorisnikService {
     }
 
     @Override
-    public List<Korisnik> getUsers() {
+    public List<Korisnik> vratiKorisnike() {
         return korisnikDao.vratiKorisnike();
     }
 
     @Override
-    public Korisnik getUserById(Long id) {
+    public Korisnik ucitajKorisnikaID(Long id) {
         return korisnikDao.ucitajKorisnikaID(id);
     }
 
     @Override
-    public Korisnik getUserByUsername(String username) {
+    public Korisnik ucitajKorisnikaUsername(String username) {
         return korisnikDao.ucitajKorisnikaUsername(username);
     }
 
     @Override
-    public void deleteUser(Korisnik korisnik) {
+    public void obrisiKorisnika(Korisnik korisnik) {
         korisnikDao.obrisiKorisnika(korisnik);
     }
 
     @Override
-    public void changePassword(IzmenaLozinkeForm izmenaLozinkeForm) {
+    public void izmeniKorisnika(IzmenaLozinkeForm izmenaLozinkeForm) {
         Korisnik korisnik = new Korisnik();
         korisnik.setId(izmenaLozinkeForm.getId());
         korisnik.setUsername(izmenaLozinkeForm.getUsername());
@@ -84,7 +84,7 @@ public class KorisnikServiceImpl implements KorisnikService {
     }
 
     @Override
-    public List<Korisnik> getUsersByUsername(String username) {
+    public List<Korisnik> pretraziKorisnikeUserName(String username) {
         return korisnikDao.pretraziKorisnikeUsername(username);
     }
 

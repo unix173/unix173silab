@@ -7,15 +7,15 @@ import java.util.List;
 
 public interface VoziloService {
 
-    List<Vozilo> getItems();
+    List<Vozilo> vratiVozila();
 
-    Vozilo getItemById(String id);
+    Vozilo ucitajVoziloID(String id);
 
-    void addItem(Vozilo vozilo);
+    void sacuvajVozilo(Vozilo vozilo);
 
-    void setItem(Vozilo vozilo);
+    void izmeniVozilo(Vozilo vozilo);
 
-    void deleteItem(Vozilo vozilo);
+    void obrisiVozilo(Vozilo vozilo);
 
-    List<Vozilo> getBestItemsForReservationFromItemTypeId(Long id, Integer quantity, Date startDate, Date endDate);
+    List<Vozilo> vratiAdekvatnaVozilaZaRezervisanje(Long id, Integer quantity, Date startDate, Date endDate);
 }

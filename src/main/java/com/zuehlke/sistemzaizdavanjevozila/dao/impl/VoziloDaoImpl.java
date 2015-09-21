@@ -46,7 +46,7 @@ public class VoziloDaoImpl implements VoziloDao {
     }
 
     @Override
-    public List<Vozilo> vratiSlobodnaVozila(Long itemTypeId, String startDate, String endDate) {
+    public List<Vozilo> vratiAdekvatnaVozilaZaRezervisanje(Long itemTypeId, String startDate, String endDate) {
         String query = "from Vozilo i " +
                 "where i.tipVozila.id = :itemTypeId and i.id not in " +
                 "(select distinct i.id " +

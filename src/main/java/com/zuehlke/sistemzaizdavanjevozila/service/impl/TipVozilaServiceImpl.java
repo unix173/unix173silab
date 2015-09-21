@@ -23,27 +23,27 @@ public class TipVozilaServiceImpl implements TipVozilaService {
     private VoziloDao voziloDao;
 
     @Override
-    public void addItemType(TipVozila tipVozila) {
+    public void sacuvajTipVozila(TipVozila tipVozila) {
         tipVozilaDao.sacuvajTipVozila(tipVozila);
     }
 
     @Override
-    public void setItemType(TipVozila tipVozila) {
+    public void izmeniTipVozila(TipVozila tipVozila) {
         tipVozilaDao.izmeniTipVozila(tipVozila);
     }
 
     @Override
-    public void deleteItemType(TipVozila tipVozila) {
+    public void obrisiTipVozila(TipVozila tipVozila) {
         tipVozilaDao.obrisiTipVozila(tipVozila);
     }
 
     @Override
-    public List<TipVozila> getItemTypes() {
+    public List<TipVozila> vratiTipoveVozila() {
         return tipVozilaDao.vratiTipoveVozila();
     }
 
     @Override
-    public List<TipVozilaInfoDTO> getAvailableItemTypes(Set<Long> reservedItemTypeIdList, Date startDate, Date endDate) {
+    public List<TipVozilaInfoDTO> vratiSlobodneTipoveVozila(Set<Long> reservedItemTypeIdList, Date startDate, Date endDate) {
 
         List<TipVozilaInfoDTO> availableItemTypes = tipVozilaDao.vratiSlobdneTipoveVozila(startDate, endDate);
         List<TipVozilaInfoDTO> filteredAvailableItemTypes = new ArrayList<TipVozilaInfoDTO>();
@@ -56,12 +56,12 @@ public class TipVozilaServiceImpl implements TipVozilaService {
     }
 
     @Override
-    public TipVozila getItemTypeById(Long id) {
+    public TipVozila ucitajTipVozilaID(Long id) {
         return tipVozilaDao.ucitajTipVozilaID(id);
     }
 
     @Override
-    public List<TipVozila> getItemTypeByName(String name) {
+    public List<TipVozila> pretraziVozilaPoImenu(String name) {
         return tipVozilaDao.pretraziTipoveVozilaIme(name);
     }
 }

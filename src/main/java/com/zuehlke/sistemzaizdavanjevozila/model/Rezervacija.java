@@ -23,7 +23,7 @@ public class Rezervacija {
     private Double ukupnaCena;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "rezervacija")
-    private Set<StavkaRezervacije> reservationEntries = new HashSet<StavkaRezervacije>();
+    private Set<StavkaRezervacije> stavkeRezervacije = new HashSet<StavkaRezervacije>();
 
     private StatusRezervacije statusRezervacije;
 
@@ -67,16 +67,16 @@ public class Rezervacija {
         this.ukupnaCena = ukupnaCena;
     }
 
-    public Set<StavkaRezervacije> getReservationEntries() {
-        return reservationEntries;
+    public Set<StavkaRezervacije> getStavkeRezervacije() {
+        return stavkeRezervacije;
     }
 
-    public void setReservationEntries(Set<StavkaRezervacije> reservationEntries) {
-        this.reservationEntries = reservationEntries;
+    public void setStavkeRezervacije(Set<StavkaRezervacije> stavkeRezervacije) {
+        this.stavkeRezervacije = stavkeRezervacije;
     }
 
-    public void addReservationEntry(StavkaRezervacije stavkaRezervacije) {
+    public void dodajStavkuRezervacije(StavkaRezervacije stavkaRezervacije) {
         stavkaRezervacije.setRezervacija(this);
-        reservationEntries.add(stavkaRezervacije);
+        stavkeRezervacije.add(stavkaRezervacije);
     }
 }

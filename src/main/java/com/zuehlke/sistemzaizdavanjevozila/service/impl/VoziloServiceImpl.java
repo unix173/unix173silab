@@ -24,25 +24,25 @@ public class VoziloServiceImpl implements VoziloService {
     }
 
     @Override
-    public void addItem(Vozilo vozilo) {
+    public void sacuvajVozilo(Vozilo vozilo) {
         voziloDao.sacuvajVozilo(vozilo);
     }
 
     @Override
-    public void setItem(Vozilo vozilo) {
+    public void izmeniVozilo(Vozilo vozilo) {
         voziloDao.izmeniVozilo(vozilo);
     }
 
     @Override
-    public void deleteItem(Vozilo vozilo) {
+    public void obrisiVozilo(Vozilo vozilo) {
         voziloDao.obrisiVozilo(vozilo);
     }
 
     @Override
-    public List<Vozilo> getBestItemsForReservationFromItemTypeId(Long id, Integer quantity, Date startDate, Date endDate) {
+    public List<Vozilo> vratiAdekvatnaVozilaZaRezervisanje(Long id, Integer quantity, Date startDate, Date endDate) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         List<Vozilo> vozila = new ArrayList<Vozilo>();
-        List<Vozilo> availableVozilos = voziloDao.vratiSlobodnaVozila(id, df.format(startDate), df.format(endDate));
+        List<Vozilo> availableVozilos = voziloDao.vratiAdekvatnaVozilaZaRezervisanje(id, df.format(startDate), df.format(endDate));
 
         for(Vozilo vozilo : availableVozilos){
             if(quantity-- == 0) break;
@@ -52,12 +52,12 @@ public class VoziloServiceImpl implements VoziloService {
     }
 
     @Override
-    public List<Vozilo> getItems() {
+    public List<Vozilo> vratiVozila() {
         return voziloDao.vratiVozila();
     }
 
     @Override
-    public Vozilo getItemById(String id) {
+    public Vozilo ucitajVoziloID(String id) {
         return voziloDao.ucitajVoziloID(id);
     }
 }

@@ -21,13 +21,13 @@ public class RezervacijaControllerAdmin {
 
     @RequestMapping(value = "admin/prikazRezervacija", method = RequestMethod.GET)
     public String prikaziRezervacije(Model model) {
-        model.addAttribute("reservations", rezervacijaService.getReservations());
+        model.addAttribute("reservations", rezervacijaService.vratiRezervacije());
         return "admin/prikazRezervacija";
     }
 
     @RequestMapping(value = "admin/prikazRezervacijaPoKorisniku", method = RequestMethod.GET)
     public String priaziRezervacijePoKorisniku(@ModelAttribute("user") Korisnik korisnik, Model model) {
-        List<Rezervacija> rezervacijas = rezervacijaService.getReservationsByUserId(korisnik.getId());
+        List<Rezervacija> rezervacijas = rezervacijaService.vratiRezervacijeUserID(korisnik.getId());
         Rezervacija rezervacija = new Rezervacija();
         rezervacija.setKorisnik(new Korisnik());
         model.addAttribute("reservation", rezervacija);
@@ -38,17 +38,17 @@ public class RezervacijaControllerAdmin {
 
     @RequestMapping(value = "admin/obrisiRezervacijuAkcija", method = RequestMethod.POST)
     public String obrisiRezervaciju(@ModelAttribute("reservation") Rezervacija rezervacija, RedirectAttributes redirectAttributes) {
-        rezervacija = rezervacijaService.getReservationById(rezervacija.getId());
+        rezervacija = rezervacijaService.ucitajRezervacijuID(rezervacija.getId());
         Long userId = rezervacija.getKorisnik().getId();
-        rezervacijaService.deleteReservation(rezervacija);
-        redirectAttributes.addFlashAttribute("reservations", rezervacijaService.getReservationsByUserId(userId));
+        rezervacijaService.obrisiRezervaciju(rezervacija);
+        redirectAttributes.addFlashAttribute("reservations", rezervacijaService.vratiRezervacijeUserID(userId));
         redirectAttributes.addFlashAttribute("user", rezervacija.getKorisnik());
         return "redirect:/admin/prikazRezervacijaPoKorisniku?id=" + userId;
     }
 
     @RequestMapping(value = "admin/prikazStavkiRezervacija", method = RequestMethod.GET)
     public String prikaziStavkeRezervacijeAkcija(@ModelAttribute("reservation") Rezervacija rezervacija, Model model) {
-        model.addAttribute("reservationEntries", rezervacijaService.getReservationById(rezervacija.getId()).getReservationEntries());
+        model.addAttribute("reservationEntries", rezervacijaService.ucitajRezervacijuID(rezervacija.getId()).getStavkeRezervacije());
         return "admin/prikazStavkiRezervacija";
     }
 }

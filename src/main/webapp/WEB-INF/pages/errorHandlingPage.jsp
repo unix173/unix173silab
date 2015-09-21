@@ -8,7 +8,7 @@
 
 <p>Status kod = ${statusCode}</p>
 
-<p></o><a href="${pageContext.request.contextPath}/home">Povratak na početnu stranicu.</a></p>
+<p></o><a href="${pageContext.request.contextPath}/pocetna">Povratak na početnu stranicu.</a></p>
 
 </body>
 </html>

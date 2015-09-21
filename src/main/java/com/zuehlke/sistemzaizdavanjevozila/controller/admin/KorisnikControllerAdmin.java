@@ -19,9 +19,9 @@ public class KorisnikControllerAdmin {
     @RequestMapping(value = "admin/prikaziKorisnike", method = RequestMethod.GET)
     public String prikaziKorisnike(Model model, @RequestParam(value = "keyword", required = false) String keyword) {
         if(keyword == null || keyword.isEmpty()) {
-            model.addAttribute("users", korisnikService.getUsers());
+            model.addAttribute("users", korisnikService.vratiKorisnike());
         }else {
-            model.addAttribute("users", korisnikService.getUsersByUsername(keyword));
+            model.addAttribute("users", korisnikService.pretraziKorisnikeUserName(keyword));
         }
         model.addAttribute("user", new Korisnik());
         return "admin/prikaziKorisnike";
@@ -29,7 +29,7 @@ public class KorisnikControllerAdmin {
 
     @RequestMapping(value = "admin/obrisiKorisnikaAkcija", method = RequestMethod.POST)
     public String procesObrisiKorisnika(@ModelAttribute("user") Korisnik korisnik, Model model) {
-        korisnikService.deleteUser(korisnik);
+        korisnikService.obrisiKorisnika(korisnik);
         return "redirect:/admin/prikaziKorisnike";
     }
 }

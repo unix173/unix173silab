@@ -8,23 +8,23 @@ import java.util.List;
 
 public interface KorisnikService {
 
-    void addUser(RegistracijaKorisnikaForm registracijaKorisnikaForm, String confirmationId);
+    void sacuvajKorisnika(RegistracijaKorisnikaForm registracijaKorisnikaForm, String confirmationId);
 
-    List<Korisnik> getUsers();
+    List<Korisnik> vratiKorisnike();
 
-    Korisnik getUserById(Long id);
+    Korisnik ucitajKorisnikaID(Long id);
 
-    Korisnik getUserByUsername(String username);
+    Korisnik ucitajKorisnikaUsername(String username);
 
-    void deleteUser(Korisnik korisnik);
+    void obrisiKorisnika(Korisnik korisnik);
 
-    void changePassword(IzmenaLozinkeForm izmenaLozinkeForm);
+    void izmeniKorisnika(IzmenaLozinkeForm izmenaLozinkeForm);
 
     boolean checkIfUnique(RegistracijaKorisnikaForm registracijaKorisnikaForm);
 
     boolean checkIfPasswordIsCorrect(Long id, String oldPassword);
 
-    List<Korisnik> getUsersByUsername(String username);
+    List<Korisnik> pretraziKorisnikeUserName(String username);
 
     boolean confirmRegistration(String confirmationId);
 }

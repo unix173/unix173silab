@@ -12,7 +12,7 @@ import java.util.Set;
 @Component
 public class RezervacijaUtilImpl implements RezervacijaUtil{
 
-    public Set<Long> reservedItemTypeIdList(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms) {
+    public Set<Long> vratiListuIDRezervisanihTipovaVozila(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms) {
         Set<Long> reservedItemTypeIdSet = new HashSet<Long>();
         for (DodajStavkuRezervacijeForm dodajStavkuRezervacijeForm : dodajStavkuRezervacijeForms) {
             reservedItemTypeIdSet.add(dodajStavkuRezervacijeForm.getItemTypeId());
@@ -20,7 +20,7 @@ public class RezervacijaUtilImpl implements RezervacijaUtil{
         return reservedItemTypeIdSet;
     }
 
-    public double countReservationPrice(List<StavkaRezervacije> reservationEntries) {
+    public double izracunajCenuRezervacije(List<StavkaRezervacije> reservationEntries) {
         double totalPrice = 0;
         for (StavkaRezervacije stavkaRezervacije : reservationEntries) {
             totalPrice += stavkaRezervacije.getVozilo().getTipVozila().getCena() * ((stavkaRezervacije.getReservationEndDate().getTime() - stavkaRezervacije.getReservationStartDate().getTime()) / (1000*60*60*24));
@@ -28,7 +28,7 @@ public class RezervacijaUtilImpl implements RezervacijaUtil{
         return totalPrice;
     }
 
-    public StavkaRezervacije createReservationEntry(Vozilo vozilo, DodajStavkuRezervacijeForm dodajStavkuRezervacijeForm) {
+    public StavkaRezervacije kreirajStavkuRezervacije(Vozilo vozilo, DodajStavkuRezervacijeForm dodajStavkuRezervacijeForm) {
         StavkaRezervacije stavkaRezervacije = new StavkaRezervacije();
         stavkaRezervacije.setVozilo(vozilo);
         stavkaRezervacije.setReservationStartDate(dodajStavkuRezervacijeForm.getReservationStartDate());

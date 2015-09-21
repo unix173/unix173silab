@@ -66,7 +66,7 @@ public class RezervacijaController {
             dodajStavkuRezervacijeForm.setReservationStartDate(null);
         } else {
             model.addAttribute("reservationInProgress", true);
-            model.addAttribute("itemTypeDTOList", tipVozilaService.getAvailableItemTypes(rezervacijaUtil.reservedItemTypeIdList(dodajStavkuRezervacijeForms),
+            model.addAttribute("itemTypeDTOList", tipVozilaService.vratiSlobodneTipoveVozila(rezervacijaUtil.vratiListuIDRezervisanihTipovaVozila(dodajStavkuRezervacijeForms),
                     dodajStavkuRezervacijeForm.getReservationStartDate(), dodajStavkuRezervacijeForm.getReservationEndDate()));
         }
         model.addAttribute("addReservationEntryForm", dodajStavkuRezervacijeForm);
@@ -80,7 +80,7 @@ public class RezervacijaController {
             dodajStavkuRezervacijeForm.setDesiredQuantity(null);
             redirectAttributes.addFlashAttribute("addReservationEntryForm", dodajStavkuRezervacijeForm);
             redirectAttributes.addFlashAttribute("validationFailed", true);
-            redirectAttributes.addFlashAttribute("itemTypeDTOList", tipVozilaService.getAvailableItemTypes(rezervacijaUtil.reservedItemTypeIdList(dodajStavkuRezervacijeForms),
+            redirectAttributes.addFlashAttribute("itemTypeDTOList", tipVozilaService.vratiSlobodneTipoveVozila(rezervacijaUtil.vratiListuIDRezervisanihTipovaVozila(dodajStavkuRezervacijeForms),
                     dodajStavkuRezervacijeForm.getReservationStartDate(), dodajStavkuRezervacijeForm.getReservationEndDate()));
             return "redirect:/user/dodajRezervaciju";
         } else {
@@ -92,7 +92,7 @@ public class RezervacijaController {
     @RequestMapping(value = "user/dodajRezervacijuAkcija", method = RequestMethod.POST)
     public String dodajRezervacijuAkcija(@ModelAttribute("addReservationEntryForms") List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms, Principal principal, RedirectAttributes redirectAttributes) {
 
-        rezervacijaService.addReservation(rezervacijaService.createReservation(dodajStavkuRezervacijeForms, korisnikService.getUserByUsername(((User) ((Authentication) principal).getPrincipal()).getUsername())));
+        rezervacijaService.sacuvajRezervaciju(rezervacijaService.kreirajRezervaciju(dodajStavkuRezervacijeForms, korisnikService.ucitajKorisnikaUsername(((User) ((Authentication) principal).getPrincipal()).getUsername())));
         redirectAttributes.addFlashAttribute("successfulReservation", true);
         //do a redirect to user's reservation page
         redirectAttributes.addFlashAttribute("addReservationEntryForms", new ArrayList<DodajStavkuRezervacijeForm>());
@@ -108,7 +108,7 @@ public class RezervacijaController {
 
     @RequestMapping(value = "user/prikazRezervacijaKorisnika", method = RequestMethod.GET)
     public String prikaziRezervacijeKorisnika(Model model, Principal principal) {
-        List<Rezervacija> rezervacijas = rezervacijaService.getReservationsByUserId(korisnikService.getUserByUsername(((User) ((Authentication) principal).getPrincipal()).getUsername()).getId());
+        List<Rezervacija> rezervacijas = rezervacijaService.vratiRezervacijeUserID(korisnikService.ucitajKorisnikaUsername(((User) ((Authentication) principal).getPrincipal()).getUsername()).getId());
         Rezervacija rezervacija = new Rezervacija();
         rezervacija.setKorisnik(new Korisnik());
         model.addAttribute("reservation", rezervacija);
@@ -118,7 +118,7 @@ public class RezervacijaController {
 
     @RequestMapping(value = "user/prikazStavkiRezervacijeKorisnika", method = RequestMethod.GET)
     public String prikaziStavkeRezervacijeKorisnikaAkcija(@ModelAttribute("reservation") Rezervacija rezervacija, Model model) {
-        List<StavkaRezervacije> reservationEntries = new ArrayList<StavkaRezervacije>(rezervacijaService.getReservationById(rezervacija.getId()).getReservationEntries());
+        List<StavkaRezervacije> reservationEntries = new ArrayList<StavkaRezervacije>(rezervacijaService.ucitajRezervacijuID(rezervacija.getId()).getStavkeRezervacije());
         model.addAttribute("reservationEntries", reservationEntries);
         return "user/prikazStavkiRezervacijeKorisnika";
     }

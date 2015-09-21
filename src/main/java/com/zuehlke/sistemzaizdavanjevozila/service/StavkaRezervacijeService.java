@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface StavkaRezervacijeService {
 
-    void addReservationEntry(StavkaRezervacije stavkaRezervacije);
+    void sacuvajStavkuRezervacije(StavkaRezervacije stavkaRezervacije);
 
-    List<StavkaRezervacije> getReservationEntries();
+    List<StavkaRezervacije> vratiStavkeRezervacije();
 
-    StavkaRezervacije getReservationEntryById(Long id);
+    StavkaRezervacije ucitajStavkuRezervacijeID(Long id);
 
-    void deleteReservationEntry(StavkaRezervacije stavkaRezervacije);
+    void obrisiStavkuRezervacije(StavkaRezervacije stavkaRezervacije);
 
-    void setReservationEntry(StavkaRezervacije stavkaRezervacije);
+    void izmeniStavkuRezervacije(StavkaRezervacije stavkaRezervacije);
 }

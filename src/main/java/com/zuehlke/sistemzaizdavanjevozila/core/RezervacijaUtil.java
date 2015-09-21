@@ -12,9 +12,9 @@ import java.util.Set;
  */
 public interface RezervacijaUtil {
 
-   Set<Long> reservedItemTypeIdList(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms);
+   Set<Long> vratiListuIDRezervisanihTipovaVozila(List<DodajStavkuRezervacijeForm> dodajStavkuRezervacijeForms);
 
-   double countReservationPrice(List<StavkaRezervacije> reservationEntries);
+   double izracunajCenuRezervacije(List<StavkaRezervacije> reservationEntries);
 
-   StavkaRezervacije createReservationEntry(Vozilo vozilo, DodajStavkuRezervacijeForm dodajStavkuRezervacijeForm);
+   StavkaRezervacije kreirajStavkuRezervacije(Vozilo vozilo, DodajStavkuRezervacijeForm dodajStavkuRezervacijeForm);
 }
