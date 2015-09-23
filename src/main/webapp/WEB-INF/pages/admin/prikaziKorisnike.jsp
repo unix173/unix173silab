@@ -17,12 +17,23 @@
     <div class="contentmain">
         <p>KORISNICI</p>
         <br/>
+
+        <div>
+            <c:if test="${not empty nasao}">
+                <p>${nasao}</p>
+            </c:if>
+            <c:if test="${not empty nijeNasao}">
+                <p>${nijeNasao}</p>
+            </c:if>
+            <c:if test="${not empty obrisan}">
+                <p>${obrisan}</p>
+            </c:if>
+        </div>
         <form method="get">
             <input type="text" name="keyword"/>
             <input type="submit" value="PRETRAŽI" class="btn btn-primary btn-sm">
         </form>
         <table class="table table-striped">
-
             <tr>
                 <th>Ime</th>
                 <th>Prezime</th>

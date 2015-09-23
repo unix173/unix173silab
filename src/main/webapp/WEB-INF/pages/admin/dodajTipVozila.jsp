@@ -17,13 +17,20 @@
     <div class="contentmain">
         <p>DODAVANJE TIPA VOZILA</p>
         <br/>
+
+        <div>
+            <c:if test="${not empty dodatTipVozila}">${dodatTipVozila}</c:if>
+        </div>
+        <div>
+            <c:if test="${not empty nijeDodatTipVozila}">${nijeDodatTipVozila}</c:if>
+        </div>
         <form:form method="POST" modelAttribute="itemType">
             <div>
                 <label>Model: </label>
                 <form:input path="ime" id="inputName" placeholder="Unesite model vozila"/>
                 <label>Cena :</label>
                 <form:input path="cena" id="inputPrice" placeholder="Unesite cenu vozila"/>
-                <button type="submit"  class="btn btn-primary btn-sm">SAČUVAJ</button>
+                <button type="submit" class="btn btn-primary btn-sm">SAČUVAJ</button>
             </div>
         </form:form>
     </div>

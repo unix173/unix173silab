@@ -1,5 +1,7 @@
 package com.zuehlke.sistemzaizdavanjevozila.model;
 
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
@@ -18,6 +20,7 @@ public class TipVozila {
     @NotNull
     private String ime;
 
+    @NumberFormat
     private Double cena;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "tipVozila")

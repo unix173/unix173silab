@@ -43,6 +43,7 @@ public class RezervacijaControllerAdmin {
         rezervacijaService.obrisiRezervaciju(rezervacija);
         redirectAttributes.addFlashAttribute("reservations", rezervacijaService.vratiRezervacijeUserID(userId));
         redirectAttributes.addFlashAttribute("user", rezervacija.getKorisnik());
+        redirectAttributes.addFlashAttribute("obrisana", "Sistem ne može da učita podatke o korisniku");
         return "redirect:/admin/prikazRezervacijaPoKorisniku?id=" + userId;
     }
 

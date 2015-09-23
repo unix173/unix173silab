@@ -17,6 +17,16 @@
     <div class="contentmain">
         <p>TIPOVI VOZILA</p>
         <br/>
+
+        <div>
+            <c:if test="${not empty pronasao}">${pronasao}</c:if>
+        </div>
+        <div>
+            <c:if test="${not empty nijePronasao}">${nijePronasao}</c:if>
+        </div>
+        <div>
+            <c:if test="${not empty obrisao}">${obrisao}</c:if>
+        </div>
         <form method="get">
             <input type="text" name="keyword"/>
             <input type="submit" value="PRETRAŽI" class="btn btn-primary btn-sm">

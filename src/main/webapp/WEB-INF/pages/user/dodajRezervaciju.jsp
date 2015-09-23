@@ -31,10 +31,10 @@
         <br/>
         <c:if test="${successfulReservation != null}">
             <c:if test="${successfulReservation}">
-                <div class="text-success">Rezervacija je uspešno sačuvana!</div>
+                <div>Sistem je sačuvao rezervaciju.</div>
             </c:if>
             <c:if test="${!successfulReservation}">
-                <div class="text-warning">Došlo je do greške, molimo pokušajte ponovo.</div>
+                <div>Sistem ne može da sačuva rezervaciju.</div>
             </c:if>
         </c:if>
         <div>

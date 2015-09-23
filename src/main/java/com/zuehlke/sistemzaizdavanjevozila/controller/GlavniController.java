@@ -18,10 +18,17 @@ public class GlavniController {
     private final static Logger logger = LoggerFactory.getLogger(GlavniController.class);
 
     @RequestMapping(value = {"/pocetna", "/"})
-    public String prikaziPocetnuStranu(ModelMap model, @RequestParam(value = "success", required = false) String success) {
+    public String prikaziPocetnuStranu(
+            ModelMap model,
+            @RequestParam(value = "success", required = false) String success,
+            @RequestParam(value = "izmenjenKorisnik", required = false)String izmenjenKorisnik
+    ) {
         logger.trace("method invoked: prikaziPocetnuStranu");
         if (success != null) {
             model.addAttribute("success", "Sistem je prijavio korisnika");
+        }
+        if(izmenjenKorisnik != null) {
+            model.addAttribute("izmenjenKorisnik", "Sistem je izmenio korisnika");
         }
         return "pocetna";
     }

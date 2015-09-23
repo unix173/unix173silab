@@ -18,6 +18,12 @@
     <div class="contentmain">
         <p>REZERVACIJE KORISNIKA</p>
         <br/>
+
+        <div>
+            <c:if test="${not empty obrisana}">
+                <p>${obrisana}</p>
+            </c:if>
+        </div>
         <table class="table table-striped">
             <tr>
                 <th>Broj rezervacije</th>

@@ -81,12 +81,12 @@ public class KorisnikController {
         if (result.hasErrors()) {
             return new ModelAndView("user/izmeniLozinku", "changePasswordForm", izmenaLozinkeForm);
         } else if (!korisnikService.checkIfPasswordIsCorrect(izmenaLozinkeForm.getId(), izmenaLozinkeForm.getOldPassword())) {
-            result.addError(new ObjectError("message", "Old password is not correct!"));
+            result.addError(new ObjectError("message", "Sistem ne može da izmeni korisnika!"));
             return new ModelAndView("user/izmeniLozinku", "changePasswordForm", izmenaLozinkeForm);
         } else {
             korisnikService.izmeniKorisnika(izmenaLozinkeForm);
         }
-        return new ModelAndView("pocetna");
+        return new ModelAndView("redirect:/pocetna?izmenjenKorisnik");
     }
 
 }

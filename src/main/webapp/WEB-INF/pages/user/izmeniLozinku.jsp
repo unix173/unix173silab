@@ -39,7 +39,7 @@
                 <form:input type="password" path="matchingNewPassword" id="inputMatchingNewPassword"
                             placeholder="Ponovite novu lozinku"/>
             </div>
-            <button type="submit" class="btn btn-primary btn-sm">Modify</button>
+            <button type="submit" class="btn btn-primary btn-sm">Izmeni</button>
         </form:form>
     </div>
 </div>

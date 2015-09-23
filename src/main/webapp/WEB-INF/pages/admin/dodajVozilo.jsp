@@ -17,6 +17,11 @@
     <div class="contentmain">
         <p>DODAVANJE VOZILA</p>
         <br/>
+        <div>
+            <c:if test="${not empty dodatoVozilo}">
+                <p>${dodatoVozilo}</p>
+            </c:if>
+        </div>
         <form:form method="POST" modelAttribute="item">
             <div>
                 <label>Tip vozila</label>

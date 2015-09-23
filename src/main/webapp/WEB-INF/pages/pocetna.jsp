@@ -21,6 +21,9 @@
         <div>
             <c:if test="${not empty success}">${success}</c:if>
         </div>
+        <div>
+            <c:if test="${not empty izmenjenKorisnik}">${izmenjenKorisnik}</c:if>
+        </div>
     </div>
 </div>
 

@@ -67,7 +67,7 @@ public class DodajStavkuRezervacijeForm {
         this.itemTypeName = itemTypeName;
     }
 
-    @AssertTrue(message = "Desired quantity is not available")
+    @AssertTrue(message = "Uneta količina nije dostupna")
     private boolean isValidQuantity() {
         if((desiredQuantity == null) && (realQuantity == null)) return true;
         else if((desiredQuantity == null) || (realQuantity == null)) return false;
@@ -76,7 +76,7 @@ public class DodajStavkuRezervacijeForm {
     }
 
 
-    @AssertTrue(message = "Date range is not valid")
+    @AssertTrue(message = "Interval nije tačno unet")
     private boolean isValidDateRange() {
         if(reservationStartDate == null || reservationEndDate == null) return false;
         return this.reservationStartDate.before(this.reservationEndDate);

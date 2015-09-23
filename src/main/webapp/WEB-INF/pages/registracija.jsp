@@ -32,7 +32,7 @@
                     <label>Ime:</label>
                 </div>
                 <div class="col-sm-6 text-left">
-                    <form:input path="ime" id="inputName" placeholder="Ime"/>
+                    <form:input path="name" id="inputName" placeholder="Ime"/>
                 </div>
             </div>
             <div class="row formany">
@@ -40,7 +40,7 @@
                     <label>Prezime:</label>
                 </div>
                 <div class="col-sm-6 text-left">
-                    <form:input path="prezime" id="inputLastname" placeholder="Prezime"/>
+                    <form:input path="lastName" id="inputLastname" placeholder="Prezime"/>
                 </div>
             </div>
             <div class="row formany">

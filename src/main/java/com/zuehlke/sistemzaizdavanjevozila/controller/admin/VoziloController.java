@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class VoziloController {
@@ -23,16 +24,26 @@ public class VoziloController {
     }
 
     @RequestMapping(value = "admin/dodajVozilo", method = RequestMethod.GET)
-    public String prikaziDodavanjeVozila(Model model) {
+    public String prikaziDodavanjeVozila(
+            Model model,
+            @RequestParam(value = "dodatoVozilo", required = false) String dodatoVozilo
+    ) {
         model.addAttribute("item", new Vozilo());
         model.addAttribute("itemTypes", tipVozilaService.vratiTipoveVozila());
+        if (dodatoVozilo != null) {
+            model.addAttribute("dodatoVozilo", "Sistem je zapamtio vozilo");
+        }
         return "admin/dodajVozilo";
     }
 
     @RequestMapping(value = "admin/dodajVozilo", method = RequestMethod.POST)
     public String procesDodavanjaVozila(@ModelAttribute("item") Vozilo vozilo, Model model) {
-        voziloService.sacuvajVozilo(vozilo);
-        return "redirect:/pocetna";
+        try {
+            voziloService.sacuvajVozilo(vozilo);
+        }catch (Exception e){
+            return "redirect:/admin/dodajVozilo?nijeDodatoVozilo";
+        }
+        return "redirect:/admin/dodajVozilo?dodatoVozilo";
     }
 
 }

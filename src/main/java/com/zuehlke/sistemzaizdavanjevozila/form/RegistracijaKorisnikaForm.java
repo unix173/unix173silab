@@ -87,7 +87,7 @@ public class RegistracijaKorisnikaForm {
         this.id = id;
     }
 
-    @AssertTrue(message="Passwords do not match!")
+    @AssertTrue(message="Šifre nisu iste!")
     private boolean isValid() {
         return this.password.equals(this.matchingPassword);
     }

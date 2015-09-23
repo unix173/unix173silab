@@ -20,7 +20,7 @@ INSERT INTO `sziv`.`vozilo` (`id`, `tipvozila_id`) VALUES ('BG129RT', '4');
 INSERT INTO `sziv`.`vozilo` (`id`, `tipvozila_id`) VALUES ('BG111RX', '3');
 INSERT INTO `sziv`.`vozilo` (`id`, `tipvozila_id`) VALUES ('BG322OO', '5');
 
-insert into korisnik values (NULL,1,'admin@email.com',1,'AdminFNM', 1,'$2a$10$cGtOPvnrDnS8EJWU4I4CNuu19v4GX8cBzv5TbLfTZoT8kwf9nxxjy','AdminLNM','admin');
-insert into korisnik values (NULL,2,'user@email.com',1,'Ivan', 0,'$2a$10$j2J9l2Z5SiPkwKHMr/DG5ue4t0OdkKykIuiaOusCOz3senq8kZAp.','Ivanovic','user');
+insert into korisnik values (NULL,1,'admin@email.com',1,'Admin', 1,'$2a$10$cGtOPvnrDnS8EJWU4I4CNuu19v4GX8cBzv5TbLfTZoT8kwf9nxxjy','Admin','admin');
+insert into korisnik values (NULL,2,'user@email.com',1,'Ivan', 0,'$2a$10$j2J9l2Z5SiPkwKHMr/DG5ue4t0OdkKykIuiaOusCOz3senq8kZAp.','Simic','user');
 
 

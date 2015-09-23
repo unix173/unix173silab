@@ -87,7 +87,7 @@ public class IzmenaLozinkeForm {
         this.lastName = lastName;
     }
 
-    @AssertTrue(message="Passwords do not match!")
+    @AssertTrue(message="Sistem ne može da izmeni korisnika!")
     private boolean isValid() {
         return this.newPassword.equals(this.matchingNewPassword);
     }

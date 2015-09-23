@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class TipVozilaController {
 
@@ -23,10 +26,18 @@ public class TipVozilaController {
 
     @RequestMapping(value = "admin/prikazTipaVozila", method = RequestMethod.GET)
     public String prikaziTipovaVozila(Model model, @RequestParam(value = "keyword", required = false) String keyword) {
+        List<TipVozila> tipovi = new ArrayList<TipVozila>();
         if (keyword == null || keyword.isEmpty()) {
-            model.addAttribute("itemTypes", tipVozilaService.vratiTipoveVozila());
+            tipovi = tipVozilaService.vratiTipoveVozila();
+            model.addAttribute("itemTypes", tipovi);
         } else {
-            model.addAttribute("itemTypes", tipVozilaService.pretraziVozilaPoImenu(keyword));
+            tipovi = tipVozilaService.pretraziVozilaPoImenu(keyword);
+            model.addAttribute("itemTypes", tipovi);
+            if (!tipovi.isEmpty()) {
+                model.addAttribute("pronasao", "Sistem je pronašao tipove vozila");
+            } else {
+                model.addAttribute("nijePronasao", "Sistem ne može da pronađe tipove vozila");
+            }
         }
         model.addAttribute("itemType", new TipVozila());
         return "admin/prikazTipaVozila";
@@ -53,8 +64,9 @@ public class TipVozilaController {
     }
 
     @RequestMapping(value = "admin/obrisiTipVozila", method = RequestMethod.POST)
-    public String procesBrisanjaTipaVozila(@ModelAttribute("itemType") TipVozila tipVozila, Model model) {
+    public String procesBrisanjaTipaVozila(@ModelAttribute("itemType") TipVozila tipVozila, Model model, RedirectAttributes redirectAttributes) {
         tipVozilaService.obrisiTipVozila(tipVozila);
+        redirectAttributes.addFlashAttribute("obrisao", "Sistem je obrisao tip vozila");
         return "redirect:/admin/prikazTipaVozila";
     }
 
@@ -73,7 +85,8 @@ public class TipVozilaController {
     @RequestMapping(value = "admin/dodajTipVozila", method = RequestMethod.POST)
     public String procesDodajTipVozila(@ModelAttribute("itemType") TipVozila tipVozila, Model model) {
         tipVozilaService.sacuvajTipVozila(tipVozila);
-        return "redirect:/pocetna";
+        model.addAttribute("dodatTipVozila", "Sistem je zapamtio tip vozila");
+        return "admin/dodajTipVozila";
     }
 
 }
